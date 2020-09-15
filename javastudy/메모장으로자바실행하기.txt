@@ -1,0 +1,34 @@
+jre : 자바 실행 환경
+jdk : 자바 개발 키트
+
+java 업데이트 금지
+
+이클립스 : 코딩 + 실행 + 디버깅(오류수정) 환경을 제공하는 IDE 중 하나
+
+-----------
+메모장으로 Hello.java 코드 작성
+
+명령프롬프트(cmd) 실행
+
+cd c:\program files\java\jdk1.8.0_202\bin   
+
+dir /p
+
+javac Hello.java    실행 결과로 Hello.class  가 생성된다.
+
+dir /p
+
+java Hello.class   이건 실행 안 됨
+java Hello          Hello.class 파일의 실행
+
+c:\program files\java\jdk1.8.0_202\bin 경로로 이동하지 않아도
+javac.exe 파일과 java.exe 파일을 실행할 수 있도록 "환경 변수"를 설정한다.
+
+- 실행할 파일이 어디에 저장되어 있는지 미리 컴퓨터에게 알려주는 것 : path 설정
+
+   wifi : koreais123
+
+- 시스템 변수 : JAVA_HOME   c:\program files\java\jdk1.8.0_202
+- path 설정 : %JAVA_HOME%\bin
+
+path 설정이 끝나면 어디서든 javac.exe 파일과 java.exe 파일을 실행할 수 있다.
