@@ -1,16 +1,19 @@
 package ex01_oop;
 
 class Song {
+	
 	// field
 	String title;
 	String genre;
 	double playTime;
+	
 	// constructor
 	Song(String title, String genre, double playTime) {
 		this.title = title;
 		this.genre = genre;
 		this.playTime = playTime;
 	}
+	
 	// method
 	void info() {
 		System.out.println("제목: " + title);
@@ -21,9 +24,11 @@ class Song {
 }
 
 class Singer {
+	
 	// field
 	String name;
 	Song song;
+	
 	// constructor
 	Singer(String name, Song song) {
 		this.name = name;
@@ -33,6 +38,7 @@ class Singer {
 		this.name = name;
 		this.song = new Song(title, genre, playTime);
 	}
+	
 	// method
 	void info() {
 		System.out.println("이름: " + name);
