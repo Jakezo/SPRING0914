@@ -81,7 +81,47 @@ class WeekScheduler {
 	
 	// 2. 스케쥴 수정하기 (기존 스케쥴이 있으면 수정, 없으면 새로 등록
 	void changeSchedule() {
-		
+		boolean isExist = false;
+		System.out.print("스케쥴을 수정할 요일(일~토) 입력 >> ");
+		String weekday = sc.next();
+		sc.nextLine();
+		for (int i = 0; i < week.length; i++) {
+			if (weekday.equals(weekName[i])) {
+				if (week[i].getSchedule() == null || week[i].getSchedule().isEmpty()) {
+					System.out.println(weekName[i] + "요일은 스케쥴이 없습니다.");
+					System.out.print("새 스케쥴을 등록하시겠습니까(Y/N)? >> ");
+					String yesNo = sc.next();
+					sc.nextLine();
+					if (yesNo.charAt(0) == 'Y' || yesNo.charAt(0) == 'y') {  // "Y", "YES", "N", "NO" 모두 처리가능
+						System.out.print("새 스케쥴 입력 >> ");
+						String schedule = sc.nextLine();
+						week[i].setSchedule(schedule);
+						System.out.println(weekName[i] + "요일에 새 스케쥴이 저장되었습니다.");
+					} else {
+						System.out.println("스케쥴 수정이 취소되었습니다.");
+					}
+				} else {  // 스케쥴이 null 이 아니고 빈 문자열도 아니면
+					System.out.println("수정할 스케쥴을 확인합니다.");
+					System.out.println(week[i].getSchedule());
+					System.out.print("수정할까요(Y/N)? >> ");
+					String yesNo = sc.next();
+					sc.nextLine();
+					if (yesNo.charAt(0) == 'Y' || yesNo.charAt(0) == 'y') {
+						System.out.print("수정할 스케쥴 입력 >> ");
+						String schedule = sc.nextLine();
+						week[i].setSchedule(schedule);
+						System.out.println(weekName[i] + "요일의 스케쥴이 수정되었습니다.");
+					} else {
+						System.out.println("취소되었습니다.");
+					}
+				}
+				isExist = true;
+				break;
+			}
+		}  // end for
+		if (!isExist) {
+			System.out.println(weekday + "요일은 존재하지 않습니다. 다시 시도하세요.");
+		}
 	}
 	
 	// 3. 스케쥴 삭제하기 (기존 스케쥴이 있으면 삭제, 없으면 취소)
@@ -125,7 +165,11 @@ class WeekScheduler {
 	
 	// 4. 일주일 전체 스케쥴 출력하기 (요일별 스케쥴 출력)
 	void printWeekSchedule() {
-		
+		System.out.println(nthWeek + "주차 스케쥴 안내");
+		for (int i = 0; i < week.length; i++) {
+			System.out.print(weekName[i] + "요일 : ");
+			week[i].printDaySchedule();
+		}
 	}
 	
 	// 5. 프로그램 종료
