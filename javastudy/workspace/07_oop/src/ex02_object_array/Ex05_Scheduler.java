@@ -73,7 +73,7 @@ class WeekScheduler {
 				// for문 종료 (for문의 종료는 곧 makeSchedule 메소드의 종료)
 				break;  // return;
 			}
-		}
+		}  // end for
 		if (!isExist) {
 			System.out.println(weekday + "요일은 존재하지 않습니다. 다시 시도하세요.");
 		}
@@ -86,7 +86,41 @@ class WeekScheduler {
 	
 	// 3. 스케쥴 삭제하기 (기존 스케쥴이 있으면 삭제, 없으면 취소)
 	void deleteSchedule() {
-		
+		boolean isExist = false;
+		// 삭제할 요일 입력
+		System.out.print("스케쥴을 삭제할 요일(일~토) 입력 >> ");
+		String weekday = sc.next();
+		sc.nextLine();
+		// week 배열 순회
+		for (int i = 0; i < week.length; i++) {
+			// 삭제할 요일이 언제인지 확인
+			if (weekday.equals(weekName[i])) {  // 삭제할 요일이 있으면
+				// 해당 요일의 스케쥴 확인
+				if (week[i].getSchedule() == null || week[i].getSchedule().isEmpty()) {  // 해당 요일에 스케쥴이 없으면
+					System.out.println(weekName[i] + "요일은 스케쥴이 없습니다.");
+				} else {  // 해당 요일에 스케쥴이 있으면
+					System.out.println("삭제할 스케쥴을 확인합니다.");
+					System.out.println(week[i].getSchedule());
+					// 삭제 여부 확인
+					System.out.print("삭제할까요(Y/N)? >> ");
+					String yesNo = sc.next();
+					sc.nextLine();
+					if (yesNo.equalsIgnoreCase("y")) {  // 입력이 "Y", "y" 모두 가능
+						// 해당 요일의 스케쥴 없애기
+						// 스케쥴을 null 로 저장
+						week[i].setSchedule(null);
+						System.out.println(weekName[i] + "요일의 스케쥴이 삭제되었습니다.");
+					} else {  // "Y", "y" 를 입력하지 않은 경우
+						System.out.println("취소되었습니다.");
+					}
+				}
+				isExist = true;
+				break;
+			}
+		}  // end for
+		if (!isExist) {
+			System.out.println(weekday + "요일은 존재하지 않습니다. 다시 시도하세요.");
+		}
 	}
 	
 	// 4. 일주일 전체 스케쥴 출력하기 (요일별 스케쥴 출력)
