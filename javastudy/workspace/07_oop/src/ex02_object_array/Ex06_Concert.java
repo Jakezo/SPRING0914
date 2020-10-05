@@ -213,6 +213,7 @@ class ConcertHall {
 	
 }
 
+
 public class Ex06_Concert {
 
 	public static void main(String[] args) {
