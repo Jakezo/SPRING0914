@@ -1,4 +1,4 @@
-package ex04_abstract_quiz;
+package ex04_quiz;
 
 abstract class Fighter {
 	// field
