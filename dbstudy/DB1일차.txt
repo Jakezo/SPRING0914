@@ -107,7 +107,7 @@ CREATE TABLE course (
   professor CHAR(10)
 );
 
-SQL> CREATE TABLE enroll (
+CREATE TABLE enroll (
   enrollNo NUMBER PRIMARY KEY,
   studentNo NUMBER REFERENCES student(studentNo),
   courseCode CHAR(1) REFERENCES course(courseCode)
