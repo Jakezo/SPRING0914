@@ -124,27 +124,61 @@ WHERE MANAGER_ID IS NULL;
        3) 맨드라미, 아이언맨, 드라마맨또롱 : %맨% (맨을 포함한 문자열)
 */
 
-
-
-
-
 -- 13. 성(last_name)에 u 가 포함되는 사원들의 employee_id, last_name 을 조회한다.
+SELECT EMPLOYEE_ID, LAST_NAME
+FROM EMPLOYEES
+WHERE LAST_NAME LIKE '%u%' OR LAST_NAME LIKE '%U%';
 
+SELECT EMPLOYEE_ID, LAST_NAME
+FROM EMPLOYEES
+WHERE LAST_NAME LIKE IN('%u%', '%U%');  -- 안 되는 쿼리(IN 연산자와 WILD CARD)
+
+SELECT EMPLOYEE_ID, LAST_NAME
+FROM EMPLOYEES
+WHERE REGEXP_LIKE (LAST_NAME, 'u|U');  -- 정규표현식: u|U (u 또는 U)
+
+SELECT EMPLOYEE_ID, LAST_NAME
+FROM EMPLOYEES
+WHERE UPPER(LAST_NAME) LIKE '%U%';  -- UPPER(): 대문자로 변환
+
+SELECT EMPLOYEE_ID, LAST_NAME
+FROM EMPLOYEES
+WHERE LOWER(LAST_NAME) LIKE '%u%';  -- LOWER(): 소문자로 변환
 
 -- 14. 전화번호(phone_number)가 650 으로 시작하는 사원들의 last_name, phone_number 를 조회한다.
+SELECT LAST_NAME, PHONE_NUMBER
+FROM EMPLOYEES
+WHERE PHONE_NUMBER LIKE '650%';
 
+SELECT LAST_NAME, PHONE_NUMBER
+FROM EMPLOYEES
+WHERE SUBSTR(PHONE_NUMBER, 1, 3) = '650';  -- PHONE_NUMBER의 1번째 글자부터 3글자, SUBSTR 함수의 반환 값은 언제나 '문자열'
 
 -- 15. 성(last_name)의 네 번째 글자가 a 인 사원들의 last_name 을 조회한다.
-
+SELECT LAST_NAME
+FROM EMPLOYEES
+WHERE LAST_NAME LIKE '___a%';
 
 -- 16. 성(last_name) 에 a 또는 e 가 포함된 사원들의 last_name 을 조회한다.
-
+SELECT LAST_NAME
+FROM EMPLOYEES
+WHERE LAST_NAME LIKE '%a%' OR LAST_NAME LIKE '%e%';
 
 -- 17. 성(last_name) 에 a 와 e 가 모두 포함된 사원들의 last_name 을 조회한다.
+SELECT LAST_NAME
+FROM EMPLOYEES
+WHERE LAST_NAME LIKE '%a%' AND LAST_NAME LIKE '%e%';
 
+-- 18. 2008/02/20 ~ 2008/05/01 사이에 고용된(hire_date) 사원들의 last_name, employee_id, hire_date 를 조회한다.
+-- 1) 날짜는 문자처럼 ''로 묶는다.
+-- 2) 날짜는 숫자처럼 크기 비교를 할 수 있다.
+SELECT LAST_NAME, EMPLOYEE_ID, HIRE_DATE
+FROM EMPLOYEES
+WHERE HIRE_DATE >= '2008/02/20' AND HIRE_DATE <= '2008/05/01';
 
--- 18. 2008/02/20 ~ 2008/05/01 사이에 고용된(hire_date) 사원들의 last_name, employeed_id, hire_date 를 조회한다.
-
+SELECT LAST_NAME, EMPLOYEE_ID, HIRE_DATE
+FROM EMPLOYEES
+WHERE HIRE_DATE BETWEEN '2008/02/20' AND '2008/05/01';
 
 -- 19. 2004년도에 고용된(hire_date) 모든 사원들의 last_name, employee_id, hire_date 를 조회한다.
 
