@@ -1,0 +1,11 @@
+SPRING 사용자 삭제 및 생성
+
+1. 관리자(SYSTEM) 권한으로 접속
+
+2. SPRING 사용자 제거
+   1) DROP TABLE SPRING;
+   2) DROP TABLE SPRING CASCADE;  -- SPRING계정에 포함된 오브젝트(테이블 등)가 있는 경우
+
+3. 새로운 SPRING 사용자 생성
+   1) CREATE USER SPRING IDENTIFIED BY 1111;  -- SPRING 계정 만들기
+   2) GRANT DBA TO SPRING;  -- SPRING 계정에 DBA 권한 부여하기
