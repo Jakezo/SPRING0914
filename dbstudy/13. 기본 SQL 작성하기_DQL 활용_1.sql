@@ -3,7 +3,7 @@
 -- SELECT 검색할 칼럼
 -- FROM 테이블
 -- [WHERE 조건식]
--- [GROUP BY 그룹화할 칼럼]
+-- [GROUP BY 그룹화할 칼럼][HAVING 조건식]
 -- [ORDER BY 정렬 칼럼]
 
 
@@ -181,25 +181,58 @@ FROM EMPLOYEES
 WHERE HIRE_DATE BETWEEN '2008/02/20' AND '2008/05/01';
 
 -- 19. 2004년도에 고용된(hire_date) 모든 사원들의 last_name, employee_id, hire_date 를 조회한다.
+SELECT LAST_NAME, EMPLOYEE_ID, HIRE_DATE
+FROM EMPLOYEES
+WHERE HIRE_DATE BETWEEN '2004/01/01' AND '2004/12/31';
 
+SELECT LAST_NAME, EMPLOYEE_ID, HIRE_DATE
+FROM EMPLOYEES
+WHERE HIRE_DATE LIKE '04%';  -- 날짜는 디폴트로 '2자리년도/월/일'
+
+SELECT LAST_NAME, EMPLOYEE_ID, HIRE_DATE
+FROM EMPLOYEES
+WHERE SUBSTR(HIRE_DATE, 1, 2) = '04';
 
 -- 20. 부서(department_id)를 조회하되 중복을 제거하여 조회한다.
-
+-- 중복 제거: DISTINCT
+-- 중복을 제거할 칼럼 앞에 DISTINCT를 작성한다.
+SELECT DISTINCT DEPARTMENT_ID
+FROM EMPLOYEES;
 
 -- 21. 직업(job_id)이 ST_CLERK 가 아닌 사원들의 부서번호(department_id)를 조회한다.
 -- 단, 부서번호가 NULL인 값은 제외하고 부서번호의 중복을 제거한다.
-
+SELECT DISTINCT DEPARTMENT_ID
+FROM EMPLOYEES
+-- WHERE JOB_ID != 'ST_CLERK';
+-- WHERE JOB_ID <> 'ST_CLERK';
+WHERE JOB_ID NOT IN('ST_CLEAK')
+AND DEPARTMENT_ID IS NOT NULL;
 
 -- 22. 커미션(commission_pct)을 받는 사원들의 실제 커미션(commission = salary * commission_pct)을 구하고,
 -- employee_id, first_name, job_id 와 함께 조회한다.
+SELECT SALARY * COMMISSION_PCT AS COMMISSION, EMPLOYEE_ID, FIRST_NAME, JOB_ID
+FROM EMPLOYEES;
 
+-- ORDER BY 정렬할칼럼 ASC;   -- ASC:  오름차순 정렬, 생략할 수 있다.
+-- ORDER BY 정렬할칼럼 DESC;  -- DESC: 내림차순 정렬
 
 -- 23. 가장 오래 전에 입사(hire_date)한 직원부터 최근에 입사한 직원 순으로 last_name, hire_date 를 조회한다.
+SELECT LAST_NAME, HIRE_DATE
+FROM EMPLOYEES
+ORDER BY HIRE_DATE ASC;  -- HIRE_DATE의 오름차순 정렬(날짜순)
 
 
 -- 24. 부서번호(department_id)가 20, 50 인 부서에서 근무하는 모든 사원들의 부서번호의 오름차순으로 조회하되,
 -- 같은 부서번호 내에서는 last_name 의 알파벳순으로 조회한다.
+SELECT *
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID IN(20, 50)
+ORDER BY DEPARTMENT_ID ASC, LAST_NAME ASC;  -- ORDER BY DEPARTMENT_ID, LAST_NAME;
 
 
 -- 25. 커미션(commission_pct)을 받는 모든 사원들의 last_name, salary, commission_pct 을 조회한다.
 -- 연봉이 높은 사원을 먼저 조회하고 같은 연봉의 사원들은 커미션이 높은 사원을 먼저 조회한다.
+SELECT LAST_NAME, SALARY, COMMISSION_PCT
+FROM EMPLOYEES
+WHERE COMMISSION_PCT IS NOT NULL
+ORDER BY SALARY DESC, COMMISSION_PCT DESC;
