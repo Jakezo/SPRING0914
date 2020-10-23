@@ -61,24 +61,71 @@ WHERE NVL(COMMISSION_PCT, 0) != 0;  -- NVL(COMMISSION_PCT, 0) : COMMISSION_PCT�
 --WHERE NVL(COMMISSION_PCT, 0) <> 0;
 
 -- 6. 모든 사원들의 last_name, commission_pct 를 조회하되 커미션(commission_pct)이 없는 사원은 0으로 처리하여 조회한다.
-
+SELECT LAST_NAME, NVL(COMMISSION_PCT, 0)
+FROM EMPLOYEES;
 
 -- 7. 커미션(commission_pct)이 없는 사원들은 0으로 처리하고, 커미션이 있는 사원들은 기존 커미션보다 10% 인상된 상태로 조회한다.
-
+SELECT NVL2(COMMISSION_PCT, COMMISSION_PCT + 0.1, 0) AS NEW_COMMISSION_PCT  -- 칼럼 별명(ALIAS) : 칼럼 AS 별명
+FROM EMPLOYEES;
 
 -- 8. 연봉(salary)이 5000 에서 12000 인 범위의 사원들의 first_name, last_name, salary 를 조회한다.
+SELECT FIRST_NAME, LAST_NAME, SALARY
+FROM EMPLOYEES
+WHERE SALARY >= 5000 AND SALARY <= 12000;
 
+SELECT FIRST_NAME, LAST_NAME, SALARY
+FROM EMPLOYEES
+WHERE SALARY BETWEEN 5000 AND 12000;
 
 -- 9. 연봉(salary)이 5000 에서 12000 사이의 범위가 아닌 사원들의 first_name, last_name, salary 를 조회한다.
+SELECT FIRST_NAME, LAST_NAME, SALARY
+FROM EMPLOYEES
+WHERE SALARY < 5000 OR SALARY > 12000;
 
+SELECT FIRST_NAME, LAST_NAME, SALARY
+FROM EMPLOYEES
+WHERE SALARY NOT BETWEEN 5000 AND 12000;
 
 -- 10. 직업(job_id)이 SA_REP 이나 ST_CLERK 인 사원들의 전체 칼럼을 조회한다.
+SELECT *
+FROM EMPLOYEES
+WHERE JOB_ID = 'SA_REP' OR JOB_ID = 'ST_CLEAK';
 
+SELECT *
+FROM EMPLOYEES
+WHERE JOB_ID IN('SA_REP', 'ST_CLERK');
 
 -- 11. 연봉(salary)이 2500, 3500, 7000 이 아니며 직업(job_id) 이 SA_REP 이나 ST_CLERK 인 사람들을 조회한다.
+SELECT *
+FROM EMPLOYEES
+WHERE (SALARY != 2500 AND SALARY != 3500 AND SALARY != 7000)
+AND (JOB_ID = 'SA_REP' OR JOB_ID = 'ST_CLERK');
 
+SELECT *
+FROM EMPLOYEES
+WHERE SALARY NOT IN(2500, 3500, 7000)
+AND JOB_ID IN('SA_REP', 'ST_CLERK');
 
 -- 12. 상사(manager_id)가 없는 사람들의 last_name, job_id 를 조회한다.
+SELECT LAST_NAME, JOB_ID
+FROM EMPLOYEES
+WHERE MANAGER_ID IS NULL;
+
+/*
+    와일드 카드(WILD CARD)
+    1. 모든 문자를 대체할 수 있는 만능 문자
+    2. 종류
+       1) 글자 수 상관 없는 만능 문자 : %
+       2) 한 글자를 대체하는 만능 문자 : _
+    3. 와일드 카드 전용 연산자 : LIKE (등호(=) 대신 사용)
+    4. 예시
+       1) 마차, 마동석, 마요네즈 : 마% (마로 시작하는 문자열)
+       2) 공주, 백설공주, 평강공주, 백제공주 : %공주 (공주로 끝나는 문자열)
+       3) 맨드라미, 아이언맨, 드라마맨또롱 : %맨% (맨을 포함한 문자열)
+*/
+
+
+
 
 
 -- 13. 성(last_name)에 u 가 포함되는 사원들의 employee_id, last_name 을 조회한다.
