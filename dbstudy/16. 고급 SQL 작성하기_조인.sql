@@ -45,5 +45,27 @@ ON E.DEPARTMENT = D.DEPT_NO  -- 조인 조건식
 WHERE D.LOCATION = '서울';   -- 일반 조건식
 
 
+CREATE VIEW 과장들 AS
+SELECT * FROM EMPLOYEE WHERE POSITION = '과장';
+
+SELECT * FROM 과장들;
+
+DROP VIEW 과장들;
+
+-- 신규사원을 입력할 수 있도록
+-- 기존 EMPLOYEE 의 명단을 빼고, 구조는 동일한 테이블을 만듬
+
+CREATE TABLE 신규사원 AS
+SELECT * FROM EMPLOYEE WHERE 1 = 2;
+
+SELECT * FROM 신규사원;
+
+DROP TABLE 신규사원;
+
+
+
+
+
+
 
 
