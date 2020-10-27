@@ -38,12 +38,18 @@ INSERT INTO EMPLOYEE VALUES (1002, '김민서', '사원', 'M', 2500000, '17/09/0
 INSERT INTO EMPLOYEE VALUES (1003, '이은영', '부장', 'F', 5500000, '90/09/01', 2);
 INSERT INTO EMPLOYEE VALUES (1004, '한성일', '과장', 'M', 5000000, '93/04/01', 2);
 
+-- 5. DEPARTMENT 테이블 ROW 수정
+-- UPDATE 테이블 SET 수정할내용 WHERE 조건식
+-- 총무부의 위치를 '부산'으로 수정하시오.
+UPDATE DEPARTMENT SET LOCATION = '부산' WHERE DEPT_NAME = '총무부';
 
+-- 6. EMPLOYEE 테이블 ROW 수정
+-- 1) POSITION이 '사원'인 직원들의 SALARY를 5% 인상하시오.
+UPDATE EMPLOYEE SET SALARY = SALARY * 1.05 WHERE POSITION = '사원';
+-- 2) POSITION이 '과장'인 직원들의 POSITIOIN을 '차장'으로 수정하고, SALARY를 10% 인상하시오.
+UPDATE EMPLOYEE SET POSITION = '차장', SALARY = SALARY * 1.1 WHERE POSITION = '과장';
 
-
-
-
-
-
-
-
+-- 7. DEPARTMENT 테이블 ROW 삭제
+-- DELETE FROM 테이블 WHERE 조건식
+-- '기획부'를 삭제하시오.
+DELETE FROM DEPARTMENT WHERE DEPT_NAME = '기획부';
