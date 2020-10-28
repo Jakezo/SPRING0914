@@ -26,7 +26,7 @@ CREATE TABLE USERS (
 -- 외래키 : 아이디 (사용자 테이블의 아이디 칼럼을 참조하는 키)
 CREATE TABLE BUYS (
     BUY_NO NUMBER PRIMARY KEY,
-    USER_NO VARCHAR2(20) REFERENCES USERS(USER_ID),
+    USER_ID VARCHAR2(20) REFERENCES USERS(USER_ID),
     PROD_NAME VARCHAR2(20),
     PROD_CATEGORY VARCHAR2(20),
     PROD_PRICE NUMBER,
@@ -57,6 +57,51 @@ INSERT INTO BUYS VALUES (1007, 'KJD', '책', '서적', 15, 5);
 INSERT INTO BUYS VALUES (1008, 'LHJ', '책', '서적', 15, 2);
 INSERT INTO BUYS VALUES (1009, 'LHJ', '청바지', '의류', 50, 1);
 INSERT INTO BUYS VALUES (1010, 'PSH', '운동화', NULL, 30, 2);
+
+-- 구매 테이블에서 제품명이 '운동화'인 구매 내역의 제품카테고리를 '신발'로 수정하시오.
+UPDATE BUYS
+SET PROD_CATEGORY = '신발'
+WHERE PROD_NAME = '운동화';
+
+-- 사용자 테이블에서 사용자번호가 5인 사용자를 삭제하시오.
+-- 사용자번호가 5인 사용자의 구매 내역을 먼저 삭제한 뒤 진행한다.
+DELETE
+FROM BUYS B
+WHERE B.USER_ID = (SELECT U.USER_ID
+                   FROM USERS U
+                   WHERE U.USER_NO = 5);
+-- WHERE USER_ID = ('사용자번호가 5인 사용자의 아이디');
+-- WHERE USER_ID = 'KJD';
+
+DELETE
+FROM USERS
+WHERE USER_NO = 5;
+
+-- 사용자 아이디별 구매횟수를 조회하시오.
+-- 아이디  구매횟수
+-- KHD     3
+-- ...
+SELECT
+    USER_ID AS 아이디,
+    COUNT(*) AS 구매횟수
+FROM
+    BUYS
+GROUP BY
+    USER_ID;
+
+
+-- 어떤 고객이 어떤 제품을 구매했는지 조회하시오.
+-- 고객명   구매제품
+-- 강호동   운동화
+-- ...
+SELECT
+    U.USER_NAME AS 고객명,
+    B.PROD_NAME AS 구매제품
+FROM
+    USERS U, BUYS B
+WHERE
+    U.USER_ID = B.USER_ID;
+
 
 
 
