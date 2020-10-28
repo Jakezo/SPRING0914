@@ -85,12 +85,41 @@ ON D.LOCATION_ID = L.LOCATION_ID
 WHERE L.CITY LIKE 'T%';
 
 
--- 6. 자신의 담당 매니저(manager_id)의 고용일(hire_date)보다 빨리 입사한 사원을 찾아서 last_name, hire_date, manager_id 를 조회한다. 
+-- 6. 자신의 상사(manager_id)의 고용일(hire_date)보다 빨리 입사한 사원을 찾아서 last_name, hire_date, manager_id 를 조회한다. 
 -- 사용할 테이블 (employees)
+-- EMPLOYEES E : 사원(나)
+-- EMPLOYEES M : 상사(남)
+-- 조인조건 : 내 상사 번호(E.MANAGER_ID) = 상사 번호(M.EMPLOYEE_ID)
+SELECT E.LAST_NAME AS 내이름, E.HIRE_DATE AS 내고용일, M.LAST_NAME AS 상사이름, M.HIRE_DATE AS 상사고용일
+FROM EMPLOYEES E, EMPLOYEES M
+WHERE E.MANAGER_ID = M.EMPLOYEE_ID  -- 조인조건
+AND E.HIRE_DATE < M.HIRE_DATE;  -- 내고용일 < 상사고용일
+
+SELECT E.LAST_NAME AS 내이름, E.HIRE_DATE AS 내고용일, M.LAST_NAME AS 상사이름, M.HIRE_DATE AS 상사고용일
+FROM EMPLOYEES E JOIN EMPLOYEES M
+ON E.MANAGER_ID = M.EMPLOYEE_ID  -- 조인조건
+AND E.HIRE_DATE < M.HIRE_DATE;  -- 내고용일 < 상사고용일
 
 
 -- 7. 같은 소속부서(department_id)에서 나보다 늦게 입사(hire_date)하였으나 나보다 높은 연봉(salary)을 받는 사원이 존재하는 사원들의
 -- department_id, full_name(first_name 과 last_name 사이에 공백을 포함하여 연결), salary, hire_date 를 full_name 순으로 정렬하여 조회한다.
+-- 사용할 테이블 (employees)
+-- 나 : ME
+-- 남 : YOU
+SELECT  ME.LAST_NAME AS 내이름, ME.SALARY AS 내연봉, ME.HIRE_DATE AS 내입사일,
+        YOU.LAST_NAME AS 남이름, YOU.SALARY AS 남연봉, YOU.HIRE_DATE AS 남입사일
+FROM EMPLOYEES ME, EMPLOYEES YOU
+WHERE ME.DEPARTMENT_ID = YOU.DEPARTMENT_ID  -- 조인조건
+AND ME.HIRE_DATE < YOU.HIRE_DATE
+AND ME.SALARY < YOU.SALARY
+ORDER BY ME.LAST_NAME;
+
+SELECT DISTINCT ME.LAST_NAME AS 내이름, ME.SALARY AS 내연봉, ME.HIRE_DATE AS 내입사일
+FROM EMPLOYEES ME, EMPLOYEES YOU
+WHERE ME.DEPARTMENT_ID = YOU.DEPARTMENT_ID  -- 조인조건
+AND ME.HIRE_DATE < YOU.HIRE_DATE
+AND ME.SALARY < YOU.SALARY
+ORDER BY ME.LAST_NAME;
 
 
 -- 8. 같은 소속부서(department_id)의 다른 사원보다 늦게 입사(hire_date)하였으나 현재 더 높은 연봉(salary)을 받는 사원들의
