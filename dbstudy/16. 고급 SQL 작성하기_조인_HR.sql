@@ -1,10 +1,10 @@
--- EMPLOYEES        DEPARTMENTS
---   EMPLOYEE_ID      DEPARTMENT_ID
---   FIRST_NAME       DEPARTMENT_NAME
---   LAST_NAME        MANAGER_ID
---   EMAIL            LOCATION_ID
---   PHONE_NUMBER
---   HIRE_DATE
+-- EMPLOYEES        DEPARTMENTS         LOCATIONS
+--   EMPLOYEE_ID      DEPARTMENT_ID       LOCATION_ID
+--   FIRST_NAME       DEPARTMENT_NAME     STREET_ADDRESS
+--   LAST_NAME        MANAGER_ID          POSTAL_CODE
+--   EMAIL            LOCATION_ID         CITY
+--   PHONE_NUMBER                         STATE_PROVINCE
+--   HIRE_DATE                            COUNTRY_ID
 --   JOB_ID
 --   SALARY
 --   COMMISSION_PCT
@@ -50,15 +50,39 @@ ON E.EMPLOYEE_ID = JH.EMPLOYEE_ID
 WHERE E.JOB_ID = JH.JOB_ID;
 
 
-
-
 -- 4. 각 부서별 사원수와 평균연봉을 department_name, location_id 와 함께 조회한다.
 -- 평균연봉은 소수점 2 자리까지 반올림하여 표현하고, 각 부서별 사원수의 오름차순으로 조회한다.
 -- 사용할 테이블 (departments, employees)
+-- 반올림 : ROUND 함수
+-- ROUND(값, DIGITS)
+-- ROUND(평균, 2) : 평균의 소수2자리 반올림
+
+SELECT D.DEPARTMENT_NAME, D.LOCATION_ID, COUNT(*) AS 사원수, ROUND(AVG(SALARY), 2) AS 평균연봉
+FROM DEPARTMENTS D, EMPLOYEES E
+WHERE D.DEPARTMENT_ID(+) = E.DEPARTMENT_ID  -- 왼쪽에 '(+)'가 추가되면 '오른쪽 외부 조인'이다.
+GROUP BY D.DEPARTMENT_NAME, D.LOCATION_ID  -- SELECT절에서 표시하고자 하는 칼럼은 GROUP BY절에도 추가해야 한다.
+ORDER BY COUNT(*);  -- ORDER BY 사원수;  모두 동일한 결과이다. ORDER BY절은 칼럼의 별명도 사용할 수 있다.
+
+SELECT D.DEPARTMENT_NAME, D.LOCATION_ID, COUNT(*) AS 사원수, ROUND(AVG(SALARY), 2) AS 평균연봉
+FROM DEPARTMENTS D RIGHT OUTER JOIN EMPLOYEES E  -- 오른쪽 테이블인 EMPLOYEES 테이블의 모든 정보가 조회된다.
+ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+GROUP BY D.DEPARTMENT_NAME, D.LOCATION_ID  -- SELECT절에서 표시하고자 하는 칼럼은 GROUP BY절에도 추가해야 한다.
+ORDER BY COUNT(*);
 
 
--- 5. 도시이름(city)이 T 로 시작하는 지역에 사는 사원들의 employee_id, last_name, department_id, city 를 조회한다.
+-- 5. 도시이름(city)이 T 로 시작하는 지역에서 근무하는 사원들의 employee_id, last_name, department_id, city 를 조회한다.
 -- 사용할 테이블 (employees, departments, locations)
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, E.DEPARTMENT_ID, L.CITY
+FROM EMPLOYEES E, DEPARTMENTS D, LOCATIONS L
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID  -- 조인조건1
+AND D.LOCATION_ID = L.LOCATION_ID        -- 조인조건2
+AND L.CITY LIKE 'T%';  -- 'T%': T로 시작하는 모든 텍스트
+
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, E.DEPARTMENT_ID, L.CITY
+FROM EMPLOYEES E INNER JOIN DEPARTMENTS D
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID INNER JOIN LOCATIONS L
+ON D.LOCATION_ID = L.LOCATION_ID
+WHERE L.CITY LIKE 'T%';
 
 
 -- 6. 자신의 담당 매니저(manager_id)의 고용일(hire_date)보다 빨리 입사한 사원을 찾아서 last_name, hire_date, manager_id 를 조회한다. 
