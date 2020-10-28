@@ -125,4 +125,23 @@ ORDER BY ME.LAST_NAME;
 -- 8. 같은 소속부서(department_id)의 다른 사원보다 늦게 입사(hire_date)하였으나 현재 더 높은 연봉(salary)을 받는 사원들의
 -- department_id, full_name(first_name 과 last_name 사이에 공백을 포함하여 연결), salary, hire_date 를 full_name 순으로 정렬하여 조회한다.
 -- 사용할 테이블 (employees)
+-- 나 : ME
+-- 남 : YOU
+-- 연결 연산자 : ||
+SELECT DISTINCT ME.DEPARTMENT_ID AS 내부서번호, ME.FIRST_NAME || ' ' || ME.LAST_NAME AS FULL_NAME
+FROM EMPLOYEES ME, EMPLOYEES YOU
+WHERE ME.DEPARTMENT_ID = YOU.DEPARTMENT_ID
+AND ME.HIRE_DATE > YOU.HIRE_DATE
+AND ME.SALARY > YOU.SALARY
+ORDER BY FULL_NAME;
+
+
+
+
+
+
+
+
+
+
 
