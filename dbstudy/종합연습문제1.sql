@@ -90,10 +90,13 @@ GROUP BY
     USER_ID;
 
 
--- 어떤 고객이 어떤 제품을 구매했는지 조회하시오.
+-- 어떤 고객이 어떤 제품을 구매했는지 조회하시오. (구매한 이력이 있는 고객만 조회하는 내부 조인)
+-- 구매 이력이 없는 고객도 함께 조회하시오. (USERS 테이블의 모든 데이터를 포함하고, BUYS 테이블의 일치하는 데이터만 포함하는 외부 조인)
 -- 고객명   구매제품
 -- 강호동   운동화
 -- ...
+
+-- 내부 조인
 SELECT
     U.USER_NAME AS 고객명,
     B.PROD_NAME AS 구매제품
@@ -102,10 +105,115 @@ FROM
 WHERE
     U.USER_ID = B.USER_ID;
 
+-- 외부 조인
+SELECT
+    U.USER_NAME AS 고객명,
+    B.PROD_NAME AS 구매제품
+FROM
+    USERS U, BUYS B
+WHERE
+    U.USER_ID = B.USER_ID(+);  -- 왼쪽 외부 조인
+
+SELECT
+    U.USER_NAME AS 고객명,
+    B.PROD_NAME AS 구매제품
+FROM
+    USERS U LEFT OUTER JOIN BUYS B  -- 왼쪽 외부 조인
+ON
+    U.USER_ID = B.USER_ID;
+
+-- 제품을 구매한 이력이 있는 고객아이디, 고객명 그리고 총 구매횟수를 조회하시오.
+SELECT
+    U.USER_ID AS 아이디,
+    U.USER_NAME AS 고객명,
+    COUNT(*) AS 구매횟수
+FROM
+    USERS U, BUYS B
+WHERE
+    U.USER_ID = B.USER_ID
+GROUP BY
+    U.USER_ID, U.USER_NAME;
+
+-- 제품을 구매한 이력이 있는 고객명과 총 구매액을 조회하시오.
+SELECT
+    U.USER_NAME AS 고객명,
+    SUM(B.PROD_PRICE * B.BUY_AMOUNT) AS 총구매액
+FROM
+    USERS U, BUYS B
+WHERE
+    U.USER_ID = B.USER_ID
+GROUP BY
+    U.USER_ID, U.USER_NAME;
 
 
+-- 구매 이력과 상관 없이 고객별 구매횟수를 조회하시오.
+-- 구매 이력이 없으면 구매횟수는 0으로 조회하시오.
+SELECT
+    U.USER_ID AS 아이디,
+    U.USER_NAME AS 고객명,
+    --B.USER_ID AS 구매한아이디,
+    COUNT(B.USER_ID) AS 구매횟수
+FROM
+    USERS U LEFT OUTER JOIN BUYS B
+ON
+    U.USER_ID = B.USER_ID
+GROUP BY
+    U.USER_ID, U.USER_NAME;  --, B.USER_ID;
 
+-- 구매 이력에 상관 없이 고객별 총 구매액을 조회하시오.
+-- 구매 이력이 없으면 총 구매액은 0으로 조회하시오.
+SELECT
+    U.USER_NAME AS 고객명,
+    NVL(SUM(B.PROD_PRICE * B.BUY_AMOUNT), 0) AS 총구매액
+FROM
+    USERS U LEFT OUTER JOIN BUYS B
+ON
+    U.USER_ID = B.USER_ID
+GROUP BY
+    U.USER_NAME;
 
+-- 카테고리가 '전자'인 제품을 구매한 고객명과 총 구매액을 조회하시오.
+-- 카테고리가 '전자'인 제품은 그룹화 전에 처리할 수 있는 조건이므로 WHERE 절에서 처리한다.
+SELECT
+    U.USER_NAME AS 고객명,
+    SUM(B.PROD_PRICE * B.BUY_AMOUNT) AS 총구매액
+FROM
+    USERS U INNER JOIN BUYS B
+ON
+    U.USER_ID = B.USER_ID
+WHERE
+    B.PROD_CATEGORY = '전자'
+GROUP BY
+    U.USER_NAME, U.USER_ID;
 
+-- 구매횟수가 2회 이상인 고객명과 구매횟수를 조회하시오.
+-- 구매횟수는 그룹화 이후에만 확인 가능하기 때문에 HAVING 절로 처리한다.
+SELECT
+    U.USER_NAME AS 고객명,
+    COUNT(*) AS 구매횟수
+FROM
+    USERS U INNER JOIN BUYS B
+ON
+    U.USER_ID = B.USER_ID
+--WHERE
+--    COUNT(*) >= 2  -- 전체 레코드 수 9개로 처리
+GROUP BY
+    U.USER_NAME, U.USER_ID
+HAVING
+    COUNT(*) >= 2;  -- 그룹화 후 개수(고객별 구매횟수)로 처리
 
-
+-- USERS 테이블과 BUYS 테이블 각각의 종속 관계를 확인하고
+-- 정규화하시오.
+-- BUYS 테이블을 BUYS 테이블과 PRODUCT 테이블로 분리한다.
+CREATE TABLE PRODUCT (
+    PROD_CODE NUMBER PRIMARY KEY,
+    PROD_NAME VARCHAR2(20) UNIQUE,
+    PROD_CATEGORY VARCHAR2(20),
+    PROD_PRICE NUMBER
+);
+CREATE TABLE BUYS (
+    BUY_NO NUMBER PRIMARY KEY,
+    USER_ID VARCHAR2(20) REFERENCES USERS(USER_ID),
+    PROD_NAME VARCHAR2(20) REFERENCES PRODUCT(PROD_NAME),
+    BUY_AMOUNT NUMBER
+);

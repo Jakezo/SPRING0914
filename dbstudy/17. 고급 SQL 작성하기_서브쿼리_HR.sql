@@ -33,6 +33,61 @@ SELECT
 FROM
     EMPLOYEES E;
 
+-- 4. 평균연봉 이상의 연봉을 받는 사원들의 정보를 조회하시오.
+-- SELECT *
+-- FROM EMPLOYEES
+-- WHERE SALARY >= 평균연봉;
+SELECT *
+FROM EMPLOYEES
+WHERE SALARY >= (SELECT AVG(SALARY) FROM EMPLOYEES);
+
+-- 5. Patrick Sully 와 같은 부서에 근무하는 모든 사원정보를 조회하시오.
+-- SELECT *
+-- FROM EMPLOYEES
+-- WHERE DEPARTMENT_ID = 'Patrick Sully의 부서';
+SELECT *
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID
+                       FROM EMPLOYEES
+                       WHERE FIRST_NAME = 'Patrick'
+                       AND LAST_NAME = 'Sully');
+
+-- 6. 부서번호가 20인 사원들 중에서 평균연봉 이상의 연봉을 받는 사원정보를 조회하시오.
+SELECT *
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 20
+AND SALARY >= (SELECT AVG(SALARY) FROM EMPLOYEES);
+
+-- 7. 'PU_MAN'의 최대연봉보다 더 많은 연봉을 받은 사원들의 정보를 조회하시오.
+SELECT *
+FROM EMPLOYEES
+WHERE SALARY > (SELECT MAX_SALARY
+                FROM JOBS
+                WHERE JOB_ID = 'PU_MAN');
+
+-- 8. 사원번호가 131인 사원의 JOB_ID와 SALARY가 모두 일치하는 사원들의 정보를 조회하시오.
+SELECT *
+FROM EMPLOYEES
+WHERE (JOB_ID, SALARY) = (SELECT JOB_ID, SALARY
+                          FROM EMPLOYEES
+                          WHERE EMPLOYEE_ID = 131);
+--WHERE JOB_ID = ()
+--AND SALARY = ();
+
+-- 9. LOCATION_ID가 1000~1900인 국가들의 COUNTRY_ID와 COUNTRY_NAME을 조회하시오.
+-- SELECT COUNTRY_ID, COUNTRY_NAME
+-- FROM COUNTRIES
+-- WHERE COUNTRY_ID IN 'LOCATION_ID가 1000~1900인 국가들의 COUNTRY_ID'
+SELECT COUNTRY_ID, COUNTRY_NAME
+FROM COUNTRIES
+WHERE COUNTRY_ID IN (SELECT DISTINCT COUNTRY_ID
+                     FROM LOCATIONS
+                     WHERE LOCATION_ID BETWEEN 1000 AND 1900);
+
+
+
+
+
 
 
 
