@@ -84,14 +84,43 @@ WHERE COUNTRY_ID IN (SELECT DISTINCT COUNTRY_ID
                      FROM LOCATIONS
                      WHERE LOCATION_ID BETWEEN 1000 AND 1900);
 
+-- 10. 부서가 'Executive'인 모든 사원들의 정보를 조회하시오.
+-- 서브쿼리의 WHERE 절에서 사용한 DEPARTMENT_NAME은 PK, UQ가 아니므로 서브쿼리의 결과는 여러 개이다.
+SELECT *
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID
+                        FROM DEPARTMENTS
+                        WHERE DEPARTMENT_NAME = 'Executive');
 
-
-
-
-
-
-
-
+-- 11. 부서번호가 30인 사원들 중에서 부서번호가 50인 사원들의 최대연봉보다 더 많은 연봉을 받는 사원들을 조회하시오.
+SELECT *
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 30
+AND SALARY > (SELECT MAX(SALARY)
+              FROM EMPLOYEES
+              WHERE DEPARTMENT_ID = 50);
+SELECT *
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 30
+AND SALARY > ALL(SELECT SALARY  -- 부서번호가 50인 모든 SALARY 보다 큰 SALARY
+                 FROM EMPLOYEES
+                 WHERE DEPARTMENT_ID = 50);
+              
+-- 12. MANAGER가 아닌 사원들의 정보를 조회하시오.
+-- MANAGER는 MANAGER_ID를 가지고 있다.
+-- SELECT *
+-- FROM EMPLOYEES
+-- WHERE EMPLOYEE_ID NOT IN('MANAGER의 MANAGER_ID')
+SELECT *
+FROM EMPLOYEES
+WHERE EMPLOYEE_ID NOT IN(SELECT DISTINCT MANAGER_ID
+                         FROM EMPLOYEES
+                         WHERE MANAGER_ID IS NOT NULL);
+SELECT *
+FROM EMPLOYEES E
+WHERE NOT EXISTS(SELECT M.MANAGER_ID
+                 FROM EMPLOYEES M
+                 WHERE E.EMPLOYEE_ID = M.MANAGER_ID);  -- 사원번호 = 매니저번호 (매니저라는 의미)
 
 
 
