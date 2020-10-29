@@ -1,0 +1,31 @@
+-- 시퀀스와 테이블
+
+CREATE TABLE BOARD (
+    BOARD_NO NUMBER PRIMARY KEY,
+    BOARD_TITLE VARCHAR2(2000) NOT NULL,
+    BOARD_CONTENT VARCHAR2(4000)
+);
+
+CREATE SEQUENCE BOARD_SEQ
+INCREMENT BY 1  -- 번호는 1씩 증가한다.
+START WITH 1  -- 번호는 1부터 시작한다.
+NOMAXVALUE   -- 최대번호는 없다.
+NOMINVALUE   -- 최소번호는 없다.
+NOCYCLE      -- 번호는 순환되지 않는다.
+NOCACHE;     -- CACHE를 사용하지 않는다.
+
+
+INSERT INTO BOARD VALUES (BOARD_SEQ.NEXTVAL, '공지사항', '오늘 재평가가 있습니다.');
+INSERT INTO BOARD VALUES (BOARD_SEQ.NEXTVAL, '알림', '내일은 본평가가 있습니다.');
+
+SELECT * FROM BOARD;
+
+
+
+
+
+
+
+
+
+

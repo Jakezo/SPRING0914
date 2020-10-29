@@ -122,6 +122,51 @@ WHERE NOT EXISTS(SELECT M.MANAGER_ID
                  FROM EMPLOYEES M
                  WHERE E.EMPLOYEE_ID = M.MANAGER_ID);  -- 사원번호 = 매니저번호 (매니저라는 의미)
 
+-- 13. 근무지가 'Southlake'인 사원들의 정보를 조회하시오.
+-- SELECT *
+-- FROM EMPLOYEES E
+-- WHERE '모든 사원의 LOCATION_ID' = 'Southlake의 LOCATION_ID'
+-- 1) 서브쿼리
+SELECT
+    E.*
+FROM
+    EMPLOYEES E
+WHERE
+    (SELECT D.LOCATION_ID
+     FROM DEPARTMENTS D
+     WHERE D.DEPARTMENT_ID = E.DEPARTMENT_ID)
+    =
+    (SELECT LOCATION_ID
+     FROM LOCATIONS
+     WHERE CITY = 'Southlake');
+    
+-- 2) 내부조인
+SELECT
+    E.*
+FROM
+    EMPLOYEES E, DEPARTMENTS D, LOCATIONS L
+WHERE
+    E.DEPARTMENT_ID = D.DEPARTMENT_ID
+AND
+    D.LOCATION_ID = L.LOCATION_ID
+AND
+    L.CITY = 'Southlake';
 
+-- 14. 부서명의 가나다순으로 모든 사원의 정보를 조회하시오.
+SELECT E.*
+FROM EMPLOYEES E
+ORDER BY (SELECT D.DEPARTMENT_NAME
+          FROM DEPARTMENTS D
+          WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID);
 
-
+-- 15. 가장 많은 사원들이 근무하고 있는 부서의 번호와 근무하는 인원수를 조회하시오.
+SELECT
+    DEPARTMENT_ID, MAX(COUNT(*)) AS 인원수
+FROM
+    EMPLOYEES
+GROUP BY
+    DEPARTMENT_ID
+HAVING
+    COUNT(*) = (SELECT MAX(COUNT(*))
+                FROM EMPLOYEES
+                GROUP BY DEPARTMENT_ID);
