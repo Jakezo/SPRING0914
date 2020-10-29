@@ -1,0 +1,23 @@
+-- 1. 연봉이 가장 높은 사원을 조회하시오.
+SELECT O.*
+FROM (SELECT E.*
+      FROM EMPLOYEES E
+      ORDER BY SALARY DESC) O
+WHERE ROWNUM = 1;
+
+
+-- 2. 연봉 TOP 10을 조회하시오.
+SELECT O.*
+FROM (SELECT E.*
+      FROM EMPLOYEES E
+      ORDER BY SALARY DESC) O
+WHERE ROWNUM <= 10;
+
+
+-- 3. 연봉 TOP 11~20을 조회하시오.
+SELECT R.*
+FROM (SELECT ROWNUM AS RN, O.*
+      FROM (SELECT E.*
+            FROM EMPLOYEES E
+            ORDER BY SALARY DESC) O) R
+WHERE R.RN BETWEEN 11 AND 20;
