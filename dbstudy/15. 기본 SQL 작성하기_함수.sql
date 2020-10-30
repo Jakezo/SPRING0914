@@ -32,8 +32,169 @@ SELECT CONCAT(CONCAT(FIRST_NAME, ' '), LAST_NAME) FROM EMPLOYEES;
 SELECT SUBSTR('010-1234-5678', 1, 3) FROM DUAL;  -- 010 (1번째 글자부터 3글자)
 SELECT SUBSTR('010-1234-5678', -4) FROM DUAL;  -- 5678 (뒤 4글자)
 
+-- 5. 특정 문자열 위치 반환하기
+-- 1) INSTR(검색대상, 찾을문자열)
+-- 2) INSTR(검색대상, 찾을문자열, 시작위치, N번째)
+SELECT INSTR('SQLSESSION', 'S') FROM DUAL;  -- 1 ('S'가 나타난 첫 번째 위치)
+SELECT INSTR('SQLSESSION', 'A') FROM DUAL;  -- 0 (찾는 문자열이 없는 경우 0을 반환)
+-- S  Q  L  S  E  S  S  I  O  N
+-- 1  2  3  4  5  6  7  8  9  10
+SELECT INSTR('SQLSESSION', 'S', 1, 2) FROM DUAL;  -- 4 (1번째 위치부터 검색하고, 2번째 'S'를 찾아 위치를 반환)
+SELECT INSTR('SQLSESSION', 'S', 1, 3) FROM DUAL;  -- 6 (1번째 위치부터 검색하고, 3번째 'S'를 찾아 위치를 반환)
+SELECT INSTR('SQLSESSION', 'S', 1, 4) FROM DUAL;  -- 7 (1번째 위치부터 검색하고, 4번째 'S'를 찾아 위치를 반환)
+
+-- 6. 채우기
+-- 1) LPAD(채우기대상, 폭, 채울문자) : 채우기대상의 전체 길이가 지정된 폭만큼 왼쪽이 채울문자로 채워짐
+-- 2) RPAD(채우기대상, 폭, 채울문자) : 채우기대상의 전체 길이가 지정된 폭만큼 오른쪽이 채울문자로 채워짐
+SELECT LPAD('APPLE', 10, '*') FROM DUAL;
+SELECT RPAD('BANANA', 10, '*') FROM DUAL;
+
+-- 7. 좌우 불필요한 문자 제거하기
+-- 1) LTRIM(대상, 제거할 문자열) : 왼쪽에서 제거할 문자열을 제거, 제거할 문자열을 생략하면 공백 제거
+-- 2) RTRIM(대상, 제거할 문자열) : 오른쪽에서 제거할 문자열을 제거, 제거할 문자열을 생략하면 공백 제거
+-- 3) TRIM(대상, 제거할 문자열) : 양쪽에서 제거할 문자열을 제거, 제거할 문자열을 생략하면 공백 제거
+SELECT LENGTH(LTRIM('       APPLE')) FROM DUAL;  -- 5 (공백 제거하면 APPLE만 남음, APPLE의 글자수는 5)
+SELECT LENGTH(RTRIM('APPLE    ')) FROM DUAL;
+SELECT LENGTH(TRIM('       APPLE      ')) FROM DUAL;
+
+-- 문제1. 아이디 찾기 결과 만들기
+-- admin : ad********
+-- myid : my********
+-- yourid : yo********
+SELECT 
+    RPAD(SUBSTR(LAST_NAME, 1, 2), 10, '*') 
+FROM 
+    EMPLOYEES;
+
+-- 문제2. 성과 이름 분리하기
+-- james dean
+-- 홍 길동
+-- 1) 성 (james, 홍) 출력하기
+SELECT
+    SUBSTR('JAMES DEAN',
+           1,
+           INSTR('JAMES DEAN', ' ') - 1)
+FROM
+    DUAL;
+
+-- 2) 이름 (dean, 길동) 출력하기
+SELECT
+    SUBSTR('홍 길동',
+           INSTR('홍 길동', ' ') + 1)
+FROM
+    DUAL;
+
 
 -- *** 숫자 ***
+-- 1. 반올림
+SELECT ROUND(123.4567, 2) FROM DUAL;  -- 123.46 (소수 2자리로 반올림)
+SELECT ROUND(123.4567, 1) FROM DUAL;  -- 123.5  (소수 1자리로 반올림)
+SELECT ROUND(123.4567) FROM DUAL;     -- 123    (정수로 반올림)
+SELECT ROUND(123.4567, -1) FROM DUAL; -- 120    (일의 자리에서 반올림)
+SELECT ROUND(123.4567, -2) FROM DUAL; -- 100    (십의 자리에서 반올림)
+
+-- 2. 절사 (자르기)
+SELECT TRUNC(123.4567, 2) FROM DUAL;  -- 123.45 (소수 2자리로 자름)
+SELECT TRUNC(123.4567, 1) FROM DUAL;  -- 123.4  (소수 1자리로 자름)
+SELECT TRUNC(123.4567) FROM DUAL;     -- 123    (정수로 자름)
+SELECT TRUNC(123.4567, -1) FROM DUAL; -- 120    (일의 자리에서 자름)
+SELECT TRUNC(123.4567, -2) FROM DUAL; -- 100    (십의 자리에서 자름)
+
+-- 3. 올림
+-- CEIL 함수는 자릿수를 지정할 수 없어서 계산을 통해 자릿수를 만든다.
+
+-- 123.4567 -> (*100) -> 12345.67 -> (CEIL) -> 12346 -> (/100) -> 123.46
+-- 123.4567 -> (*10)  -> 1234.567 -> (CEIL) -> 1235  -> (/10)  -> 123.5
+SELECT CEIL(123.4567 * 100) / 100 FROM DUAL;  -- 123.46 (소수 2자리로 올림)
+SELECT CEIL(123.4567 * 10) / 10 FROM DUAL;    -- 123.5  (소수 1자리로 올림)
+
+SELECT CEIL(123.4567) FROM DUAL;              -- 124    (정수로 올림)
+
+-- 123.4567 -> (/10)  -> 12.34567 -> (CEIL) -> 13    -> (*10)  -> 130
+-- 123.4567 -> (/100) -> 1.234567 -> (CEIL) -> 2     -> (*100) -> 200
+SELECT CEIL(123.4567 / 10) * 10 FROM DUAL;    -- 130    (일의 자리에서 올림)
+SELECT CEIL(123.4567 / 100) * 100 FROM DUAL;  -- 200    (십의 자리에서 올림)
+
+-- 4. 내림
+-- FLOOR 함수는 CEIL 함수와 마찬가지로 처리한다.
+SELECT FLOOR(123.4567 * 100) / 100 FROM DUAL;  -- 123.45 (소수 2자리로 내림)
+SELECT FLOOR(123.4567 * 10) / 10 FROM DUAL;    -- 123.4  (소수 1자리로 내림)
+SELECT FLOOR(123.4567) FROM DUAL;              -- 123.4  (정수로 내림)
+SELECT FLOOR(123.4567 / 10) * 10 FROM DUAL;    -- 120    (일의 자리에서 내림)
+SELECT FLOOR(123.4567 / 100) * 100 FROM DUAL;  -- 100    (십의 자리에서 내림)
+
+-- 절사와 내림의 차이는 음수에서 발생한다.
+-- 절사는 그대로 자르고, 내림은 작은 수로 바꾼다.
+SELECT TRUNC(-1.5) FROM DUAL;  --  -1  (.5를 잘라 버림)
+SELECT FLOOR(-1.5) FROM DUAL;  --  -2  (-1.5보다 작은 정수로 변환)
+
+-- 5. 집계 함수
+-- 1) SUM(칼럼) : 칼럼의 합계,  SUM(칼럼1, 칼럼2)과 같은 방식은 지원되지 않는다. SUM(칼럼1) + SUM(칼럼2) 와 같이 처리한다.
+-- 2) AVG(칼럼) : 칼럼의 평균
+-- 3) MAX(칼럼) : 칼럼의 최대값
+-- 4) MIN(칼럼) : 칼럼의 최소값
+-- 5) COUNT(칼럼) : 칼럼의 데이터 개수 (NULL 제외)
+--    COUNT(*) : 레코드(행, ROW)의 개수
 
 
 -- *** 날짜 ***
+-- 1. 현재 날짜 반환
+SELECT SYSDATE FROM DUAL;
+
+-- 2. 날짜는 숫자처럼 연산이 가능하다.
+-- 1일 : 1
+-- 12시간 : 0.5
+SELECT SYSDATE + 2 FROM DUAL;    -- 2일 후
+SELECT SYSDATE + 0.5 FROM DUAL;  -- 12시간 후
+
+-- 3. 개월 연산은 함수로 처리한다.
+SELECT ADD_MONTHS(SYSDATE, 3) FROM DUAL;   -- 3개월 후
+SELECT ADD_MONTHS(SYSDATE, -3) FROM DUAL;  -- 3개월 전
+
+-- 4. 개월 수 차이
+SELECT MONTHS_BETWEEN(SYSDATE, SYSDATE - 180) FROM DUAL;
+
+
+-- *** 타입 변환 ***
+
+-- 1. 문자열 변환 : TO_CHAR
+SELECT TO_CHAR(123) FROM DUAL;  -- '123'  (문자열 형식의 123)
+SELECT TO_CHAR(123, '999999') FROM DUAL;  -- '   123' (9 하나당 공백 하나)
+SELECT TO_CHAR(123, '000000') FROM DUAL;  -- '000123' (0 하나당 0 하나)
+SELECT TO_CHAR(123, '99') FROM DUAL;   -- '###' (값보다 9가 부족하면 오류)
+SELECT TO_CHAR(1234, '9,999') FROM DUAL;  -- '1,234'
+SELECT TO_CHAR(1234, '9,999.99') FROM DUAL;  -- '1,234.00'
+SELECT TO_CHAR(SYSDATE, 'YYYY/MM/DD DAY HH:MI:SS') FROM DUAL;
+
+-- 2. 숫자로 변환
+SELECT TO_NUMBER('100') FROM DUAL;  -- 100 (숫자 100)
+
+-- 참고. 숫자와 문자열의 비교
+-- 100 = '100'
+-- 자동으로 숫자로 변환해서 비교를 진행한다.
+-- 100 = TO_NUMBER('100') 로 변환된 뒤에 비교한다.
+
+-- 3. 날짜로 변환
+SELECT TO_DATE('20/10/05', 'YY/MM/DD') FROM DUAL;  -- 2020년 10월 05일
+SELECT TO_DATE('20/10/05', 'YY/DD/MM') FROM DUAL;  -- 2020년 05월 10일
+SELECT TO_DATE('140825', 'YYMMDD') FROM DUAL;      -- 2014년 08월 25일
+SELECT TO_DATE('14-08-25', 'YY-MM-DD') FROM DUAL;  -- 2014년 08월 25일
+
+SELECT TO_DATE(SYSDATE, 'YYYY-MM-DD') FROM DUAL;  -- 20/10/30    날짜를 'YYYY-MM-DD'과 같은 형식으로 바꾸는 용도가 아니다.
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD') FROM DUAL;  -- 2020-10-30  날짜의 형식을 변경해서 표시하는 함수는 TO_CHAR 함수이다.
+
+-- 올해 며칠이 지났는가?
+-- 오늘 - 2020년 01월 01일
+SELECT SYSDATE - '20/01/01' FROM DUAL;  -- 날짜 - 문자열은 연산이 안 된다.
+SELECT SYSDATE - TO_DATE('20/01/01', 'YY/MM/DD') FROM DUAL;
+
+/*
+날짜를 문자열로 저장하는 예시
+CREATE TABLE ORDERS (
+    ORDER_DATE VARCHAR2(30)
+);
+
+INSERT INTO ORDERS VALUES (TO_CHAR(SYSDATE, 'YYYY-MM-DD HH:MI:SS'));
+
+SELECT ORDER_DATE FROM ORDERS;
+*/
