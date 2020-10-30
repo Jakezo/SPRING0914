@@ -20,15 +20,3 @@ ON D.DEPT_NO = E.DEPARTMENT;
 SELECT E.EMP_NO, E.NAME, D.DEPT_NAME
 FROM DEPARTMENT D, EMPLOYEE E
 WHERE D.DEPT_NO(+) = E.DEPARTMENT;  -- 오른쪽 외부 조인: 반대(왼쪽) 방향에 '(+)'를 추가한다.
-
-
-
-
-
-
-
-
-
-
-
-

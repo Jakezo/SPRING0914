@@ -1,3 +1,7 @@
+DROP TABLE ORDERS;
+DROP TABLE CUSTOMERS;
+DROP TABLE BOOKS;
+
 -- 1. 다음 설명을 읽고 적절한 테이블을 생성하되, 기본키/외래키는 별도로 설정하지 마시오.
 
 -- 1) BOOKS 테이블
@@ -5,14 +9,24 @@
 --    (2) BOOK_NAME : 책 이름, 가변 길이 문자 (최대 100)
 --    (3) PUBLISHER : 출판사, 가변 길이 문자 (최대 50)
 --    (4) PRICE : 가격, 숫자 (최대 6자리)
-
+CREATE TABLE BOOKS (
+    BOOK_ID NUMBER(11) NOT NULL,
+    BOOK_NAME VARCHAR2(100),
+    PUBLISHER VARCHAR2(50),
+    PRICE NUMBER(6)
+);
 
 -- 2) CUSTOMERS 테이블
 --    (1) CUST_ID : 고객 아이디, 숫자 (최대 11자리), 필수
 --    (2) CUST_NAME : 고객 이름, 가변 길이 문자 (최대 20)
 --    (3) ADDRESS : 고객 주소, 가변 길이 문자 (최대 50)
 --    (4) PHONE : 고객 전화, 고정 길이 문자 (최대 20)
-
+CREATE TABLE CUSTOMERS (
+    CUST_ID NUMBER(11) NOT NULL,
+    CUST_NAME VARCHAR2(20),
+    ADDRESS VARCHAR2(50),
+    PHONE CHAR(20)
+);
 
 -- 3) ORDERS 테이블
 --    (1) ORDER_ID : 주문 아이디, 숫자 (최대 11자리), 필수
@@ -20,7 +34,13 @@
 --    (3) BOOK_ID : 책 아이디, 숫자 (최대 11자리)
 --    (4) SALE_PRICE : 판매 가격, 숫자 (최대 6자리)
 --    (5) ORDER_DATE : 주문일, 날짜
-
+CREATE TABLE ORDERS (
+    ORDER_ID NUMBER(11) NOT NULL,
+    CUST_ID NUMBER(11),
+    BOOK_ID NUMBER(11),
+    SALE_PRICE NUMBER(6),
+    ORDER_DATE DATE
+);
 
 -- 4) 아래 INSERT 문은 변경 없이 그대로 사용한다.
 INSERT ALL
@@ -60,30 +80,101 @@ SELECT * FROM DUAL;
 
 -- 2. BOOKS, CUSTOMERS, ORDERS 테이블들의 적절한 칼럼에 기본키를 추가하시오.
 -- '테이블명_PK' 형식의 제약 조건 이름도 함께 부여하시오.
-
+ALTER TABLE BOOKS ADD CONSTRAINT BOOKS_PK PRIMARY KEY(BOOK_ID);
+ALTER TABLE CUSTOMERS ADD CONSTRAINT CUSTOMERS_PK PRIMARY KEY(CUST_ID);
+ALTER TABLE ORDERS ADD CONSTRAINT ORDERS_PK PRIMARY KEY(ORDER_ID);
 
 -- 3. 외래키가 필요한 테이블을 선정하고 적절한 칼럼에 외래키를 추가하시오.
 -- '테이블명_참조하는테이블명_FK' 형식의 제약 조건 이름도 함께 부여하시오.
-
+ALTER TABLE ORDERS ADD CONSTRAINT ORDERS_CUSTOMERS_FK FOREIGN KEY(CUST_ID) REFERENCES CUSTOMERS(CUST_ID);
+ALTER TABLE ORDERS ADD CONSTRAINT ORDERS_BOOKS_FK FOREIGN KEY(BOOK_ID) REFERENCES BOOKS(BOOK_ID);
 
 -- 4. 2014년 7월 4일부터 7월 7일 사이에 주문 받은 도서를 제외하고 나머지 모든 주문 정보를 조회하시오.
+SELECT *
+FROM ORDERS
+WHERE ORDER_DATE NOT BETWEEN '14/07/04' AND '14/07/07';
 
 
 -- 5. 박지성의 총 구매액(SALE_PRICE)을 조회하시오.
 
+-- 1) 조인 (CUSTOMERS 테이블의 CUST_ID  <-  ORDERS 테이블의 CUST_ID)
+SELECT
+    SUM(O.SALE_PRICE) AS 총구매액
+FROM
+    CUSTOMERS C, ORDERS O
+WHERE 1 = 1
+    AND C.CUST_ID = O.CUST_ID  -- 조인 조건
+    AND C.CUST_NAME = '박지성';
+
+
+-- 2) 서브쿼리 (인라인 서브쿼리, 인라인 뷰)
+-- SELECT 합계
+-- FROM ('박지성'의 구매내역)
+SELECT
+    SUM(A.SALE_PRICE)
+FROM
+    (SELECT O.*
+     FROM CUSTOMERS C, ORDERS O
+     WHERE C.CUST_ID = O.CUST_ID AND C.CUST_NAME = '박지성') A;
+
 
 -- 6. 박지성이 구매한 도서의 수를 조회하시오.
-
+SELECT
+    COUNT(ORDER_ID) AS 구매한도서수
+FROM
+    CUSTOMERS C, ORDERS O
+WHERE 1 = 1
+    AND C.CUST_ID = O.CUST_ID
+    AND C.CUST_NAME = '박지성';
 
 -- 7. 박지성이 구매한 도서를 발간한 출판사(PUBLISHER)의 수를 조회하시오.
-
+-- BOOKS        ORDERS      CUSTOMERS
+-- BOOK_ID      BOOK_ID
+--              CUST_ID     CUST_ID
+-- PUBLISHER                CUST_NAME
+SELECT
+    COUNT(DISTINCT PUBLISHER) AS 구매한출판사수
+FROM
+    BOOKS B, CUSTOMERS C, ORDERS O
+WHERE 1 = 1
+    AND B.BOOK_ID = O.BOOK_ID
+    AND C.CUST_ID = O.CUST_ID
+    AND C.CUST_NAME = '박지성';
 
 -- 8. 고객별로 분류하여 각 고객의 이름과 각 고객별 총 구매액을 조회하시오.
-
+SELECT
+    C.CUST_NAME,
+    SUM(O.SALE_PRICE)
+FROM
+    CUSTOMERS C, ORDERS O
+WHERE 1 = 1
+    AND C.CUST_ID = O.CUST_ID
+GROUP BY
+    C.CUST_NAME, C.CUST_ID;
+    
 
 -- 9. 주문한 이력이 없는 고객의 이름을 조회하시오.
-
+-- SELECT CUST_NAME
+-- FROM CUSTOMERS
+-- WHERE CUST_ID NOT IN('주문한 모든 CUST_ID')
+SELECT
+    CUST_NAME
+FROM
+    CUSTOMERS
+WHERE
+    CUST_ID NOT IN(SELECT DISTINCT CUST_ID
+                   FROM ORDERS);
 
 -- 10. 고객별로 총 구매횟수를 조회하시오.
 -- 구매한 이력이 없는 고객은 구매횟수를 0으로 표시하시오.
-
+-- 구매한 이력이 없다: CUSTOMERS 에는 있고, ORDERS 에는 없는 고객
+-- CUSTOMERS 는 모든 데이터를 포함하고, ORDERS 는 일치하는 데이터만 포함하는 외부 조인
+SELECT
+    C.CUST_NAME,
+    COUNT(O.ORDER_ID)
+FROM
+    CUSTOMERS C LEFT OUTER JOIN ORDERS O
+ON
+    C.CUST_ID = O.CUST_ID
+GROUP BY
+    C.CUST_NAME, C.CUST_ID;
