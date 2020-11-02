@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import connection.DBConnect;
+import dto.JobDTO;
 
 // DAO : Data Access Object
 // DB에 접근하는 객체
@@ -35,7 +36,31 @@ public class JobDAO {
 	// METHOD
 	
 	/***** 1. 삽입 메소드 *****/
-	
+	public int insert(JobDTO dto) {
+		
+		try {
+			
+			sql = "INSERT INTO JOB VALUES (?, ?, ?, ?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getJob_id());
+			ps.setString(2, dto.getJob_title());
+			ps.setInt(3, dto.getMin_salary());
+			ps.setInt(4, dto.getMax_salary());
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) { ps.close(); }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+		
+	}
 	
 	
 	
