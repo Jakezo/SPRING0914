@@ -94,9 +94,7 @@ SELECT *
 FROM ORDERS
 WHERE ORDER_DATE NOT BETWEEN '14/07/04' AND '14/07/07';
 
-
 -- 5. 박지성의 총 구매액(SALE_PRICE)을 조회하시오.
-
 -- 1) 조인 (CUSTOMERS 테이블의 CUST_ID  <-  ORDERS 테이블의 CUST_ID)
 SELECT
     SUM(O.SALE_PRICE) AS 총구매액
@@ -105,8 +103,7 @@ FROM
 WHERE 1 = 1
     AND C.CUST_ID = O.CUST_ID  -- 조인 조건
     AND C.CUST_NAME = '박지성';
-
-
+    
 -- 2) 서브쿼리 (인라인 서브쿼리, 인라인 뷰)
 -- SELECT 합계
 -- FROM ('박지성'의 구매내역)
@@ -116,7 +113,6 @@ FROM
     (SELECT O.*
      FROM CUSTOMERS C, ORDERS O
      WHERE C.CUST_ID = O.CUST_ID AND C.CUST_NAME = '박지성') A;
-
 
 -- 6. 박지성이 구매한 도서의 수를 조회하시오.
 SELECT
@@ -151,7 +147,6 @@ WHERE 1 = 1
     AND C.CUST_ID = O.CUST_ID
 GROUP BY
     C.CUST_NAME, C.CUST_ID;
-    
 
 -- 9. 주문한 이력이 없는 고객의 이름을 조회하시오.
 -- SELECT CUST_NAME
