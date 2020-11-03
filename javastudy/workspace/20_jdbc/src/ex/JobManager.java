@@ -49,7 +49,14 @@ public class JobManager {
 	}
 	
 	// 4. 검색 메소드
-	
+	public static void select() {
+		// 1) 검색할 job_id를 입력 받는다.
+		String job_id = JOptionPane.showInputDialog("검색할 JOB_ID를 입력하세요.");
+		// 2) JobDAO 클래스의 select() 메소드에 job_id를 전달한다.
+		JobDTO dto = dao.select(job_id);
+		// 3) 직업 정보를 반환 받아서 출력한다.
+		System.out.println(dto != null ? dto.getJob_id() : "없다.");
+	}
 	
 	// 5. 메인 메소드
 	public static void main(String[] args) {
@@ -62,7 +69,7 @@ public class JobManager {
 			case "1": insert(); break;
 			case "2": update(); break;
 			case "3": delete(); break;
-			//
+			case "4": select(); break;
 			case "5": JOptionPane.showMessageDialog(null, "프로그램을 종료합니다.");
 					  System.exit(0);
 			default: JOptionPane.showMessageDialog(null, "잘못된 선택입니다.");

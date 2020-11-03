@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import connection.DBConnect;
 import dto.JobDTO;
@@ -21,7 +22,7 @@ public class JobDAO {
 	private PreparedStatement ps;
 	private String sql;
 	private int result;
-	// select 용
+	private ResultSet rs;
 	
 	// CONSTRUCTOR
 	public JobDAO() {
@@ -112,23 +113,36 @@ public class JobDAO {
 		
 	}
 	
-	
-	
-	
-	
-	
+	/***** 4. 검색 메소드 *****/
+	public JobDTO select(String job_id) {
+		
+		JobDTO dto = null;
+		
+		try {
+			sql = "SELECT * FROM JOB WHERE JOB_ID = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, job_id);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				dto = new JobDTO();
+				dto.setJob_id( rs.getString(1) );
+				dto.setJob_title( rs.getString(2) );
+				dto.setMin_salary( rs.getInt(3) );
+				dto.setMax_salary( rs.getInt(4) );
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) { rs.close(); }
+				if (ps != null) { ps.close(); }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return dto;
+		
+	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -22,7 +22,7 @@ public class Ex03_selectOneTest {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			rs.next();
-			count = rs.getInt("ROW_COUNT");
+			count = rs.getInt("ROW_COUNT");  // count = rs.getInt(1);
 			System.out.println("전체 ROW: " + count);
 		} catch (Exception e) {
 			e.printStackTrace();
