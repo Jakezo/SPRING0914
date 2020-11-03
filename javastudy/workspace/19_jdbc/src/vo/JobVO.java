@@ -49,4 +49,22 @@ public class JobVO {
 		this.max_salary = max_salary;
 	}
 	
+	@Override
+	public String toString() {
+		return job_id;  // System.out.println(vo); 에서 vo의 출력 형식이 된다.
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

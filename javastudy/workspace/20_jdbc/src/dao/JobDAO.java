@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import connection.DBConnect;
 import dto.JobDTO;
 
-// DAO : Data Access Object
+// DAO : Database Access Object
 // DB에 접근하는 객체
 // CRUD를 처리하는 객체
 // CREATE: INSERT
@@ -61,6 +61,60 @@ public class JobDAO {
 		return result;
 		
 	}
+	
+	/***** 2. 갱신 메소드 *****/
+	public int update(JobDTO dto) {
+		
+		try {
+			
+			sql = "UPDATE JOB SET MIN_SALARY = ?, MAX_SALARY = ? WHERE JOB_ID = UPPER(?)";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, dto.getMin_salary());
+			ps.setInt(2, dto.getMax_salary());
+			ps.setString(3, dto.getJob_id());
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) { ps.close(); }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+		
+	}
+	
+	/***** 3. 삭제 메소드 *****/
+	public int delete(String job_id) {
+		
+		try {
+			
+			sql = "DELETE FROM JOB WHERE JOB_ID = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, job_id);
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) { ps.close(); }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+		
+	}
+	
+	
+	
+	
 	
 	
 	
