@@ -99,16 +99,56 @@
 		</dd>
 	</dl>
 
+	<hr/>
+	
+	<h3>목록 태그</h3>
+	<table>
+		<tbody>
+			<tr>
+				<td>select-one</td>
+				<td>select-list</td>
+				<td>combo(select + input)</td>
+			</tr>
+			<tr>
+				<td>
+					<select name="isp">
+						<option value="skt">SKT</option>
+						<option value="kt">KT</option>
+						<option value="lg">LG</option>
+					</select>
+				</td>
+				<td>
+					<select name="jobs" multiple>
+						<option value="1">의사</option>
+						<option value="2">변호사</option>
+						<option value="3">교사</option>
+						<option value="4">개발자</option>
+						<option value="5">DBA</option>
+					</select>
+				</td>
+				<td>
+					<!-- 콤보는 input이다. input에 datalist를 추가하는 개념이다. -->
+					<input type="text" list="domains" placeholder="도메인 입력 및 선택" />  <!-- list 속성으로 <datalist> 태그와 연결한다. -->
+					<datalist id="domains">  <!-- <datalist> 태그의 id 속성으로 <input> 태그의 list 속성과 연결된다. -->
+						<option value="gmail.com" />
+						<option value="naver.com" />
+						<option value="daum.net" />
+						<option value="kakao.com" />
+					</datalist>
+				</td>
+			</tr>
+		</tbody>	
+	</table>
 
+	<hr/>
+	
+	<h3>다중 행 입력이 가능한 태그</h3>
+	<textarea rows="10" cols="100" name="content" placeholder="내용"></textarea>
 
-
-
+	<hr/>
+	
+	<h3>이름표(label) 붙이기</h3>
+	<input type="checkbox" name="wishlist" value="tv" id="wish"><label for="wish">TV</label>
+	
 </body>
 </html>
-
-
-
-
-
-
-
