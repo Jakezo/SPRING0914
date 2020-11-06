@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function a(f) {
+		if (f.userId.value == '') {
+			alert("아이디를 입력하세요.");
+			f.userId.focus();
+			return;
+		}
+	}
+</script>
+</head>
+<body>
+	<h1>회원가입</h1>
+	<form method="post" enctype="multipart/form-data">
+	    <table>
+		    <tbody>
+		        <tr>
+		            <td>아이디</td>
+		            <td><input type="text" name="userId" /></td>
+		        </tr>
+		        <tr>
+		            <td>비밀번호</td>
+		            <td><input type="password" /></td>
+		        </tr>
+		        <tr>
+		            <td>비밀번호확인</td>
+		            <td><input type="password" /></td>
+		        </tr>
+		        <tr>
+		            <td>이름</td>
+		            <td><input type="text" /></td>
+		        </tr>
+		        <tr>
+		            <td>성별</td>
+		            <td>
+		                <input type="radio" name="gender" value="M" checked />남자
+		                <input type="radio" name="gender" value="F" />여자
+		            </td>
+		        </tr>
+		        <tr>
+		            <td>연락처</td>
+		            <td>
+		                
+		                <select name="tel">
+		                    <option value="010">010</option>
+		                    <option value="02">02</option>
+		                    <option value="031">031</option>
+		                    <option value="032">032</option>
+		                </select>
+		                
+		                - <input type="number" name="mPhone2" />
+		            </td>
+		        </tr>
+		        <tr>
+		            <td>이메일</td>
+		            <td>
+		                <input type="text" />
+		                @
+		                
+		                <input type="text" list="domains" placeholder="도메인입력/선택" />
+		                <datalist id="domains">
+		                    <option value="naver.com">
+		                    <option value="daum.net">
+		                    <option value="gmail.com">
+		                    <option value="nate.com">
+		                </datalist>
+		                
+		            </td>
+		        </tr>
+		        <tr>
+		            <td>취미 활동</td>
+		            <td>
+		                <input type="checkbox" name="hobbies" value="독서" checked />독서
+		                <input type="checkbox" name="hobbies" value="낚시" />낚시
+		                <input type="checkbox" name="hobbies" value="수영" />수영
+		            </td>
+		        </tr>
+		        <tr>
+		            <td>프로필사진</td>
+		            <td><input type="file" name="profile" /></td>
+		        </tr>
+	        </tbody>
+	        <tfoot>
+	        	<tr>
+	        		<td colspan="2">
+				        <input type="button" value="회원가입" onclick="a(this.form)" />
+				        <input type="reset" value="다시작성" />        		
+	        		</td>
+	        	</tr>
+	        </tfoot>
+	    </table>
+	</form>
+</body>
+</html>

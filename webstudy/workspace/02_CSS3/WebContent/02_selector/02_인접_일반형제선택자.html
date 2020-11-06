@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	
+	/* 1. 일반 형제 선택자 */
+	h3 ~ div {  /* h3 태그의 모든 div 동생 태그들이 선택된다. */
+		line-height: 100px;
+	}
+	
+	/* 2. 인접 형제 선택자 */
+	h3 + div {  /* h3 태그의 바로 아래 div 태그만 선택된다. */
+		background: yellow;
+	}
+	
+</style>
+</head>
+<body>
+
+	<h3>
+		선택자
+	</h3>
+	<div>
+		1. 자식선택자
+	</div>
+	<div>
+		2. 형제선택자
+	</div>
+
+</body>
+</html>
