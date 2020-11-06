@@ -1,0 +1,26 @@
+선택자 (selector)
+
+1. 전체 선택자: *
+   * {
+     font-family: 'Roboto', sans-serif;
+   }
+2. 태그 선택자: 태그이름
+   div {
+     font-family: 'Roboto', sans-serif;
+   }
+3. id 속성 선택자: #id
+   #box {
+     font-family: 'Roboto', sans-serif;
+   }
+4. class 속성 선택자: .class
+   .centered {
+     font-family: 'Roboto', sans-serif;
+   }
+
+
+
+
+
+
+
+
