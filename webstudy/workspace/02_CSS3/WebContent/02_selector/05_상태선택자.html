@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/* type 속성이 "text"인 모든 input 태그 중 선택된 태그 */
+	input[type="text"]:focus {
+		background: aqua;
+	}
+	/* type 속성이 "radio"인 모든 input 태그 중 선택된 태그
+	input[type="radio"]:focus {
+		width: 50px;
+	} */
+	/* type 속성이 "radio"인 모든 input 태그 중 checked 된 태그 뒤의 label 태그 */
+	input[type="radio"]:checked + label {
+		color: red;
+	}
+	/* type 속성이 "checkbox"인 모든 input 태그 중 checked 된 태그 뒤의 span 태그 */
+	input[type="checkbox"]:checked + span {
+		color: red;
+	}
+	/* type 속성이 "text"인 모든 input 태그 중 disabled 된 태그 */
+	input[type="text"]:disabled {
+		color: orange;
+	}
+	select[name="addr"] {
+		color: blue;
+	}
+</style>
+</head>
+<body>
+
+	<form action="#">
+		검색 <input type="text" /><br/>
+		검색 <input type="text" /><br/>
+		검색 <input type="text" /><br/>
+		검색 <input type="text" /><br/>
+		검색 <input type="text" /><br/>
+		<br/>
+		<fieldset>
+			<legend>성별</legend>
+			<input type="radio" name="gender" id="m" checked /><label for="m">남자</label>
+			<input type="radio" name="gender" id="f" /><label for="f">여자</label>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>취미</legend>
+			<input type="checkbox" name="hobbies" /><span>영화</span>
+			<input type="checkbox" name="hobbies" /><span>여행</span>
+			<input type="checkbox" name="hobbies" /><span>게임</span>
+		</fieldset>
+		<br/>
+		<input type="text" value="010-1234-5678" disabled />
+		<br/>
+		<select name="addr">
+			<option value="seoul">서울</option>
+			<option value="gyeonggi">경기</option>
+			<option value="incheon">인천</option>
+		</select>
+	</form>
+
+</body>
+</html>
+
+
+
+
+
