@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+	.my-box {
+		background-color: crimson;
+	}
+	
+	/* 1. box크기 == img크기 */
+	#box1 {
+		width: 640px;
+		height: 480px;
+		background-image: url(../assets/images/wildlife.jpg);
+		background-size: 640px 480px;  /* 가로 세로 순 */
+	}
+	
+	/* 2. box크기 < img크기 */
+	#box2 {
+		width: 300px;
+		height: 300px;
+		background-image: url(../assets/images/wildlife.jpg);
+		/* background-size: 300px 300px; */
+		background-size: cover;   /* 가로:세로 비율을 유지시키면서 크기를 맞춤 */
+	}
+	
+	/* 3. box크기 > img크기 */
+	#box3 {
+		width: 1000px;
+		height: 500px;
+		background-image: url(../assets/images/wildlife.jpg);
+		background-repeat: no-repeat;
+		background-position: center;  /* 세로(top,생략:middle,bottom) 가로(left,center,right) */
+	}
+	
+	/* 전체 배경 */
+	body > div {
+		width: 100vw;
+		height: 500%;
+		background-image: url(../assets/images/halloween.jpg);
+		background-repeat: repeat-y;
+	}
+	
+</style>
+</head>
+<body>
+
+	<div>
+		
+		<div id="box1" class="my-box">
+			<h1>BOX-1</h1>
+		</div>
+		
+		<div id="box2" class="my-box">
+			<h1>BOX-2</h1>
+		</div>
+		
+		<div id="box3" class="my-box">
+			<h1>BOX-3</h1>
+		</div>
+		
+	</div>
+
+</body>
+</html>
