@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>화면구현</title>
+<style type="text/css">
+	table {
+		width: 750px;
+	}
+	table, td {
+		border-top: 1px solid gray;
+		border-bottom: 1px solid gray;
+		border-collapse: collapse;  /* table 태그 대상 */
+		padding: 10px;
+		text-align: center;
+		vertical-align: middle;
+	}
+	thead > tr {
+		background: lightgray;
+	}
+	td:nth-of-type(n) {  /* n이 1, 2, 3, 4, 5로 등록 */
+		width: 150px;
+	}
+	
+</style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <td>No.</td>
+        <td>제목</td>
+        <td>작성자</td>
+        <td>작성일</td>
+        <td>조회수</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>알라딘</td>
+        <td>박알란</td>
+        <td>2020-01-05</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>흥부전</td>
+        <td>이흥부</td>
+        <td>2020-01-03</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>어린왕자</td>
+        <td>김어린</td>
+        <td>2020-01-02</td>
+        <td>15</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>필독</td>
+        <td>관리자</td>
+        <td>2020-01-01</td>
+        <td>500</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>공지사항</td>
+        <td>관리자</td>
+        <td>2020-01-01</td>
+        <td>200</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
