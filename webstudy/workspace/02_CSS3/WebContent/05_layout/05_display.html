@@ -46,7 +46,17 @@
 		
 	}
 	
+	#inline-block {
 	
+		/* 인라인-블록: 블록레벨작업이 가능하지만 영역이 inline에 포함된다. */
+		display: inline-block;
+	
+		/* 블록레벨만 가능한 작업 */
+		width: 300px;
+		height: 100px;
+		text-align: center;
+	
+	}
 	
 </style>
 </head>
@@ -57,11 +67,11 @@
 	</div>
 	
 	<div>
-		여기는 <span id="inline-block">inline-block</span> 처리됩니다.
+		여기는 <span id="block">block</span> 처리됩니다.
 	</div>
 	
 	<div>
-		여기는 <span id="block">block</span> 처리됩니다.
+		여기는 <div id="inline-block">inline-block</div> 처리됩니다.
 	</div>
 	
 </body>
