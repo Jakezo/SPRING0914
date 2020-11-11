@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	
+	/*
+		인라인레벨태그: span, a
+		블록레벨태그  : div, p, pre, ul, ol, li
+	*/
+	/*
+		인라인레벨태그들이 불가능한 작업
+		1. width
+		2. height
+		3. text-align
+	*/
+
+	#inline {
+	
+		/* 인라인레벨로 표시 */
+		display: inline;
+	
+		/* 인라인레벨로 처리가 안 되는 작업들 */
+		width: 300px;
+		height: 100px;
+		text-align: center;
+		
+		/* 인라인레벨도 처리가 되는 작업들 */
+		border: 1px solid black;
+		padding: 50px;
+		margin: 50px;
+		background: yellow;
+		
+	}
+	
+	#block {
+		
+		/* 블록레벨로 표시 */
+		display: block;
+		
+		/* 블록레벨만 가능한 작업 */
+		width: 300px;
+		height: 100px;
+		text-align: center;
+		
+	}
+	
+	
+	
+</style>
+</head>
+<body>
+	
+	<div>
+		여기는 <div id="inline">inline</div> 처리됩니다.
+	</div>
+	
+	<div>
+		여기는 <span id="inline-block">inline-block</span> 처리됩니다.
+	</div>
+	
+	<div>
+		여기는 <span id="block">block</span> 처리됩니다.
+	</div>
+	
+</body>
+</html>
