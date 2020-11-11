@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+	.container {
+		position: relative;
+		width: 500px;
+		height: 500px;
+		border: 1px solid black;
+		margin: auto;
+	}
+	#spring {
+		position: absolute;  /* absolute: 부모 중에서 static이 아닌 요소 */
+		top: 0px;  /* top 에서 0px 만큼 떨어진다. */
+		left: 0px;  /* left 에서 0px 만큼 떨어진다. */
+		width: 200px;
+		height: 200px;
+		border: 1px solid black;
+	}
+	#summer {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		width: 200px;
+		height: 200px;
+		border: 1px solid black;
+	}
+	#fall {
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		width: 200px;
+		height: 200px;
+		border: 1px solid black;
+	}
+	#winter {
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+		width: 200px;
+		height: 200px;
+		border: 1px solid black;
+	}
+
+</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div id="spring" class="box">봄</div>
+		<div id="summer" class="box">여름</div>
+		<div id="fall"   class="box">가을</div>
+		<div id="winter" class="box">겨울</div>
+	</div>
+	
+</body>
+</html>
