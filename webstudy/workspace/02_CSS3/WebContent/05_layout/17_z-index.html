@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/*
+		z-index
+		
+		1. 앞 뒤 순서를 조정하는 속성이다.
+		2. 정수값을 가진다.
+		3. 상대적으로 높은 값이 앞에 나타나고 낮은 값이 뒤에 나타난다.
+		4. position이 relative, absolute, fixed인 경우에만 적용된다.
+		5. 같은 depth의 요소끼리 비교한다.
+		   : 부모-자식은 다른 depth, 형제끼리는 같은 depth
+	*/
+	.container {
+		width: 300px;
+		height: 300px;
+		border-radius: 10px;
+		background: green;
+		position: relative;
+		z-index: 999999;  /* box1, box2와 depth가 다르기 때문에 서로 연관이 없다. */
+	}
+	.container > .box {
+		width: 200px;
+		height: 200px;
+		position: absolute;
+	}
+	#box1 {
+		top: 0px;
+		left: 0px;
+		background: gray;
+		z-index: 3;  /* box1의 z-index값이 box2보다 더 크므로 앞에 나타난다. */
+	}
+	#box2 {
+		bottom: 0px;
+		right: 0px;
+		background: purple;
+		z-index: 2
+	}
+	
+</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div id="box1" class="box">BOX1</div>
+		<div id="box2" class="box">BOX2</div>
+	</div>
+	
+</body>
+</html>

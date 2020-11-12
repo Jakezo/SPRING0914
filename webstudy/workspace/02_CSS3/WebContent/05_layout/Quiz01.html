@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	
+	/* ul 태그의 자식 태그인 li 태그들의 수평 레이아웃 배치 */
+	.top-menu > .menu-bar {
+		display: flex;  /* 자식 태그들이 수평 레이아웃 배치됨 */
+		list-style-type: none;  /* 불릿 기호 없애기 */
+		padding: 0px;  /* 왼쪽 내부 여백 제거 */
+		background: black;
+	}
+	
+	.top-menu > .menu-bar > li > a {
+		display: block;  /* a 태그는 인라인레벨이므로 블록레벨로 바꿈 */
+		width: 100px;  /* 너비 */
+		padding: 30px 10px;  /* 상하30px: 상하padding이 같으면 텍스트가 세로 가운데 정렬 처리 */
+		text-align: center;  /* 텍스트 가로 가운데 정렬 */
+		color: white;
+		text-decoration: none;  /* a 태그의 밑줄 없애기 */
+		font-weight: 900;
+	}
+	
+	.top-menu > .menu-bar > li > a:hover {
+		background: gray;
+		color: black;
+	}
+	
+	.top-menu > .menu-bar > li > a:active {
+		background: green;
+		color: black;
+	}
+	
+</style>
+</head>
+<body>
+	
+	<div class="top-menu">
+		<ul class="menu-bar">
+			<li><a href="javascript:void(0)">HOME</a></li>
+			<li><a href="javascript:void(0)">BOARD</a></li>
+			<li><a href="javascript:void(0)">GUEST</a></li>
+			<li><a href="javascript:void(0)">ABOUT</a></li>
+		</ul>
+	</div>
+	
+</body>
+</html>
