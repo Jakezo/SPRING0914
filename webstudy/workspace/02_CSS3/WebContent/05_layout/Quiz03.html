@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+	* {
+		box-sizing: border-box;  /* width, height가 실제 box의 크기가 된다. */
+	}
+	body {
+		padding: 10px;
+		background: silver;
+	}
+	
+	header {
+		padding: 30px;
+		background: white;
+		text-align: center;
+	}
+	header > h1 {
+		font-size: 50px;
+	}
+	
+	nav > ul {
+		list-style-type: none;
+		padding: 0px;
+		margin: 0px;
+		background: black;
+		display: flex;
+	}
+	nav > ul > li > a {  /* nav > ul a */
+		display: block;
+		padding: 10px 30px;  /* 상하10px 좌우30px */
+		text-decoration: none;  /* 밑줄 없애기 */
+		text-align: center;
+		color: white;
+	}
+	nav > ul > li > a:hover {
+		background: green;
+	}
+	
+	.main-section {
+		display: flex;
+	}
+	.main-section > .left-section {
+		margin-right: 10px;
+		/* width: 75%; */
+		flex: 3;
+	}
+	.main-section > .right-section {
+		/* width: 25%; */
+		flex: 1;
+	}
+	article {
+		background: white;
+		padding: 10px;
+		margin-top: 10px;
+	}
+	.fake-img {
+		background: silver;
+		padding: 10px;
+	}
+	
+	footer {
+		background: gray;
+		padding: 20px;
+		margin-top: 10px;
+		text-align: center;
+	}
+	
+</style>
+</head>
+<body>
+	
+	<header>
+		<h1>My Website</h1>
+	</header>
+	<nav>
+		<ul>
+			<li><a href="javascript:void(0)">Menu1</a></li>
+			<li><a href="javascript:void(0)">Menu2</a></li>
+			<li><a href="javascript:void(0)">Menu3</a></li>
+			<li><a href="javascript:void(0)">Menu4</a></li>
+		</ul>
+	</nav>
+	
+	<section class="main-section">
+		<section class="left-section">
+			<article>
+				<h2>TITLE HEADING1</h2>
+				<p>Title description1</p>
+				<div class="fake-img">image</div>
+				<p>content1</p>
+				<p>xxxxx xxxxx xxxxx</p>
+			</article>
+			<article>
+				<h2>TITLE HEADING2</h2>
+				<p>Title description2</p>
+				<div class="fake-img">image</div>
+				<p>content2</p>
+				<p>xxxxx xxxxx xxxxx</p>
+			</article>
+		</section>
+		<section class="right-section">
+			<article>
+				<h2>About Me</h2>
+				<div class="fake-img">image</div>
+				<p>xxxxx xxxxx xxxxx</p>
+			</article>
+			<article>
+				<h2>Popular Post</h2>
+				<div class="fake-img">image</div>
+				<div class="fake-img">image</div>
+				<div class="fake-img">image</div>
+			</article>
+			<article>
+				<h2>Follow Me</h2>
+				<p>xxxxx xxxxx xxxxx</p>
+			</article>
+		</section>
+	</section>
+	
+	<footer>
+		<h2>Footer</h2>
+	</footer>
+
+</body>
+</html>
