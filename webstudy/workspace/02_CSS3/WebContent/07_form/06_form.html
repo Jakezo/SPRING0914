@@ -3,6 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	body {
+		box-sizing: border-box;
+		background: silver;
+	}
+	fieldset {
+		width: 350px;
+		margin: auto;
+		border-radius: 10px;
+		border: 1px solid gray;
+		background: gray;
+	}
+	fieldset .screen-out {
+		/*
+			display: none;  과 같은 효과이다.
+		*/
+		width: 0px;
+		height: 0px;
+		position: absolute;
+		overflow: hidden;  /* 크기가 없는 박스라서 텍스트가 모두 벗어날텐데 벗어나면 숨긴다. */
+	}
+	fieldset > #login-id, fieldset > #login-pw {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 20px;
+		border: 1px solid gray;
+	}
+	fieldset > #login-id {
+		border-radius: 10px 10px 0px 0px;
+	}
+	fieldset > #login-pw {
+		border-radius: 0px 0px 10px 10px;
+	}
+	fieldset > button {
+		width: 100%;
+		margin-top: 40px;
+		padding: 20px;
+		border-radius: 10px;
+		border: 1px solid gray;
+		background: green;
+	}
+	fieldset > button:hover {
+		color: white;
+		background: black;
+	}
+	.login-append {
+		margin-top: 20px;
+		overflow: hidden;
+	}
+	.login-append > .login-check {
+		float: left;
+	}
+	.login-append > .login-find {
+		float: right;
+	}
+	.login-append > .login-find > .login-find-link {
+		text-decoration: none;
+		color: black;
+	}
+	.login-append > .login-find > .login-find-link:hover {
+		color: red;
+	}
+	
+</style>
 </head>
 <body>
 	<form method="post">
