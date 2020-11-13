@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+<style type="text/css">
+	.search-wrap {
+		display: flex;
+	}
+	.search-box {
+		width: 300px;
+		padding: 10px 10px 10px 30px;
+		border: 5px solid limegreen;
+	}
+	.search-box > #query {
+		width: 260px;
+		border: none;
+		padding: 5px;
+	}
+	.btn {
+		background: limegreen;
+		border: none;
+		color: white;
+		height: 55.5px;
+		width: 55px;
+		margin-left: 10px;
+	}
+	
+</style>
+</head>
+<body>
+	<!--
+		1. 아이콘을 제공하는 CDN을 찾는다.
+		   (cdnjs.com)
+		2. fontawesome에서 제공하는 CDN 중 css를 찾는다.
+		3. 해당 CDN(주소)을 복사해서 <link> 태그의 href 속성에 붙여넣는다. (link 태그 자체를 복사할 수도 있다.)
+		4. fontawesome.com에 접속해서 원하는 아이콘을 검색하고 태그를 복사한다.
+	-->
+	<form>
+		<div class="search-wrap">
+			<div class="search-box">
+				<input type="text" name="query" id="query" placeholder="Search..." />
+			</div>
+			<div>
+				<button class="btn">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+		</div>
+	</form>
+	
+</body>
+</html>
