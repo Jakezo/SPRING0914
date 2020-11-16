@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div {
+		padding: 0px;
+		margin: 0px;
+		box-sizing: border-box;
+	}
+	.login-wrap {
+		width: 450px;
+		display: flex;
+	}
+	.left-wrap {
+		width: 300px;
+	}
+	.id-wrap, .pw-wrap {
+		display: flex;
+		padding: 5px;
+	}
+	.icon-box {
+		width: 50px;
+		height: 50px;
+		text-align: center;  /* 가로 가운데 */
+		padding: 15px;  /* 세로 가운데 효과(상하padding이 같은 경우) */
+		background: gray;
+		border: 1px solid gray;
+		border-radius: 5px 0px 0px 0px;
+	}
+	.id-wrap > input, .pw-wrap > input {
+		width: 250px;
+		padding: 10px;
+		border: 1px solid gray;
+		border-radius: 0px 0px 5px 0px;
+	}
+	.right-wrap {
+		width: 150px;
+		padding: 5px;
+	}
+	.login-button {
+		width: 110px;
+		height: 110px;
+		text-align: center;
+		line-height: 110px;  /* height == line-height 이면 세로 가운데 맞춤 */
+		background: gray;
+		border: 1px solid gray;
+		border-radius: 5px;
+	}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+</head>
+<body>
+	<div class="login-wrap">
+		<div class="left-wrap">
+			<div class="id-wrap">
+				<div class="icon-box">
+					<i class="fas fa-user"></i>
+				</div>
+				<input type="text" placeholder="Username" />
+			</div>
+			<div class="pw-wrap">
+				<div class="icon-box">
+					<i class="fas fa-key"></i>
+				</div>
+				<input type="password" placeholder="●●●●" />
+			</div>
+		</div>
+		<div class="right-wrap">
+			<div class="login-button">
+				로그인
+			</div>
+		</div>
+	</div>
+</body>
+</html>
