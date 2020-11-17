@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	// 짝수/홀수 구분하기
+	var n = Number(prompt('정수를 입력하세요.'));
+	if (n % 2 == 0) {
+		alert(n + '은 짝수이다.');
+	} else {  // n % 2 == 1
+		alert(n + '은 홀수이다.');
+	}
+	switch (n % 2) {
+	case 0:
+		alert(n + '은 짝수이다.');
+		break;  // switch를 끝내기 위해서
+	default:  // case 1:
+		alert(n + '은 홀수이다.');
+		break;  // 넣을 필요가 없다.
+	}
+	// 학점 계산하기
+	var avg = 95;
+	var grade;
+	if (avg >= 90) {
+		grade = 'A';
+	} else if (avg >= 80) {
+		grade = 'B';
+	} else if (avg >= 70) {
+		grade = 'C';
+	} else if (avg >= 60) {
+		grade = 'D';
+	} else {
+		grade = 'F';
+	}
+	
+	// 자바의 스타일
+	switch (parseInt(avg / 10)) {  // avg를 10으로 나눈 몫
+	case 10:
+	case 9: grade = 'A'; break;
+	case 8: grade = 'B'; break;
+	case 7: grade = 'C'; break;
+	case 6: grade = 'D'; break;
+	default: grade = 'F'; break;
+	}
+	
+	// 자바스크립트 스타일 (case에서 크기 비교 연산을 할 수 있다.)
+	switch (true) {
+	case ave >= 90: grade = 'A'; break;
+	case ave >= 80: grade = 'B'; break;
+	case ave >= 70: grade = 'C'; break;
+	case ave >= 60: grade = 'D'; break;
+	default: grade = 'F'; break;
+	}
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
