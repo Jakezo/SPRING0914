@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	// 1. 날짜/시간 생성
+	
+	// 1) 현재 날짜와 시간
+	var now = new Date();
+	console.log('now = ' + now);
+	
+	// 2) 특정 날짜(타임스탬프)
+	var date1 = new Date(1000 * 60 * 60 * 24 * 365);
+	console.log('date1(1970년 1월 1일에서 1년 후) = ' + date1);
+	
+	// 3) 특정 날짜(년, 월, 일)
+	var date2 = new Date(2020, 11, 17);  // 2020-12-17, 월(0 ~ 11)
+	console.log('date2(1달 후) = ' + date2);
+	
+	// 4) 특정 날짜(년, 월, 일, 시, 분, 초)
+	var date3 = new Date(2020, 10, 17, 18, 11, 30);  // 2020-11-17 18:11:30
+	console.log('date3 = ' + date3);
+	
+	// 5) 특정 날짜('년-월-일, 년/월/일')
+	var date4 = new Date('2020-05-06');  // 2020-05-06
+	console.log('date4 = ' + date4);
+	
+	// 2. 원하는 정보만 추출
+	// 1) 년 : getFullYear()
+	// 2) 월(0 ~ 11) : getMonth()
+	// 3) 일(1 ~ 31) : getDate()
+	// 4) 요일번호(0 ~ 6) : getDay(), 0은 일, 1은 월, ... 6은 토
+	// 5) 시(0 ~ 23) : getHours()
+	// 6) 분(0 ~ 59) : getMinutes()
+	// 7) 초(0 ~ 59) : getSeconds()
+	// 8) 밀리초(0 ~ 999) : getMilliseconds()
+	// 9) 밀리초(타임스탬프: 1970년 1월 1일 이후의 몇 밀리초가 지났는지 추출) : getTime()
+	
+</script>
+<style type="text/css">
+	.clock {
+		width: 1000px;
+		margin: auto;
+		text-align: center;
+		font-size: 20px;
+	}
+	.clock > span {
+		color: red;
+		font-weight: 900;
+	}
+</style>
+</head>
+<body>
+
+	<div class="clock">
+		<span id="year"></span>년&nbsp;
+		<span id="month"></span>월&nbsp;
+		<span id="date"></span>일&nbsp;
+		<span id="hour"></span>시&nbsp;
+		<span id="minute"></span>분&nbsp;
+		<span id="second"></span>초
+	</div>
+
+	<script type="text/javascript">
+		var now = new Date();
+		document.getElementById('year').textContent = now.getFullYear();
+		document.getElementById('month').textContent = now.getMonth();
+		document.getElementById('date').textContent = now.getDate();
+		document.getElementById('hour').textContent = now.getHours();
+		document.getElementById('minute').textContent = now.getMinutes();
+		document.getElementById('second').textContent = now.getSeconds();
+	</script>
+	
+	<script type="text/javascript">
+		// 입력 대화상자에 생일을 yyyy-mm-dd 형식으로 입력하면
+		// 나이를 출력하시오. (현재년도-태어난년도+1)
+		nowYear = new Date().getFullYear();
+		birthYear = new Date(prompt('생일을 입력하세요.(yyyy-mm-dd)')).getFullYear();
+		age = nowYear - birthYear + 1;
+		alert('당신은 ' + age + '살입니다.');
+		// 변수 선언을 생략하려면
+		// 최초의 값은 대입해 줘야 한다.
+	</script>
+	
+</body>
+</html>
