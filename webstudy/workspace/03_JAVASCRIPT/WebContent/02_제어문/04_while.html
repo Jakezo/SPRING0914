@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="n"></div>
+	<div id="quiz1">
+		<!--
+		<ul>
+			<li>0</li>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		-->
+	</div>
+	<div id="quiz2">
+		<!--
+		<table border="1">
+			<tr>
+				<td>0</td>
+				<td>1</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+			</tr>
+		</table>
+		-->
+	</div>
+	<div id="quiz3">
+		<!--
+		<select>
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
+		-->
+	</div>
+	<script type="text/javascript">
+		var a = 0;
+		while (a < 5) {
+			document.getElementById('n').innerHTML += a + '<br/>';
+			a++;
+		}
+		// quiz1
+		var quiz1 = '<ul>';
+		var a = 0;
+		while (a < 5) {
+			quiz1 += '<li>' + a + '</li>';
+			a++;
+		}
+		quiz1 += '</ul>';
+		document.getElementById('quiz1').innerHTML = quiz1;
+		// quiz2
+		var quiz2 = '<table border="1">';
+		var row = 0;
+		while (row < 2) {
+			quiz2 += '<tr>';
+			var col = 0;
+			while (col < 3) {
+				quiz2 += '<td>' + (row * 3 + col) + '</td>';
+				col++;
+			}
+			quiz2 += '</tr>';
+			row++;
+		}
+		quiz2 += '</table>';
+		document.getElementById('quiz2').innerHTML = quiz2;
+		
+		// quiz3
+		var quiz3 = '<select name="month">';
+		var month = 1;
+		while (month <= 12) {
+			quiz3 += '<option value="' + month + '">' + month + '</option>';
+			month++;
+		}
+		quiz3 += '</select>';
+		document.getElementById('quiz3').innerHTML = quiz3;
+	</script>
+	
+</body>
+</html>
