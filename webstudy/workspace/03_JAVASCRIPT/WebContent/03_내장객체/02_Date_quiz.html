@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	// 문제1. 현재 시간이 11시 전이면 '오전', 현재 시간이 14시 전이면 '점심'
+	//        현재 시간이 17시 전이면 '오후', 나머지 '저녁'을 출력하시오.
+	/*
+	var nowHour = new Date().getHours(); 
+	switch (true) {
+	case nowHour < 11: alert('오전'); break;
+	case nowHour < 14: alert('점심'); break;
+	case nowHour < 17: alert('오후'); break;
+	default: alert('저녁');
+	}
+	*/
+	// 문제2. 오늘의 요일을 출력하시오. (수요일)
+	/*
+	var dayNo = new Date().getDay();
+	switch (dayNo) {
+	case 0: alert('일요일'); break;
+	case 1: alert('월요일'); break;
+	case 2: alert('화요일'); break;
+	case 3: alert('수요일'); break;
+	case 4: alert('목요일'); break;
+	case 5: alert('금요일'); break;
+	default: alert('토요일');
+	}
+	*/
+	// 문제3. 1초 동안 'hello'를 웹 페이지에 계속 출력하시오.
+	//        1: hello
+	//        2: hello
+	//        ...
+	//        ??: hello
+	var startMillis = new Date().getTime();
+	var lineNo = 0;
+	while (new Date().getTime() <= startMillis + 1000) {
+		document.write((++lineNo) + ': hello<br/>');
+	}
+			
+</script>
+</head>
+<body>
+
+</body>
+</html>
