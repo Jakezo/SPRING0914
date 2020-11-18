@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	// 선언적 함수와 익명 함수의 이름이 같다.
+	
+	// who am I?
+	view();  // 선언적 함수 view
+	
+	function view() {
+		console.log('선언적 함수 view');
+	}
+
+	var view = function () {
+		console.log('익명 함수 view');
+	}
+	
+	// who am I?
+	view();  // 익명 함수 view
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>
