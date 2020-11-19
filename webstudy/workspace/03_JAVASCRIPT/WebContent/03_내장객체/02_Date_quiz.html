@@ -48,13 +48,25 @@
 	
 	function to12times(date) {
 		return date.getFullYear() + '-' +
-			   date.getMonth() + '-' +
+			   (date.getMonth() + 1) + '-' +
 			   date.getDate() + ' ' +
 			   ['일', '월', '화', '수', '목', '금', '토'][date.getDay()] + '요일 ' +
 			   (date.getHours() < 12 ? '오전' : '오후') + ' ' +
 			   date.getHours() + ':' +
 			   date.getMinutes();
 	}
+	
+	// 문제5. 입력 대화상자로 생일(yyyy-mm-dd)을 입력 받아서
+	// getAge 함수에 전달하면 나이를 반환하도록 구현하시오.
+	
+	var age = getAge(prompt('생일(yyyy-mm-dd)을 입력하세요.'));
+	console.log('나이: ' + age + '살');
+	
+	function getAge(strDate) {
+		// return 현재년도 - 태어난년도 + 1;
+		return new Date().getFullYear() - new Date(strDate).getFullYear() + 1;
+	}
+	
 	
 </script>
 </head>
