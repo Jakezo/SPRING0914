@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	// 1. 클로저의 이용이 없는 경우
+	function func1() {
+		a = 0;
+		a += 2;
+		return a;
+	}
+	console.log(func1());  // 2
+	console.log(func1());  // 2
+	console.log(func1());  // 2
+	
+	// 2. 클로저를 이용하는 경우
+	// 1) 함수를 변수에 저장하는 '함수표현식' 방식을 사용한다.
+	// 2) 반환 값으로 함수를 사용한다.
+	var func2 = function () {
+		var b = 0;
+		return 	function () {
+					b += 2;
+					return b;
+				};
+	}();
+	
+	console.log(func2());  // 2
+	console.log(func2());  // 4
+	console.log(func2());  // 6
+	
+</script>
+</head>
+<body>
+
+	<h1>방문자 카운트: <span id="count"></span>명</h1>
+	<input type="button" value="체크" onclick="entryCheck()" />
+
+	<script type="text/javascript">
+		function entryCheck() {
+			document.getElementById('count').textContent = increment();
+		}
+		var increment = function () {
+			visitNo = 0;  // 최초 선언 시에 한 번 접근된다. 이후에는 클로저의 visitNo를 사용한다.
+			return function () {
+				return ++visitNo;
+			};
+		}();
+	</script>
+
+</body>
+</html>
