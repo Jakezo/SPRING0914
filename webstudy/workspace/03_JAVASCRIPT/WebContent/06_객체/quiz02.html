@@ -14,7 +14,78 @@
 	// 5. Student 3명의 정보를 콘솔에 출력하시오.
 	
 	
-
+	function Student(name, kor, eng, mat) {
+		
+		this.name = name;
+		this.kor = kor;
+		this.eng = eng;
+		this.mat = mat;
+		
+		// function들의 내용은 모든 객체가 동일한 내용을 참조하게 되므로
+		// 공용 공간인 prototype에 저장해 두는 것이 좋다.
+		this.__proto__.getAverage = function () {
+			return (this.kor + this.eng + this.mat) / 3;
+		};
+		
+		this.__proto__.getGrade = function() {
+			if (this.getAverage() >= 90) {
+				return 'A';
+			} else if (this.getAverage() >= 80) {
+				return 'B';
+			} else if (this.getAverage() >= 70) {
+				return 'C';
+			} else if (this.getAverage() >= 60) {
+				return 'D';
+			} else {
+				return 'F';
+			}
+		}
+		
+	}  // end 생성자함수
+	
+	students = [
+		new Student("에밀리", 50, 60, 70),
+		new Student("스미스", 80, 90, 100),
+		new Student("나타샤", 90, 95, 100)
+	];
+	
+	for (let i = 0; i < students.length; i++) {
+		// students[i]는 객체이다.
+		/*
+		console.log('이름: ' + students[i].name);
+		console.log('국어: ' + students[i].kor);
+		console.log('영어: ' + students[i].eng);
+		console.log('수학: ' + students[i].mat);
+		console.log('평균: ' + students[i].getAverage());
+		console.log('학점: ' + students[i].getGrade());
+		*/
+		
+		// 매번 students[i]를 붙여야 하므로
+		// with문을 활용해서 코드를 줄여볼 수 있다.
+		
+		with (students[i]) {  // 모두 students[i]가 붙는다.
+			console.log('이름: ' + name);
+			console.log('국어: ' + kor);
+			console.log('영어: ' + eng);
+			console.log('수학: ' + mat);
+			console.log('평균: ' + getAverage());
+			console.log('학점: ' + getGrade());
+		}
+		
+		/*
+		for (var p in students[i]) {
+			// student[i][p]   : name, kor, eng, mat
+			// student[i][p]() : getAverage(), getGrade()
+			if (students[i][p] == "getAverage" || students[i][p] == "getGrade") {
+				students[i][p]();
+			} else {
+				students[i][p];
+			}
+		}
+		*/
+		
+	}
+	
 </script>
 </head>
 <body>
