@@ -3,22 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	
-	var sites = [
-		{
-			"logo": "https://www.google.co.kr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-			"name": "google",
-			"url": "https://www.google.co.kr/"
-		},
-		{
-			"logo": "https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png",
-			"name": "daum",
-			"url": "https://www.daum.net/"
-		}
-	];
-	
-</script>
 </head>
 <body>
 
@@ -36,12 +20,48 @@
 		<tbody id="site-contents">
 		</tbody>
 	</table>
+	
+	<script type="text/javascript">
+		
+		var sites = [
+			{
+				"logo": "https://www.google.co.kr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+				"name": "google",
+				"url": "https://www.google.co.kr/"
+			},
+			{
+				"logo": "https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png",
+				"name": "daum",
+				"url": "https://www.daum.net/"
+			}
+		];
+		var strSites = JSON.stringify(sites);
+		var sites = JSON.parse(strSites);
+		
+		function getSites() {
+			
+			var result = '';
+			for (let i = 0; i < sites.length; i++) {
+				
+				// sites[i] : 하나의 사이트 정보
+				// sites[i].logo : 로고 이미지 주소 (img src)
+				// sites[i].name : 사이트명
+				// sites[i].url  : 사이트 주소 (a href)
+				result += '<tr>';
+				
+				result += '<td><img src="' + sites[i].logo + '"></td>';
+				result += '<td>' + sites[i].name + '</td>';
+				result += '<td><a href="' + sites[i].url + '">' + sites[i].name + '</a></td>';
+				
+				result += '</tr>';
+				
+			}
+			
+			document.getElementById('site-contents').innerHTML = result;
+			
+		}
+		
+	</script>
 
 </body>
 </html>
-
-
-
-
-
-
