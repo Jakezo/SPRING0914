@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	/*
+		1. 요소 생성: document.createElement(요소)
+		2. 요소 추가: 부모요소.appendChild(요소)
+		3. 요소 삭제: 부모요소.removeChild(요소)
+		4. 요소 변경: 부모요소.replaceChild(old요소, new요소)
+	*/
+	
+</script>
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+		// 1. h1 태그 생성
+		var title = document.createElement('h1');
+		
+		// 2. h1 태그를 body 태그에 추가
+		document.body.appendChild(title);    // <body><h1></h1></body>
+		
+		// 3. h1 태그에 추가할 텍스트 생성
+		var text = document.createTextNode('안녕하세요');
+		
+		// 4. h1 태그에 텍스트 추가
+		title.appendChild(text);  // <body><h1>안녕하세요</h1></body>
+	
+	</script>
+
+
+
+
+
+</body>
+</html>

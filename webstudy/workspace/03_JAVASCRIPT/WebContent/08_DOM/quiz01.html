@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		
+		var hobbies = ['영화', '여행', '게임'];
+		
+		// 1. ul 생성 후 body에 추가
+		var ul = document.createElement('ul');
+		document.body.appendChild(ul);
+		
+		// 2. li 생성 후 ul에 추가 X 3
+		//    hobbies 배열로 textNode 생성 후 li에 추가 X 3
+		for (let i = 0; i < hobbies.length; i++) {
+			// 1) li 생성 후 ul에 추가
+			var li = document.createElement('li');
+			ul.appendChild(li);
+			// 2) hobbies 배열로 textNode 생성 후 li에 추가
+			var hobby = document.createTextNode(hobbies[i]);
+			li.appendChild(hobby);
+		}
+		
+	</script>
+	
+</body>
+</html>
+
+
+
+
+

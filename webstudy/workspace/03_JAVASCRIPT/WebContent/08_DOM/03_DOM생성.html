@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table {
+		border-collapse: collapse;
+	}
+	th, td {
+		border: 1px solid black;
+		padding: 5px 10px;
+	}
+</style>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		
+		var people = [
+			{
+				name: 'james',
+				age: 25
+			},
+			{
+				name: 'emily',
+				age: 26
+			}
+		];
+		
+		// 1. table 태그 생성 후 추가
+		var table = document.createElement('table');
+		document.body.appendChild(table);
+		
+		// 2. 제목 행 생성 후 추가
+		var titles = ['name', 'age'];
+		var tr = document.createElement('tr');
+		table.appendChild(tr);
+		for (let i = 0; i < titles.length; i++) {
+			var th = document.createElement('th');
+			tr.appendChild(th);
+			th.textContent = titles[i];
+		}
+		
+		// 3. people 배열 추가
+		for (let i = 0; i < people.length; i++) {
+			// people[i]는 객체이다.
+			// people[i]['name']
+			// people[i]['age']
+			var tr = document.createElement('tr');
+			table.appendChild(tr);
+			for (var p in people[i]) {  // p == 'name', 'age'
+				var td = document.createElement('td');
+				tr.appendChild(td);
+				td.textContent = people[i][p];
+			}
+		}
+		
+	</script>
+
+</body>
+</html>
