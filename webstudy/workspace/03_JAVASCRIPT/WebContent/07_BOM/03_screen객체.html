@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	console.log('화면(screen) 너비: ' + screen.width);
+	console.log('화면(screen) 높이: ' + screen.height);
+	
+	console.log('실제(screen) 너비: ' + screen.availWidth);
+	console.log('실제(screen) 높이: ' + screen.availHeight);
+	
+	// 너비 400, 높이 300 인 창을 브라우저 중앙에 열자.
+	var winWidth = 400;
+	var winHeight = 300;
+	var winTop = (screen.availHeight - winHeight) / 2;
+	var winLeft = (screen.availWidth - winWidth) / 2;
+	open('', '', 'width=' + winWidth + ', height=' + winHeight + ', top=' + winTop + ', left=' + winLeft);
+	
+</script>
+</head>
+<body>
+	
+</body>
+</html>
