@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<ul>
+		<li>라면</li>
+		<li>떡볶이</li>
+		<li>튀김</li>
+		<li>어묵</li>
+		<li>순대</li>
+	</ul>
+	<script type="text/javascript">
+		// 문제.
+		// 입력 대화상자로 입력 받은 메뉴 1개를 삭제하시오.
+		
+		// 1. 삭제 대상 입력 받기
+		var deleteMenu = prompt('삭제할 메뉴를 입력하세요.');
+		
+		// 2. 삭제할 요소의 부모 알아내기
+		// ul_list = [ <ul><li>...</li></ul> ]
+		var ul_list = document.getElementsByTagName('ul');
+		
+		// 3. 삭제할 대상을 알아내기
+		var li_list = document.querySelectorAll('li');
+		for (let i = 0; i < li_list.length; i++) {
+			// li_list[i]				: <li>순대</li>
+			// li_list[i].textContent 	: 순대
+			if (li_list[i].textContent == deleteMenu) {
+				// 부모요소.removeChild(삭제대상)
+				ul_list[0].removeChild(li_list[i]);
+				break;
+			}
+		}
+		
+	</script>
+</body>
+</html>
