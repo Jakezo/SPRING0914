@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!--
+		문제. 1초 마다 무지개 색 순서로 변경되는 박스 만들기
+		무지개 색을 배열에 저장해 두고 사용하세요.
+	-->
+	<div id="box">
+		<span id="content">빨</span>
+	</div>
+	
+	<script type="text/javascript">
+	
+		// 초기화 박스 작업
+		var box = document.getElementById('box');
+		var content = document.getElementById('content');
+		
+		box.style.width = '500px';
+		box.style.height = '500px';
+		box.style.textAlign = 'center';
+		box.style.lineHeight = '500px';
+		content.style.fontSize = '30px';
+		
+		var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple'];
+		var contents = ['빨', '주', '노', '초', '파', '남', '보'];
+		var i = 0;
+	
+		// setTimeout() 함수를 통한 재귀호출 구조-1 
+		/*
+		function rainbow() {
+			setTimeout(function(){
+				// 작업
+				rainbow();
+			}, 1000);
+		}
+		*/
+		// setTimeout() 함수를 통한 재귀호출 구조-2 
+		function rainbow() {
+			// 작업
+			box.style.background = colors[i];   // colors[i]: 'red'~'purple'
+			content.textContent = contents[i];  // contents[i]: '빨'~'보'
+			i++;
+			i %= 7;
+			// i = 0 ~ 6 으로 순환하는 방법
+			// 1) if (i == 7) { i = 0; }
+			// 2) i %= 7;
+			setTimeout(rainbow, 1000);
+		}
+		rainbow();  // rainbow() 함수를 호출해야 실행된다.
+		
+	</script>
+	
+</body>
+</html>
