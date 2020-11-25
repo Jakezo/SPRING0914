@@ -3,109 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-
-	function fn_idCheck(f) {
-		var regExpID = /^[a-z][a-z0-9_-]{4,15}$/;
-		var id = f.id.value;
-		var result = document.getElementById('id-result');
-		if (id == '') {
-			result.textContent = '필수 입력입니다.';
-			return false;
-		} else {
-			if (regExpID.test(id)) {
-				result.textContent = '사용 가능한 아이디입니다.';
-				return true;
-			} else {
-				result.textContent = '사용할 수 없는 아이디입니다.';
-				return false;
-			}
-		}
-	}
-
-	function fn_pwCheck(f) {
-		var regExpPW = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9~!@#$%^&*-_?]{8,16}$/;
-		var pw = f.pw.value;
-		var result = document.getElementById('pw-result');
-		if (pw == '') {
-			result.textContent = '필수 입력입니다.';
-			return false;
-		} else {
-			if (regExpPW.test(pw)) {
-				result.textContent = '사용 가능한 비밀번호입니다.';
-				return true;
-			} else {
-				result.textContent = '사용할 수 없는 비밀번호입니다.';
-				return false;
-			}
-		}
-	}
-	
-	function fn_pwCheck2(f) {
-		
-		if (!fn_pwCheck(f)) {
-			alert('비밀번호를 확인하세요.');
-			f.pw.focus();
-			return false;
-		}
-		
-		var result = document.getElementById('pw-result2');
-		if (f.pw.value == f.pw2.value) {
-			result.textContent = '비밀번호가 일치합니다.';
-			return true;
-		} else {
-			result.textContent = '비밀번호를 확인하세요.';
-			return false;
-		}
-		
-	}
-	
-	function fn_emailCheck(f) {
-		var regExpEmail = /^[a-z][a-z0-9-_]+@[a-zA-Z0-9]{3,}(\.[a-zA-Z]{2,6}){1,2}$/;
-		var email = f.email.value;
-		var result = document.getElementById('email-result');
-		if (email == '') {
-			result.textContent = '필수 입력입니다.';
-			return false;
-		} else {
-			if (regExpEmail.test(email)) {
-				result.textContent = '올바른 이메일입니다.';
-				return true;
-			} else {
-				result.textContent = '잘못된 이메일입니다.';
-				return false;
-			}
-		}
-	}
-	
-	
-	
-	
-	
-	function fn_signUp(f) {
-		
-		if (!fn_idCheck(f)) {
-			alert('아이디를 확인하세요.');
-			f.id.focus();
-			return;
-		}
-		if (!fn_pwCheck(f) || !fn_pwCheck2(f)) {
-			alert('비밀번호를 확인하세요.');
-			f.pw.focus();
-			return;
-		}
-		if (!fn_emailCheck(f)) {
-			alert('이메일을 확인하세요.');
-			f.email.focus();
-			return;
-		}
-		
-		f.action = '#';
-		f.submit();
-		
-	}
-
-</script>
+<script src="../assets/script/signUp.js" type="text/javascript"></script>
 </head>
 <body>
 	
@@ -133,9 +31,35 @@
 		<div id="email-result"></div>
 		<br/><br/>
 
-
-
-
+		<label>모바일</label><br/>
+		<select name="mobile1" id="mobile1">
+			<option value="010">010</option>
+			<option value="011">011</option>
+			<option value="016">016</option>
+			<option value="019">019</option>
+		</select>
+		- <input type="text" name="mobile2" size="5" onkeyup="fn_mobile2Check(this.form)" />
+		- <input type="text" name="mobile3" size="5" onkeyup="fn_mobile3Check(this.form)" />
+		<input type="hidden" name="mobile" />
+		<br/><br/><br/>
+	
+		<label for="personal-id1">주민등록번호</label><br/>
+		<input type="text" name="personal-id1" id="personal-id1" size="8" />
+		- <input type="password" name="personal-id2" size="8" />
+		<input type="button" value="검증" onclick="fn_personalIdCheck(this.form)" />
+		<div id="personal-id-result"></div>
+		<br/>
+		
+		<input type="text" name="year" size="4" readonly />년 
+		<input type="text" name="month" size="4" readonly />월 
+		<input type="text" name="day" size="4" readonly />일
+		<br/>
+		
+		<input type="radio" name="gender" value="m" id="male" /> 
+		<label for="male">남자</label>
+		<input type="radio" name="gender" value="f" id="female" /> 
+		<label for="female">여자</label>
+		<br/><br/>
 
 		<input type="button" value="회원가입" onclick="fn_signUp(this.form)" />
 		<input type="reset" value="다시작성" />
@@ -144,8 +68,3 @@
 	
 </body>
 </html>
-
-
-
-
-
