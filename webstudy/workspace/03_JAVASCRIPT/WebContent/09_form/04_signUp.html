@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	function fn_idCheck(f) {
+		var regExpID = /^[a-z][a-z0-9_-]{4,15}$/;
+		var id = f.id.value;
+		var result = document.getElementById('id-result');
+		if (id == '') {
+			result.textContent = '필수 입력입니다.';
+			return false;
+		} else {
+			if (regExpID.test(id)) {
+				result.textContent = '사용 가능한 아이디입니다.';
+				return true;
+			} else {
+				result.textContent = '사용할 수 없는 아이디입니다.';
+				return false;
+			}
+		}
+	}
+
+	function fn_pwCheck(f) {
+		var regExpPW = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9~!@#$%^&*-_?]{8,16}$/;
+		var pw = f.pw.value;
+		var result = document.getElementById('pw-result');
+		if (pw == '') {
+			result.textContent = '필수 입력입니다.';
+			return false;
+		} else {
+			if (regExpPW.test(pw)) {
+				result.textContent = '사용 가능한 비밀번호입니다.';
+				return true;
+			} else {
+				result.textContent = '사용할 수 없는 비밀번호입니다.';
+				return false;
+			}
+		}
+	}
+	
+	function fn_pwCheck2(f) {
+		
+		if (!fn_pwCheck(f)) {
+			alert('비밀번호를 확인하세요.');
+			f.pw.focus();
+			return false;
+		}
+		
+		var result = document.getElementById('pw-result2');
+		if (f.pw.value == f.pw2.value) {
+			result.textContent = '비밀번호가 일치합니다.';
+			return true;
+		} else {
+			result.textContent = '비밀번호를 확인하세요.';
+			return false;
+		}
+		
+	}
+	
+	function fn_emailCheck(f) {
+		var regExpEmail = /^[a-z][a-z0-9-_]+@[a-zA-Z0-9]{3,}(\.[a-zA-Z]{2,6}){1,2}$/;
+		var email = f.email.value;
+		var result = document.getElementById('email-result');
+		if (email == '') {
+			result.textContent = '필수 입력입니다.';
+			return false;
+		} else {
+			if (regExpEmail.test(email)) {
+				result.textContent = '올바른 이메일입니다.';
+				return true;
+			} else {
+				result.textContent = '잘못된 이메일입니다.';
+				return false;
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	function fn_signUp(f) {
+		
+		if (!fn_idCheck(f)) {
+			alert('아이디를 확인하세요.');
+			f.id.focus();
+			return;
+		}
+		if (!fn_pwCheck(f) || !fn_pwCheck2(f)) {
+			alert('비밀번호를 확인하세요.');
+			f.pw.focus();
+			return;
+		}
+		if (!fn_emailCheck(f)) {
+			alert('이메일을 확인하세요.');
+			f.email.focus();
+			return;
+		}
+		
+		f.action = '#';
+		f.submit();
+		
+	}
+
+</script>
+</head>
+<body>
+	
+	<h1>회원가입</h1>
+	
+	<form method="post">
+	
+		<label for="id">아이디</label><br/>
+		<input type="text" name="id" id="id" onkeyup="fn_idCheck(this.form)" />
+		<div id="id-result"></div>
+		<br/><br/>
+		
+		<label for="pw">비밀번호</label><br/>
+		<input type="password" name="pw" id="pw" onkeyup="fn_pwCheck(this.form)" />
+		<div id="pw-result"></div>
+		<br/><br/>
+		
+		<label for="pw2">비밀번호확인</label><br/>
+		<input type="password" name="pw2" id="pw2" onkeyup="fn_pwCheck2(this.form)" />
+		<div id="pw-result2"></div>
+		<br/><br/>
+		
+		<label for="email">이메일</label><br/>
+		<input type="text" name="email" id="email" onkeyup="fn_emailCheck(this.form)" />
+		<div id="email-result"></div>
+		<br/><br/>
+
+
+
+
+
+		<input type="button" value="회원가입" onclick="fn_signUp(this.form)" />
+		<input type="reset" value="다시작성" />
+		
+	</form>
+	
+</body>
+</html>
+
+
+
+
+
