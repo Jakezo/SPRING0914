@@ -9,7 +9,7 @@
 		var btn = document.getElementById('btn');
 		btn.addEventListener('click', function(){
 			var xhr = new XMLHttpRequest();
-			xhr.open('get', 'QDATA.html', false);
+			xhr.open('get', 'QDATA.html', false);  // 동기통신
 			xhr.send();
 			document.getElementById('hello').textContent = xhr.responseText;
 		});
