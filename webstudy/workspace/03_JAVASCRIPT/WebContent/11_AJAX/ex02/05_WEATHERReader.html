@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open('get', 'WEATHER.xml', true);
+	xhr.send();
+	xhr.onreadystatechange = function(){
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var data = xhr.responseXML;
+			var localList = data.getElementsByTagName('local');
+			for (let i = 0; i < localList.length; i++) {
+				console.log(localList[i].textContent);
+				console.log(localList[i].getAttribute('desc'));
+				console.log(localList[i].getAttribute('ta'));
+			}
+		}
+	}
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>
