@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+	
+		var people = [
+			{name: 'james', age: 20},
+			{name: 'alice', age: 21},
+			{name: 'emily', age: 22}
+		];
+		
+		var result = '';
+		$.each(people, function(i, person) {
+			// i : 0, 1, 2
+			// person : {name: 'james', age: 20}, {name: 'alice', age: 21}, {name: 'emily', age: 22}
+			result += '<tr>';
+			result += '<td>' + (i + 1) + '</td>';
+			result += '<td>' + person.name + '</td>';
+			result += '<td>' + person.age + '</td>';
+			result += '</tr>';
+		});
+		
+		$('#content').append(result);	// 기존 요소 뒤에 추가
+		$('#content').html(result);		// 기존 요소 덮어쓰기
+		
+	});
+
+
+
+</script>
+</head>
+<body>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<td>순번</td>
+				<td>이름</td>
+				<td>나이</td>
+			</tr>
+		</thead>
+		<tbody id="content"></tbody>
+	</table>
+
+</body>
+</html>
