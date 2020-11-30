@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	img {
+		width: 300px;
+		height: 300px;
+	}
+	ul, li {
+		padding: 0px;
+		margin: 0px;
+	}
+	ul {
+		width: 100%;
+		height: 30px;
+		list-style-type: none;
+		display: flex;
+		background: gray;
+	}
+	ul > li {
+		width: 33%;
+		height: 100%;
+	}
+	ul > li > a {
+		display: block;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		line-height: 30px;
+		text-decoration: none;
+	}
+	
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	
+	// 페이지 로드 이벤트
+	$(document).ready(function(){
+		
+		// 문제1.
+		var flowers = ['flower1.jpg', 'flower2.jpg', 'flower3.jpg', 'flower4.jpg', 'flower5.jpg'];
+		var result1 = '';
+		$.each(flowers, function(i, flower){
+			result1 += '<img src="assets/images/' + flower + '">';
+		});
+		$('.image-box').html(result1);
+		
+		
+		// 문제2.
+		var sites = [
+			{
+				name: '구글',
+				url: 'https://www.google.com'
+			},
+			{
+				name: '카카오',
+				url: 'https://www.kakao.com'
+			},
+			{
+				name: '네이버',
+				url: 'https://www.naver.com'
+			}
+		];
+		var result2 = '<ul>';
+		$.each(sites, function(i, site){
+			result2 += '<li>';
+			result2 += '<a href="' + site.url + '">' + site.name + '</a>';
+			result2 += '</li>';
+		});
+		result2 += '</ul>';
+		$('.link-box').html(result2);
+		
+	});
+	
+</script>
+</head>
+<body>
+
+	<!-- 문제1. 이미지 300x300 으로 가로로 5개 배치하시오. -->
+	<div class="image-box"></div>
+
+	<br/><br/>
+	
+	<!-- 문제2. 포털 링크 3개를 배치하시오. -->
+	<div class="link-box"></div>
+
+</body>
+</html>
