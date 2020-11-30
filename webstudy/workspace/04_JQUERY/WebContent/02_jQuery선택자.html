@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	
+	/*
+		jQuery 선택자
+		1. 태그선택자	$('태그명')
+		2. 아이디선택자	$('#아이디')
+		3. 클래스선택자	$('.클래스')
+	*/
+	
+	/*
+		페이지 로드 이벤트
+		1. $(document).ready(function(){});
+		2. $(function(){});
+	*/
+	
+	
+	// 페이지 로드 이벤트
+	$(document).ready(function(){
+		
+		// 값을 가져오는 getter로 사용
+		
+		// JavaScript
+		alert(document.getElementById('content').textContent);
+		alert(document.querySelector('#content').textContent);
+		
+		// jQuery
+		alert($('#content').text());
+		
+		
+		
+		// 값을 저장/변경하는 setter로 사용
+		
+		// JavaScript
+		document.getElementById('content').textContent = '안녕하세요. 제이쿼리.';
+		
+		// jQuery
+		$('#content').text('안녕하세요. 제이쿼리.');
+		
+	});
+	
+</script>
+</head>
+<body>
+
+	<h1 id="content">Hello jQuery</h1>
+
+</body>
+</html>
