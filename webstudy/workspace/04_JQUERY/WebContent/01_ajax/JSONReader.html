@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+	$.ajax({
+		url: 'DATA.json',
+		dataType: 'json',
+		type: 'get',
+		success: function(data){
+			/*
+			[{},{}].each(function(i, obj)) {
+				i	: 0, 1
+				obj	: {}, {}
+			}
+			*/
+			var result = '<ul>';
+			$(data).each(function(i, person){
+				result += '<li>' + person.name + '</li>';
+				result += '<li>' + person.age + '</li>';
+				result += '<li>' + person.addr + '</li>';
+				result += '<li>' + person.phone + '</li>';
+			});
+			result += '</ul>';
+			$('body').html(result);
+		},
+		error: function(){
+			alert('실패');
+		}
+	});
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
