@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+	$.ajax({
+		url: 'DATA.html',	// 받아 올 데이터
+		dataType: 'text',	// 받아 올 데이터의 타입
+		type: 'get',		// 요청 방식
+		success: function (data) {	// ajax 통신 성공 (정상적으로 데이터를 받음)
+			// data: responseText
+			$('#content').html(data);
+		},
+		error: function(){  // ajax 통신 실패
+			$('#content').html('실패했습니다.');
+		}
+	});
+
+</script>
+</head>
+<body>
+	<div id="content"></div>
+</body>
+</html>
