@@ -9,20 +9,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Ex02_request")
-public class Ex02_request extends HttpServlet {
+@WebServlet("/Ex04_form")
+public class Ex04_form extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public Ex02_request() {
+    public Ex04_form() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// request 객체의 기본 정보 살펴보기
-		String ip = request.getRemoteAddr();			// 요청한 사람의 IP주소 (중요)
-		String contextPath = request.getContextPath();	// 컨텍스트패스 알아내기 (중요)
-		String charset = request.getCharacterEncoding();// 인코딩 알아내기
-		String contentType = request.getContentType();	// 컨텐트 타입 알아내기
-		String method = request.getMethod();			// 전송타입(GET, POST) 알아내기
+		
+		// <form action="/01_SERVLET/Ex04_form"> 태그에 의해서
+		// 폼 요소들이 request로 전달되는 곳입니다.
+		
+		// <form method="get">이기 때문에 doGet() 메소드로 곧바로 옵니다.
+		
+		// request 처리하기
+		request.setCharacterEncoding("UTF-8");
+		
+		// request로 전달된 파라미터 꺼내기
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		String address = request.getParameter("address");
 		
 		// response 생성
 		// 1. content-type, charset
@@ -37,11 +43,9 @@ public class Ex02_request extends HttpServlet {
 		out.println("<title>제목</title>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<h3>IP: " + ip + "</h3>");
-		out.println("<h3>ContextPath: " + contextPath + "</h3>");
-		out.println("<h3>Charset: " + charset + "</h3>");
-		out.println("<h3>ContentType: " + contentType + "</h3>");
-		out.println("<h3>Method: " + method + "</h3>");
+		out.println("<h3>이름: " + name + "</h3>");
+		out.println("<h3>나이: " + age + "</h3>");
+		out.println("<h3>주소: " + address + "</h3>");
 		out.println("</body>");
 		out.println("</html>");
 	}
@@ -49,11 +53,3 @@ public class Ex02_request extends HttpServlet {
 		doGet(request, response);
 	}
 }
-
-
-
-
-
-
-
-
