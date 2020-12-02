@@ -23,10 +23,20 @@ public class Quiz03 extends HttpServlet {
 		// 요청 정보(파라미터)들을 request에서 꺼냅니다.
 		// 정수나 실수는 알맞게 parsing 해 줍니다.
 		// parsing을 안 해주면 연산(+, / 등) 이 안 됩니다.
+		int kor = 0, eng = 0, mat = 0;
+		String strKor = request.getParameter("kor");
+		String strEng = request.getParameter("eng");
+		String strMat = request.getParameter("mat");
+		if ( strKor != null && !strKor.isEmpty()) {
+			kor = Integer.parseInt(request.getParameter("kor"));
+		}
+		if ( strEng != null && !strEng.isEmpty()) {
+			eng = Integer.parseInt(request.getParameter("eng"));
+		}
+		if ( strMat != null && !strMat.isEmpty()) {
+			mat = Integer.parseInt(request.getParameter("mat"));
+		}
 		String name = request.getParameter("name");
-		int kor = Integer.parseInt(request.getParameter("kor"));
-		int eng = Integer.parseInt(request.getParameter("eng"));
-		int mat = Integer.parseInt(request.getParameter("mat"));
 		double prev_average = Double.parseDouble(request.getParameter("prev_average"));
 		
 		// 연산을 수행합니다.
