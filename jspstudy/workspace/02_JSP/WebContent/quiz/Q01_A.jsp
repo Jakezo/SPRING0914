@@ -19,6 +19,7 @@
 	</form>
 	<script type="text/javascript">
 		function fn_goToSite(f) {
+			location.href = '/02_JSP/quiz/Q01_B.jsp';
 			f.action = '/02_JSP/quiz/Q01_B.jsp';
 			f.submit();
 		}
