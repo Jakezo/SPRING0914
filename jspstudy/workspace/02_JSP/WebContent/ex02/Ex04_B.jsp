@@ -13,14 +13,3 @@
 	String num2 = request.getParameter("num2");
 	response.sendRedirect("/02_JSP/ex02/Ex04_C.jsp?num1=" + num1 + "&num2=" + num2);
 %>
-
-
-
-
-
-
-
-
-
-
-
