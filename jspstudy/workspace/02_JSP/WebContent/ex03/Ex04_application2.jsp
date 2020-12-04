@@ -53,9 +53,3 @@
 	// 지정한 위치로 이동 (파라미터를 추가할 수 있습니다.)
 	location.href = '<%=application.getContextPath()%>/ex03/Ex04_application1.jsp?done=<%=isSuccess%>';
 </script>
-
-
-
-
-
-
