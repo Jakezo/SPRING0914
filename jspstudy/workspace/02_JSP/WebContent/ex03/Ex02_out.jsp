@@ -19,7 +19,7 @@
 	<%
 		for (int i = 1; i <= 100; i++) {
 			if (i % 2 == 1) {
-				out.println(i);
+				out.println(i + "<br/>");
 			}
 		}
 	%>
