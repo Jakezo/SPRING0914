@@ -28,3 +28,18 @@
 	}
 	
 %>
+
+<%-- 로그인 성공한 경우에만 아래 태그를 볼 수 있다. --%>
+
+<form action="/06_SESSION/ex03/01_cart_C.jsp">
+	<h3>상품 선택</h3>
+	<select name="product">
+		<option value="tv">tv</option>
+		<option value="audio">audio</option>
+		<option value="세탁기">세탁기</option>
+		<option value="건조기">건조기</option>
+		<option value="냉장고">냉장고</option>
+	</select>
+	<input type="text" name="quantity" />개
+	<button>장바구니에 추가</button>
+</form>
