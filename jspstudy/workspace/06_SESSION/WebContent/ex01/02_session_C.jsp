@@ -17,9 +17,10 @@
 	
 	<h3>세션의 data: <%=data%></h3>
 	
-	
-	
-	
+	<form action="/06_SESSION/ex01/02_session_D.jsp">
+		<button>세션 data 삭제하기</button>
+	</form>
+
 
 </body>
 </html>
