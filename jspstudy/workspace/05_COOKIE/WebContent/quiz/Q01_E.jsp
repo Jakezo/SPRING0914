@@ -26,10 +26,10 @@
 			
 			try {
 		
-				if ( ckList != null && ckList.length > 0 ) {
+				if ( ckList != null && ckList.length != 0 ) {
 					for ( Cookie ck : ckList ) {
 						if ( ck.getName().equals(cookieName) ) {
-							return URLDecoder.decode(ck.getValue(), "utf-8");  // 쿠키가 있으면 쿠키값을 반환한다.
+							return URLDecoder.decode(ck.getValue(), "UTF-8");  // 쿠키가 있으면 쿠키값을 반환한다.
 						}
 					}
 				}

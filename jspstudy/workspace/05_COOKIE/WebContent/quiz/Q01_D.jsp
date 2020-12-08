@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("UTF-8");
 
 	String bYear = request.getParameter("bYear");
 	String bMonth = request.getParameter("bMonth");
@@ -10,7 +10,6 @@
 	String birthday = bYear + "년 " + bMonth + "월 " + bDay + "일";
 	
 	String marriage = request.getParameter("marriage");
-	
 	String job = request.getParameter("job");
 	
 	response.addCookie( new Cookie("birthday", URLEncoder.encode(birthday, "UTF-8")) );

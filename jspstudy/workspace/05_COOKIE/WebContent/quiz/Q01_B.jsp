@@ -10,7 +10,7 @@
 <body>
 
 	<%
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
 	
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
