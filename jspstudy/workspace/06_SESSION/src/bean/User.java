@@ -8,13 +8,13 @@ public class User {
 	
 	// 생성자(디폴트 생성자만 사용하려면 안 만들면 되고,)
 	// 디폴트 생성자 + 필드를 이용한 생성자를 사용하려면 둘 다 만들어야 한다.
-	public User() {}
+	public User() {}	
 	public User(String id, String pw) {
 		super();
 		this.id = id;
 		this.pw = pw;
 	}
-	
+
 	// 메소드(getter/setter)
 	public String getId() {
 		return id;
