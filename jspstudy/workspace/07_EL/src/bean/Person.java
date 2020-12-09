@@ -1,4 +1,4 @@
-package xxxxx;
+package bean;
 
 public class Person {
 

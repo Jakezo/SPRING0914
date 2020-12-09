@@ -1,4 +1,4 @@
-<%@page import="xxxxx.Person"%>
+<%@page import="bean.Person"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
