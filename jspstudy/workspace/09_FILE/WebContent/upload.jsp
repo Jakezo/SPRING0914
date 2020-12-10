@@ -16,7 +16,7 @@
 	String directory = "archive";
 
 	// 디렉토리의 실제 경로를 알아낸다.
-	String realPath = request.getRealPath(directory);
+	String realPath = request.getServletContext().getRealPath(directory);
 	
 	// MultipartRequest 객체를 만든다. (이 때 업로드가 진행된다.)
 	MultipartRequest multipart = new MultipartRequest(
@@ -58,6 +58,8 @@
 	</ul>
 
 	<br/><br/>
+
+	<a href="download.jsp?directory=<%=directory%>&filename=<%=filename%>">다운로드</a>
 
 </body>
 </html>
