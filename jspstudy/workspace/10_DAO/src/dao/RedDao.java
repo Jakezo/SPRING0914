@@ -73,6 +73,12 @@ public class RedDao {
 	public int insert(RedDto redDto) {
 		int result = 0;
 		try {
+			// id, pw, name, age, email 찍어보기
+			System.out.println(redDto.getId());
+			System.out.println(redDto.getPw());
+			System.out.println(redDto.getName());
+			System.out.println(redDto.getAge());
+			System.out.println(redDto.getEmail());
 			// 접속
 			con = getConnection();
 			// **수동 커밋 처리 방법(한 번만 해 봅시다.)

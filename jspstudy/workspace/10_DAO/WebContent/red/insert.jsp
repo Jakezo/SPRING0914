@@ -13,6 +13,13 @@
 	String age = request.getParameter("age");
 	String email = request.getParameter("email");
 	
+	// id, pw, name, age, email 찍어보기
+	System.out.println(id);
+	System.out.println(pw);
+	System.out.println(name);
+	System.out.println(age);
+	System.out.println(email);
+	
 	// 2. DB로 보낼 DTO 생성
 	RedDto redDto = new RedDto(id, pw, name, email, Integer.parseInt(age));
 	
