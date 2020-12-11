@@ -6,6 +6,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../assets/style/red.css">
+<style type="text/css">
+	td:nth-of-type(1) {
+		width: 150px;
+	}
+	td:nth-of-type(2) {
+		text-align: left;
+	}
+	input[type=text], input[type=password] {
+		padding: 5px;
+		width: 400px;
+		outline: 0px;
+		border: 0px;
+	}
+	input[type=text]:focus, input[type=password]:focus {
+		background: #efefef;
+	}
+</style>
 <script type="text/javascript">
 	function fn_signUp(f) {
 		if (f.id.value == '' || 
