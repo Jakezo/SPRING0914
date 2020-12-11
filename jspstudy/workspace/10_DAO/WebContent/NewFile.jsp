@@ -14,21 +14,9 @@
 	// hint)
 	// Calendar cal = Calendar.getInstance();  // 클래스메소드로 만들면 되겠다.
 	
+	// 접속 테스트
 	RedDao redDao = RedDao.getInstance();
 	Connection con=redDao.getConnection();
 	redDao.close(con, null, null);
 
 %>
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
