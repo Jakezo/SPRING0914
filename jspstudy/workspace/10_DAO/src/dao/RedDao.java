@@ -152,7 +152,26 @@ public class RedDao {
 		return list;
 	}
 	
-	
+	/***** 5. 아이디 중복 체크 *****/
+	public boolean idCheck(String id) {
+		boolean result = false;
+		try {
+			con = getConnection();
+			sql = "SELECT ID FROM RED WHERE ID = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if ( !rs.next() ) {  // 검색결과가 없으면 해당 아이디를 가진 회원이 없다.
+				result = true;
+			}
+			// result = !rs.next();  // if문 없이 그냥 이렇게 하면 됩니다.
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, rs);
+		}
+		return result;
+	}
 	
 	
 	
