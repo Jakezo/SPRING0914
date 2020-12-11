@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import dto.RedDto;
 
@@ -111,7 +112,39 @@ public class RedDao {
 	}
 	
 	
-	
+	/***** 4. 전체 목록 *****/
+	public ArrayList<RedDto> list() {
+		ArrayList<RedDto> list = new ArrayList<RedDto>();
+		try {
+			con = getConnection();
+			sql = "SELECT * FROM RED";
+			ps = con.prepareStatement(sql);
+			// SQL 실행: select문은 executeQuery(), 반환타입은 ResultSet
+			rs = ps.executeQuery();
+			// ResultSet은 그냥 사용할 수 없다.
+			// ResultSet -> ArrayList<RedDto>
+			// rs.next()는 ResultSet에 저장된 데이터 한 개
+			// rs.next()를 통해서 얻어낸 rs는 RedDto 한 개를 의미한다.
+			while (rs.next()) {
+				RedDto redDto = new RedDto();
+				// rs -> redDto
+				redDto.setNo(rs.getInt("NO"));
+				redDto.setId(rs.getString("ID"));
+				redDto.setPw(rs.getString("PW"));
+				redDto.setName(rs.getString("NAME"));
+				redDto.setAge(rs.getInt("AGE"));
+				redDto.setEmail(rs.getString("EMAIL"));
+				redDto.setRegDate(rs.getDate("REGDATE"));
+				// redDto -> ArrayList에 추가
+				list.add(redDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, rs);
+		}
+		return list;
+	}
 	
 	
 	
