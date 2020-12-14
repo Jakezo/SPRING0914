@@ -19,6 +19,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../assets/style/red.css" />
+<style type="text/css">
+	td:nth-of-type(1) {
+		width: 150px;
+	}
+	td:nth-of-type(2) {
+		text-align: left;
+	}
+	input[type=text], input[type=password] {
+		padding: 5px;
+		width: 400px;
+		outline: 0px;
+		border: 0px;
+	}
+	input[type=text]:focus, input[type=password]:focus {
+		background: #efefef;
+	}
+</style>
+<script type="text/javascript">
+	// 1. 회원정보수정 페이지로 이동하기
+	//    : 실제로는 비밀번호확인 페이지로 이동
+	function fn_pwConfirmPage(f) {
+		f.action = '/10_DAO/red/pwConfirmPage.jsp';
+		f.submit();
+	}
+</script>
 </head>
 <body>
 
@@ -30,12 +56,60 @@
 	</c:if>
 	
 	<c:if test="${redDto ne null}">
-		${redDto.name}님의 정보입니다.
+		<form method="post">
+			<table>
+				<thead>
+					<tr>
+						<td colspan="2">${redDto.name}님의 정보입니다.</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>번호</td>
+						<td>${redDto.no}</td>
+					</tr>
+					<tr>
+						<td>아이디</td>
+						<td>${redDto.id}</td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td>${redDto.name}</td>
+					</tr>
+					<tr>
+						<td>나이</td>
+						<td>${redDto.age}</td>
+					</tr>
+					<tr>
+						<td>이메일</td>
+						<td>${redDto.email}</td>
+					</tr>
+					<tr>
+						<td>가입일</td>
+						<td>${redDto.regDate}</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2">
+							<input type="button" value="회원정보수정하기" onclick="fn_pwConfirmPage(this.form)" />
+							<input type="button" value="비밀번호변경하기" onclick="" />
+							<input type="button" value="목록으로이동하기" onclick="location.href='/10_DAO/red/listPage.jsp'" />
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+			<%-- 회원정보수정, 비밀번호변경 이동시 넘겨 줄 파라미터 --%>
+			<input type="hidden" name="no" value="${redDto.no}" />
+			<input type="hidden" name="id" value="${redDto.id}" />
+			<input type="hidden" name="pw" value="${redDto.pw}" />
+			<input type="hidden" name="name" value="${redDto.name}" />
+			<input type="hidden" name="age" value="${redDto.age}" />
+			<input type="hidden" name="email" value="${redDto.email}" />
+			<input type="hidden" name="regDate" value="${redDto.regDate}" />
+		</form>
+		
 	</c:if>
 
 </body>
 </html>
-
-
-
-
