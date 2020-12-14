@@ -173,6 +173,44 @@ public class RedDao {
 		return result;
 	}
 	
+	/***** 6. 회원 정보 가져오기 *****/
+	public RedDto view(int no) {
+		RedDto redDto = null;
+		try {
+			con = getConnection();
+			sql = "SELECT * FROM RED WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, no);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				redDto = new RedDto();
+				redDto.setNo(rs.getInt("NO"));		// rs.getInt(1)
+				redDto.setId(rs.getString("ID"));	// rs.getString(2)
+				redDto.setPw(rs.getString("PW"));
+				redDto.setName(rs.getString("NAME"));
+				redDto.setAge(rs.getInt("AGE"));
+				redDto.setEmail(rs.getString("EMAIL"));
+				redDto.setRegDate(rs.getDate("REGDATE"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, rs);
+		}
+		return redDto;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

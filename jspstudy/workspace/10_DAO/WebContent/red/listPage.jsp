@@ -47,7 +47,7 @@
 					<c:forEach var="redDto" items="${list}">
 						<tr>
 							<td>${redDto.no}</td>
-							<td>${redDto.id}</td>
+							<td><a href="/10_DAO/red/viewPage.jsp?no=${redDto.no}">${redDto.id}</a></td>
 							<td>${redDto.name}</td>
 							<td>${redDto.age}</td>
 							<td>${redDto.email}</td>
