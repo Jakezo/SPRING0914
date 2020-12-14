@@ -200,7 +200,25 @@ public class RedDao {
 		return redDto;
 	}
 	
-	
+	/***** 7. 회원 정보 수정하기 *****/
+	public int update(RedDto redDto) {
+		int result = 0;
+		try {
+			con = getConnection();
+			sql = "UPDATE RED SET NAME = ?, AGE = ?, EMAIL = ? WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, redDto.getName());
+			ps.setInt(2, redDto.getAge());
+			ps.setString(3, redDto.getEmail());
+			ps.setInt(4, redDto.getNo());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		return result;
+	}
 	
 	
 	

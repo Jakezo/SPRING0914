@@ -6,7 +6,16 @@
 <%
 	// 1. 파라미터 처리
 	request.setCharacterEncoding("UTF-8");
-	int no = Integer.parseInt(request.getParameter("no"));
+	
+	int no = 0;
+	if (request.getParameter("no") == null) {
+		out.println("<script>");
+		out.println("alert('알 수 없는 회원정보입니다.')");
+		out.println("location.href='/10_DAO/red/listPage.jsp'");
+		out.println("</script>");
+	} else {
+		no = Integer.parseInt(request.getParameter("no"));
+	}
 	
 	// 2. DAO
 	RedDto redDto = RedDao.getInstance().view(no);

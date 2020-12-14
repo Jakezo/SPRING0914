@@ -23,7 +23,7 @@
 		// 이전에 넘어온 정보 중 변경된 정보가 있는 경우만 수정
 		if (name != name2 || age != age2 || email != email2) {
 			f.action = '/10_DAO/red/update.jsp';
-			f.submit();			
+			f.submit();
 		} else {
 			alert('변경된 정보가 없습니다.');
 			history.go(-2);
