@@ -8,6 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../assets/style/red.css" />
+<style type="text/css">
+	td:nth-of-type(1) {
+		width: 150px;
+	}
+	td:nth-of-type(2) {
+		text-align: left;
+	}
+	input[type=text], input[type=password] {
+		padding: 5px;
+		width: 400px;
+	}
+</style>
 <script type="text/javascript">
 	function fn_update(f) {
 		// 1. pwConfirmPage.jsp에서 넘어온 정보
@@ -32,7 +45,7 @@
 </script>
 </head>
 <body>
-	
+	<div class="wrap">
 		<form method="post">
 			<table>
 				<thead>
@@ -70,7 +83,7 @@
 					<tr>
 						<td colspan="2">
 							<input type="button" value="회원정보수정하기" onclick="fn_update(this.form)" />
-							<input type="button" value="수정취소하기" onclick="history.go(-2)" />
+							<input type="button" value="수정취소하기" onclick="alert('취소되었습니다.'); history.go(-2)" />
 							<%-- viewPage.jsp -> pwConfirmPage.jsp -> updatePage.jsp(현재) --%>
 							<input type="button" value="목록으로이동하기" onclick="location.href='/10_DAO/red/listPage.jsp'" />
 						</td>
@@ -80,5 +93,6 @@
 			<%-- 회원정보수정 이동시 넘겨 줄 파라미터 --%>
 			<input type="hidden" name="no" value="${param.no}" />
 		</form>
+	</div>
 </body>
 </html>

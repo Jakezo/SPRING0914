@@ -8,6 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../assets/style/red.css" />
+<style type="text/css">
+	td:nth-of-type(1) {
+		width: 150px;
+	}
+	td:nth-of-type(2) {
+		text-align: left;
+	}
+	input[type=text], input[type=password] {
+		padding: 5px;
+		width: 400px;
+	}
+</style>
 <script type="text/javascript">
 	function fn_updatePage(f) {
 		// 회원의 비밀번호
@@ -26,37 +39,34 @@
 </script>
 </head>
 <body>
-	
-	<form method="post">
-		<h1>회원정보 수정을 위해 비밀번호를 확인합니다.</h1>
-		<table>
-			<tbody>
-				<tr>
-					<td>비밀번호 확인</td>
-					<td><input type="password" name="pw" /></td>
-				</tr>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="2">
-						<input type="button" value="회원정보수정하기" onclick="fn_updatePage(this.form)" />
-						<input type="button" value="되돌아가기" onclick="history.back()" />
-					</td>
-				</tr>
-			</tfoot>
-		</table>
-			<%-- 회원정보수정 이동시 넘겨 줄 파라미터 --%>
-			<input type="hidden" name="no" value="${param.no}" />
-			<input type="hidden" name="id" value="${param.id}" />
-			<input type="hidden" name="name" value="${param.name}" />
-			<input type="hidden" name="age" value="${param.age}" />
-			<input type="hidden" name="email" value="${param.email}" />
-			<input type="hidden" name="regDate" value="${param.regDate}" />
-	</form>
+	<div class="wrap">
+		<form method="post">
+			<h1>회원정보 수정을 위해 비밀번호를 확인합니다.</h1>
+			<table>
+				<tbody>
+					<tr>
+						<td>비밀번호 확인</td>
+						<td><input type="password" name="pw" /></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2">
+							<input type="button" value="회원정보수정하기" onclick="fn_updatePage(this.form)" />
+							<input type="button" value="되돌아가기" onclick="history.back()" />
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+				<%-- 회원정보수정 이동시 넘겨 줄 파라미터 --%>
+				<input type="hidden" name="no" value="${param.no}" />
+				<input type="hidden" name="id" value="${param.id}" />
+				<input type="hidden" name="name" value="${param.name}" />
+				<input type="hidden" name="age" value="${param.age}" />
+				<input type="hidden" name="email" value="${param.email}" />
+				<input type="hidden" name="regDate" value="${param.regDate}" />
+		</form>
+	</div>
 
 </body>
 </html>
-
-
-
-

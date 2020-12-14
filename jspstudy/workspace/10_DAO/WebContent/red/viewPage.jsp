@@ -36,15 +36,6 @@
 	td:nth-of-type(2) {
 		text-align: left;
 	}
-	input[type=text], input[type=password] {
-		padding: 5px;
-		width: 400px;
-		outline: 0px;
-		border: 0px;
-	}
-	input[type=text]:focus, input[type=password]:focus {
-		background: #efefef;
-	}
 </style>
 <script type="text/javascript">
 	// 1. 회원정보수정 페이지로 이동하기
@@ -65,6 +56,7 @@
 	</c:if>
 	
 	<c:if test="${redDto ne null}">
+	<div class="wrap">
 		<form method="post">
 			<table>
 				<thead>
@@ -117,8 +109,7 @@
 			<input type="hidden" name="email" value="${redDto.email}" />
 			<input type="hidden" name="regDate" value="${redDto.regDate}" />
 		</form>
-		
+	</div>		
 	</c:if>
-
 </body>
 </html>
