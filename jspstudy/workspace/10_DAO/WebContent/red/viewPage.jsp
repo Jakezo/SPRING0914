@@ -44,6 +44,11 @@
 		f.action = '/10_DAO/red/pwConfirmPage.jsp';
 		f.submit();
 	}
+	// 2. 비밀번호변경 페이지로 이동하기
+	function fn_pwChangePage(f) {
+		f.action = '/10_DAO/red/pwChangePage.jsp';
+		f.submit();
+	}
 </script>
 </head>
 <body>
@@ -94,7 +99,7 @@
 					<tr>
 						<td colspan="2">
 							<input type="button" value="회원정보수정하기" onclick="fn_pwConfirmPage(this.form)" />
-							<input type="button" value="비밀번호변경하기" onclick="" />
+							<input type="button" value="비밀번호변경하기" onclick="fn_pwChangePage(this.form)" />
 							<input type="button" value="목록으로이동하기" onclick="location.href='/10_DAO/red/listPage.jsp'" />
 						</td>
 					</tr>

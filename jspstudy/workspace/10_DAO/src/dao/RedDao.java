@@ -220,7 +220,23 @@ public class RedDao {
 		return result;
 	}
 	
-	
+	/***** 8. 비밀번호 수정하기 *****/
+	public int updatePw(RedDto redDto) {
+		int result = 0;
+		try {
+			con = getConnection();
+			sql = "UPDATE RED SET PW = ? WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, redDto.getPw());
+			ps.setInt(2, redDto.getNo());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		return result;
+	}
 	
 	
 	
