@@ -74,11 +74,14 @@ public class RedDao {
 		int result = 0;
 		try {
 			// id, pw, name, age, email 찍어보기
+			// 개발이 끝나면 System.out.println() 삭제하기
+			/*
 			System.out.println(redDto.getId());
 			System.out.println(redDto.getPw());
 			System.out.println(redDto.getName());
 			System.out.println(redDto.getAge());
 			System.out.println(redDto.getEmail());
+			*/
 			// 접속
 			con = getConnection();
 			// **수동 커밋 처리 방법(한 번만 해 봅시다.)
@@ -239,14 +242,21 @@ public class RedDao {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/***** 9. 회원 삭제하기 *****/
+	public int delete(int no) {
+		int result = 0;
+		try {
+			con = getConnection();
+			sql = "DELETE FROM RED WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, no);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		return result;
+	}
 	
 }

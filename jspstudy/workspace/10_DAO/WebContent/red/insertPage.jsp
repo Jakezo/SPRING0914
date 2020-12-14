@@ -71,10 +71,10 @@
 						<td>아이디*</td>
 						<td>
 							<c:if test="${param.id eq null}">
-								<input type="text" name="id" autofocus />							
+								<input type="text" name="id" autofocus />
 							</c:if>
 							<c:if test="${param.id ne null}">
-								<input type="text" name="id" value="${param.id}" autofocus />							
+								<input type="text" name="id" value="${param.id}" autofocus />
 							</c:if>
 							<input type="button" value="중복확인" onclick="fn_idCheck(this.form)" />	
 						</td>
