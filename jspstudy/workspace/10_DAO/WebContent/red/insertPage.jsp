@@ -105,6 +105,7 @@
 						<td colspan="2">
 							<input type="button" value="가입하기" onclick="fn_signUp(this.form)" />
 							<input type="reset" value="다시작성" />
+							<input type="button" value="목록으로이동하기" onclick="location.href='/10_DAO/red/listPage.jsp'" />
 						</td>
 					</tr>
 				</tfoot>
