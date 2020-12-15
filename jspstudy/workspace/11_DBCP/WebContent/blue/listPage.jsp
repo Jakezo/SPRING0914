@@ -39,7 +39,7 @@
 				<c:forEach var="blueDto" items="${list}">
 					<tr>
 						<td>${blueDto.no}</td>
-						<td>${blueDto.title}</td>
+						<td><a href="/11_DBCP/blue/viewPage.jsp?no=${blueDto.no}">${blueDto.title}</a></td>
 						<td>${blueDto.writer}</td>
 						<td>${blueDto.postDate}</td>
 					</tr>
