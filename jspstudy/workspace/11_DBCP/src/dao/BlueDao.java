@@ -3,11 +3,14 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import dto.BlueDto;
 
 public class BlueDao {
 
@@ -37,6 +40,13 @@ public class BlueDao {
 		}
 	}
 	
+	// Singleton pattern
+	private BlueDao() { }
+	private static BlueDao blueDao = new BlueDao();
+	public static BlueDao getInstance() {
+		return blueDao;
+	}
+	
 	// 메소드
 	/***** 1. 접속 종료 *****/
 	public void close(Connection con, PreparedStatement ps, ResultSet rs) {
@@ -49,16 +59,30 @@ public class BlueDao {
 		}
 	}
 	
-	/***** 2. 접속 테스트 *****/
-	public void test() {
+	/***** 2. 목록 가져오기 *****/
+	public ArrayList<BlueDto> list() {
+		ArrayList<BlueDto> list = new ArrayList<BlueDto>();
 		try {
 			con = dataSource.getConnection();
-			System.out.println("접속성공");
+			sql = "SELECT NO, WRITER, TITLE, CONTENT, POSTDATE FROM BLUE";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			// rs.next() -> BlueDto -> list.add
+			while ( rs.next() ) {
+				BlueDto blueDto = new BlueDto();
+				blueDto.setNo( rs.getInt("NO") );  // rs.getInt(1)
+				blueDto.setWriter( rs.getString("WRITER") );
+				blueDto.setTitle( rs.getString("TITLE") );
+				blueDto.setContent( rs.getString("CONTENT") );
+				blueDto.setPostDate( rs.getDate("POSTDATE") );
+				list.add(blueDto);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(con, null, null);
+			close(con, ps, rs);
 		}
+		return list;
 	}
 	
 	
