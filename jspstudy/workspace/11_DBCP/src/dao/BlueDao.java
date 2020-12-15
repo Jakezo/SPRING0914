@@ -111,7 +111,7 @@ public class BlueDao {
 		BlueDto blueDto = null;
 		try {
 			con = dataSource.getConnection();
-			sql = "SELECT NO, WRITER, TITLE, CONTENT, POSTDATE FROM BLUE WHERE NO = ?";
+			sql = "SELECT NO, WRITER, TITLE, CONTENT, FILENAME, POSTDATE FROM BLUE WHERE NO = ?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, no);
 			rs = ps.executeQuery();
@@ -121,6 +121,7 @@ public class BlueDao {
 				blueDto.setWriter(rs.getString("WRITER"));
 				blueDto.setTitle(rs.getString("TITLE"));
 				blueDto.setContent(rs.getString("CONTENT"));
+				blueDto.setFilename(rs.getString("FILENAME"));
 				blueDto.setPostDate(rs.getDate("POSTDATE"));
 			}
 		} catch (Exception e) {
@@ -166,20 +167,5 @@ public class BlueDao {
 		}
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

@@ -14,6 +14,10 @@
 	
 	BlueDto blueDto = BlueDao.getInstance().view(no);
 	pageContext.setAttribute("blueDto", blueDto);
+	
+	String directory = "storage";
+	String realPath = request.getServletContext().getRealPath(directory);
+	pageContext.setAttribute("realPath", realPath);
 %>
 <!DOCTYPE html>
 <html>
@@ -42,6 +46,12 @@
 		
 		작성일<br/>
 		${blueDto.postDate}<br/><br/>
+		
+		<c:if test="${not empty blueDto.filename}">
+			첨부이미지<br/>
+			<img alt="이미지아님" src="${realPath}/${blueDto.filename}" />
+		</c:if>
+		
 	</div>
 	<br/><br/>
 	
