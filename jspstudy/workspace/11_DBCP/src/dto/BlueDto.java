@@ -9,6 +9,7 @@ public class BlueDto {
 	private String writer;
 	private String title;
 	private String content;
+	private String filename;
 	private Date postDate;
 	
 	// 메소드
@@ -35,6 +36,12 @@ public class BlueDto {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 	public Date getPostDate() {
 		return postDate;

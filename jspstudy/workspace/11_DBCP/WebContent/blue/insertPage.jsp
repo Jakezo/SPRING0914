@@ -23,6 +23,7 @@
 	
 	<form name="f"
 		  method="post"
+		  enctype="multipart/form-data"
 		  action="/11_DBCP/blue/insert.jsp"
 		  onsubmit="return fn_insert()">
 		제목<br/>
@@ -31,6 +32,8 @@
 		<input type="text" name="writer" /><br/><br/>
 		내용<br/>
 		<textarea rows="5" cols="80" name="content"></textarea><br/><br/>
+		파일첨부
+		<input type="file" name="filename" /><br/><br/>
 		<button>작성하기</button>
 		<input type="reset" value="다시작성하기" />
 		<input type="button" value="목록으로이동하기" onclick="location.href='/11_DBCP/blue/listPage.jsp'" />
