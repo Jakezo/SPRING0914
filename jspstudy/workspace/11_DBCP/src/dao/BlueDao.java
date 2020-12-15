@@ -85,6 +85,35 @@ public class BlueDao {
 		return list;
 	}
 	
+	/***** 3. 게시글 삽입하기 *****/
+	public int insert(BlueDto blueDto) {
+		int result = 0;
+		try {
+			con = dataSource.getConnection();
+			sql = "INSERT INTO BLUE VALUES (BLUE_SEQ.NEXTVAL, ?, ?, ?, SYSDATE)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, blueDto.getWriter());
+			ps.setString(2, blueDto.getTitle());
+			ps.setString(3, blueDto.getContent());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

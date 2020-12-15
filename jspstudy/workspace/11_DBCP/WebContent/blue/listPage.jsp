@@ -41,7 +41,7 @@
 						<td>${blueDto.no}</td>
 						<td>${blueDto.title}</td>
 						<td>${blueDto.writer}</td>
-						<td>${blueDto.postdate}</td>
+						<td>${blueDto.postDate}</td>
 					</tr>
 				</c:forEach>
 			</c:if>
