@@ -39,8 +39,12 @@
 	</div>
 	<br/><br/>
 	
-	<input type="button" value="목록으로이동하기" onclick="location.href='/11_DBCP/blue/listPage.jsp'" />
-	<input type="button" value="삭제하기" />
+	<form action="/11_DBCP/blue/delete.jsp"
+		  onsubmit="return confirm('삭제하시겠습니까?')">
+		<input type="button" value="목록으로이동하기" onclick="location.href='/11_DBCP/blue/listPage.jsp'" />
+		<input type="hidden" name="no" value="${blueDto.no}" />
+		<button>삭제하기</button>	
+	</form>
 	
 </body>
 </html>
