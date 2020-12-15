@@ -13,6 +13,23 @@
 		background: silver;
 	}
 </style>
+<script type="text/javascript">
+	function fn_update() {
+		var f = document.forms.f;
+		var prev_title = '${param.title}';
+		var prev_content = '${param.content}';
+		if (prev_title == f.title.value && prev_content == f.content.value) {
+			alert('수정된 내용이 없습니다.');
+			return false;
+		}
+		if (f.title.value == '') {
+			alert('제목은 필수입니다.');
+			f.title.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
 </head>
 <body>
 
@@ -35,6 +52,9 @@
 		
 		작성일<br/>
 		<input type="text" name="postDate" value="${param.postDate}" readonly /><br/><br/>
+		
+		<button>수정하기</button>
+		<input type="button" value="취소하기" onclick="history.back()" />
 		
 	</form>
 

@@ -146,6 +146,27 @@ public class BlueDao {
 		return result;
 	}
 	
+	/***** 6. 게시글 수정하기 *****/
+	public int update(BlueDto blueDto) {
+		int result = 0;
+		try {
+			con = dataSource.getConnection();
+			sql = "UPDATE BLUE SET TITLE = ?, CONTENT = ? WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, blueDto.getTitle());
+			ps.setString(2, blueDto.getContent());
+			ps.setInt(3, blueDto.getNo());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		return result;
+	}
+	
+	
+	
 	
 	
 	
