@@ -64,7 +64,7 @@ public class BlueDao {
 		ArrayList<BlueDto> list = new ArrayList<BlueDto>();
 		try {
 			con = dataSource.getConnection();
-			sql = "SELECT NO, WRITER, TITLE, CONTENT, POSTDATE FROM BLUE";
+			sql = "SELECT NO, WRITER, TITLE, CONTENT, FILENAME, POSTDATE FROM BLUE";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			// rs.next() -> BlueDto -> list.add
@@ -74,6 +74,7 @@ public class BlueDao {
 				blueDto.setWriter( rs.getString("WRITER") );
 				blueDto.setTitle( rs.getString("TITLE") );
 				blueDto.setContent( rs.getString("CONTENT") );
+				blueDto.setFilename( rs.getString("FILENAME") );
 				blueDto.setPostDate( rs.getDate("POSTDATE") );
 				list.add(blueDto);
 			}
@@ -90,11 +91,12 @@ public class BlueDao {
 		int result = 0;
 		try {
 			con = dataSource.getConnection();
-			sql = "INSERT INTO BLUE VALUES (BLUE_SEQ.NEXTVAL, ?, ?, ?, SYSDATE)";
+			sql = "INSERT INTO BLUE VALUES (BLUE_SEQ.NEXTVAL, ?, ?, ?, ?, SYSDATE)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, blueDto.getWriter());
 			ps.setString(2, blueDto.getTitle());
 			ps.setString(3, blueDto.getContent());
+			ps.setString(4, blueDto.getFilename());
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
