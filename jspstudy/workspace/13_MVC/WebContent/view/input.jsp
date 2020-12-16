@@ -35,5 +35,10 @@
 		}
 	</script>
 
+	<h3>하나의 CONTROLL에게 요청하기</h3>
+	<input type="button" value="오늘의아침메뉴" onclick="location.href='/13_MVC/morning.meal'" />
+	<input type="button" value="오늘의점심메뉴" onclick="location.href='/13_MVC/lunch.meal'" />
+	<input type="button" value="오늘의저녁메뉴" onclick="location.href='/13_MVC/evening.meal'" />
+
 </body>
 </html>
