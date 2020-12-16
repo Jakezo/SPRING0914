@@ -1,6 +1,8 @@
 package command;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +52,21 @@ public class PersonCommand implements Command {
 
 		// 2. session에 personMap 저장하기
 		session.setAttribute("personMap", personMap);
+		
+		
+		// ***** ArrayList ***** //
+		List<PersonDto> personList = new ArrayList<PersonDto>();
+		for (int i = 0; i < 10; i++) {
+			PersonDto pDto = new PersonDto();
+			pDto.setName(name);
+			pDto.setAge(age + i);
+			pDto.setAddress(address);
+			pDto.setGender(gender);
+			pDto.setInterests(interests);
+			personList.add(pDto);
+		}
+		
+		request.setAttribute("personList", personList);
 		
 		return "view/output.jsp";
 		
