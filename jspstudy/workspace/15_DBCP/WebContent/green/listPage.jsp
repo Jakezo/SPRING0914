@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<a href="">새 글 작성하기</a><br/><br/>
+	<a href="/15_DBCP/insertPage.do">새 글 작성하기</a><br/><br/>
 	
 	<table border="1">
 		<thead>
