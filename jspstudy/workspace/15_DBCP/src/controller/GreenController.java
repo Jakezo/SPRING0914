@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.GreenCommand;
+import command.GreenDeleteCommand;
 import command.GreenInsertCommand;
 import command.GreenListCommand;
 import command.GreenViewCommand;
@@ -45,10 +46,17 @@ public class GreenController extends HttpServlet {
 			command = new GreenViewCommand();
 			path = command.execute(request, response);
 			break;
+		case "/delete.do":
+			command = new GreenDeleteCommand();
+			path = command.execute(request, response);
+			break;
 			
 		// 단순이동
 		case "/insertPage.do":
 			path = "green/insertPage.jsp";
+			break;
+		case "/updatePage.do":
+			path = "green/updatePage.jsp";
 			break;
 		}
 		
