@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import command.GreenCommand;
 import command.GreenInsertCommand;
 import command.GreenListCommand;
+import command.GreenViewCommand;
 
 @WebServlet("*.do")
 public class GreenController extends HttpServlet {
@@ -38,6 +39,10 @@ public class GreenController extends HttpServlet {
 			break;
 		case "/insert.do":
 			command = new GreenInsertCommand();
+			path = command.execute(request, response);
+			break;
+		case "/viewPage.do":
+			command = new GreenViewCommand();
 			path = command.execute(request, response);
 			break;
 			

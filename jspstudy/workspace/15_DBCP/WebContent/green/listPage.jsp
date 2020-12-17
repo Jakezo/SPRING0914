@@ -32,7 +32,7 @@
 					<tr>
 						<td>${greenDto.no}</td>
 						<td>${greenDto.writer}</td>
-						<td>${greenDto.title}</td>
+						<td><a href="/15_DBCP/viewPage.do?no=${greenDto.no}">${greenDto.title}</a></td>
 						<td>${greenDto.hit}</td>
 						<td>${greenDto.postDate}</td>
 					</tr>
