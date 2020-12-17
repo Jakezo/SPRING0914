@@ -11,7 +11,9 @@ import command.GreenCommand;
 import command.GreenDeleteCommand;
 import command.GreenInsertCommand;
 import command.GreenListCommand;
+import command.GreenUpdateCommand;
 import command.GreenViewCommand;
+import common.PathNRedirect;
 
 @WebServlet("*.do")
 public class GreenController extends HttpServlet {
@@ -30,37 +32,50 @@ public class GreenController extends HttpServlet {
 		String cmd = requestURI.substring(contextPath.length());
 		
 		GreenCommand command = null;
-		String path = null;
+		PathNRedirect pathNRedirect = null;
 		
 		switch (cmd) {
 		// Command 필요(DB, 로직)
 		case "/listPage.do":
 			command = new GreenListCommand();
-			path = command.execute(request, response);
+			pathNRedirect = command.execute(request, response);
 			break;
 		case "/insert.do":
 			command = new GreenInsertCommand();
-			path = command.execute(request, response);
+			pathNRedirect = command.execute(request, response);
 			break;
 		case "/viewPage.do":
 			command = new GreenViewCommand();
-			path = command.execute(request, response);
+			pathNRedirect = command.execute(request, response);
 			break;
 		case "/delete.do":
 			command = new GreenDeleteCommand();
-			path = command.execute(request, response);
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/update.do":
+			command = new GreenUpdateCommand();
+			pathNRedirect = command.execute(request, response);
 			break;
 			
 		// 단순이동
 		case "/insertPage.do":
-			path = "green/insertPage.jsp";
+			pathNRedirect = new PathNRedirect();
+			pathNRedirect.setPath("green/insertPage.jsp");
+			pathNRedirect.setRedirect(true);
 			break;
 		case "/updatePage.do":
-			path = "green/updatePage.jsp";
+			pathNRedirect = new PathNRedirect();
+			pathNRedirect.setPath("green/updatePage.jsp");
+			pathNRedirect.setRedirect(false);  // forward 
 			break;
 		}
 		
-		request.getRequestDispatcher(path).forward(request, response);
+		String path = pathNRedirect.getPath();
+		if (pathNRedirect.isRedirect()) {
+			response.sendRedirect(path);
+		} else {
+			request.getRequestDispatcher(path).forward(request, response);
+		}
 		
 	}
 	

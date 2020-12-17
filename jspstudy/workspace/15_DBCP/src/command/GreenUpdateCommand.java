@@ -7,27 +7,31 @@ import common.PathNRedirect;
 import dao.GreenDao;
 import dto.GreenDto;
 
-public class GreenInsertCommand implements GreenCommand {
+public class GreenUpdateCommand implements GreenCommand {
 
 	@Override
 	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		// DB에 삽입 후 결과를 request에 저장
-		String writer = request.getParameter("writer");
+		int no = Integer.parseInt(request.getParameter("no"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
 		GreenDto greenDto = new GreenDto();
-		greenDto.setWriter(writer);
+		greenDto.setNo(no);
 		greenDto.setTitle(title);
 		greenDto.setContent(content);
 		
-		int result = GreenDao.getInstance().insert(greenDto);
+		int result = GreenDao.getInstance().update(greenDto);
 		
 		PathNRedirect pathNRedirect = new PathNRedirect();
-		pathNRedirect.setPath("green/insertResult.jsp?result=" + result);  // redirect도 새로운 request는 전달된다.
-		pathNRedirect.setRedirect(true);  // redirect (기존 request를 넘기지 않는다.)
-				
+		if (result > 0) {  // 수정이 성공하면
+			pathNRedirect.setPath("green/updateSuccess.jsp?no=" + no);
+			pathNRedirect.setRedirect(true);  // redirect
+		} else {  // 수정이 실패하면
+			pathNRedirect.setPath("green/updateFail.jsp");
+			pathNRedirect.setRedirect(false);  // forward
+		}
+		
 		return pathNRedirect;
 		
 	}

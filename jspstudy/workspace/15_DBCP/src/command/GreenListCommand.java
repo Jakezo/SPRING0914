@@ -5,17 +5,25 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.PathNRedirect;
 import dao.GreenDao;
 import dto.GreenDto;
 
 public class GreenListCommand implements GreenCommand {
 
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) {
+	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
+		
 		// Green테이블의 전체목록을 request에 저장해 두기
 		ArrayList<GreenDto> list = GreenDao.getInstance().list();
 		request.setAttribute("list", list);
-		return "green/listPage.jsp";
+		
+		PathNRedirect pathNRedirect = new PathNRedirect();
+		pathNRedirect.setPath("green/listPage.jsp");
+		pathNRedirect.setRedirect(false);  // forward (request.setAttribute("list", list); 잘 전달된다.)
+		
+		return pathNRedirect;
+		
 	}
 
 }
