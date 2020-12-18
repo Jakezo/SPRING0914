@@ -11,6 +11,7 @@ import command.LimeCommand;
 import command.LimeDeleteCommand;
 import command.LimeInsertCommand;
 import command.LimeListCommand;
+import command.LimeUpdateCommand;
 import command.LimeViewCommand;
 import common.PathNRedirect;
 
@@ -52,14 +53,23 @@ public class LimeController extends HttpServlet {
 			command = new LimeDeleteCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
+		case "/update.lime":
+			command = new LimeUpdateCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
 		
 		// 단순이동
 		case "/insertPage.lime":
 			pathNRedirect = new PathNRedirect();
 			pathNRedirect.setPath("lime/insertPage.jsp");
-			pathNRedirect.setRedirect(true);  // forward
+			pathNRedirect.setRedirect(false);  // forward
 			// forward:  http://localhost:9090/16_MYBATIS/insertPage.lime
 			// redirect: http://localhost:9090/16_MYBATIS/lime/insertPage.jsp
+			break;
+		case "/updatePage.lime":
+			pathNRedirect = new PathNRedirect();
+			pathNRedirect.setPath("lime/updatePage.jsp");
+			pathNRedirect.setRedirect(false);  // forward
 			break;
 		}
 		

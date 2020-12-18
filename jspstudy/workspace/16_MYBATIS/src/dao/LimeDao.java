@@ -86,6 +86,25 @@ public class LimeDao {
 		return result;
 	}
 	
+	/***** 5. 게시글 수정하기 *****/
+	public int update(LimeDto limeDto) {
+		SqlSession session = factory.openSession(false);
+		int result = session.update("mybatis.mapper.mapper.update", limeDto);
+		if (result > 0) {
+			session.commit();
+		}
+		session.close();
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
