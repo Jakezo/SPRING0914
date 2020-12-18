@@ -66,6 +66,11 @@
 		<input type="hidden" name="title" value="${blueDto.title}" />
 		<input type="hidden" name="content" value="${blueDto.content}" />
 		<input type="hidden" name="postDate" value="${blueDto.postDate}" />
+		
+		<%-- 추가1. delete.jsp 로 넘겨서 첨부파일 삭제하려고 함 --%>
+		<input type="hidden" name="realPath" value="<%=realPath%>" />
+		<input type="hidden" name="filename" value="${blueDto.filename}" />
+		
 	</form>
 	
 </body>

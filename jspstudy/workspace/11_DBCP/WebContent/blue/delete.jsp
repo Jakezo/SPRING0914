@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="dao.BlueDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,6 +11,18 @@
 	}
 	
 	int result = BlueDao.getInstance().delete(no);
+	
+	/***** 파일삭제하는 부분 *****/
+	if (result > 0) {
+		String realPath = request.getParameter("realPath");
+		String filename = request.getParameter("filename");
+		File file = new File(realPath, filename);
+		if (file.exists()) {
+			file.delete();
+		}
+	}
+	/****************************/
+	
 %>
 <script>
 	var result = <%=result%>;
