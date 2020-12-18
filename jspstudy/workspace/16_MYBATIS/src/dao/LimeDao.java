@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -27,14 +27,14 @@ public class LimeDao {
 	// 기존의 close() 메소드는 구현할 필요가 없다. (구현되어 있다.)
 	
 	/***** 1. 전체목록 가져오기 *****/
-	public ArrayList<LimeDto> list() {
+	public List<LimeDto> list() {
 
 		// 1) factory에서 제품(SqlSession)을 생산한다.
 		SqlSession sqlSession = factory.openSession();
 		
 		// sqlSession: mapper.xml에서 SQL을 찾아 실행하는 역할
 		// 2) sqlSession이 SQL을 실행한다.
-		ArrayList<LimeDto> list = sqlSession.selectList("mybatis.mapper.mapper.list");
+		List<LimeDto> list = sqlSession.selectList("mybatis.mapper.mapper.list");
 		
 		// 3) sqlSession을 닫는다.
 		sqlSession.close();

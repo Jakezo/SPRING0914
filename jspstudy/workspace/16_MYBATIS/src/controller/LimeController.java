@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.LimeCommand;
+import command.LimeListCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.lime")
@@ -33,7 +34,9 @@ public class LimeController extends HttpServlet {
 		switch (cmd) {
 		// Command 필요
 		case "/listPage.lime":
-		
+			command = new LimeListCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
 		}
 		
 		String path = pathNRedirect.getPath();
