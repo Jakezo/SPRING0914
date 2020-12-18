@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.LimeCommand;
+import command.LimeDeleteCommand;
 import command.LimeInsertCommand;
 import command.LimeListCommand;
 import command.LimeViewCommand;
@@ -45,6 +46,10 @@ public class LimeController extends HttpServlet {
 			break;
 		case "/viewPage.lime":
 			command = new LimeViewCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/delete.lime":
+			command = new LimeDeleteCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
 		
