@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import command.LimeCommand;
 import command.LimeInsertCommand;
 import command.LimeListCommand;
+import command.LimeViewCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.lime")
@@ -40,6 +41,10 @@ public class LimeController extends HttpServlet {
 			break;
 		case "/insert.lime":
 			command = new LimeInsertCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/viewPage.lime":
+			command = new LimeViewCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
 		

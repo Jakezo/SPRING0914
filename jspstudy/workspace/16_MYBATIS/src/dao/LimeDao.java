@@ -67,6 +67,15 @@ public class LimeDao {
 		
 	}
 	
+	/***** 3. 게시글 가져오기 *****/
+	public LimeDto view(int no) {
+		SqlSession session = factory.openSession();
+		LimeDto limeDto = session.selectOne("mybatis.mapper.mapper.view", no);
+		session.close();
+		return limeDto;
+	}
+	
+	
 	
 	
 	

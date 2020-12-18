@@ -32,8 +32,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="dto.LimeDto">
 		INSERT INTO
 		  LIME (NO, WRITER, TITLE, CONTENT, POSTDATE)
-		VALUES (LIME_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, SYSDATE)
+		VALUES (LIME_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, SYSTIMESTAMP)
 	</insert>
+	
+	<select id="view" resultType="dto.LimeDto">
+		SELECT * 
+		  FROM LIME
+		 WHERE NO = #{no}
+	</select>
+	
 
 </mapper>
 
