@@ -23,6 +23,8 @@ public class LimeDao {
 	}
 	
 	// 메소드: factory를 이용한다.
+	// SELECT문: factory.openSession();
+	// 나머지문: factory.openSession(false);  수동커밋을 하겠다.
 	
 	// 기존의 close() 메소드는 구현할 필요가 없다. (구현되어 있다.)
 	
@@ -44,7 +46,26 @@ public class LimeDao {
 		
 	}
 	
-	
+	/***** 2. 삽입하기 *****/
+	public int insert(LimeDto limeDto) {
+		
+		// 1) factory에서 session 만들기
+		SqlSession session = factory.openSession(false);
+		
+		// 2) session이 SQL 실행
+		int result = session.insert("mybatis.mapper.mapper.insert", limeDto);
+		
+		// 3) 성공하면 commit
+		if (result > 0) {
+			session.commit();
+		}
+		
+		// 4) 닫기
+		session.close();
+		
+		return result;
+		
+	}
 	
 	
 	
