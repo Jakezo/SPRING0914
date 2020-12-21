@@ -59,6 +59,7 @@ public class GetImageCaptchaCommand implements Command {
         
         // 2) 캡차 이미지 요청하기
         String key = (String)obj.get("key"); // https://openapi.naver.com/v1/captcha/nkey 호출로 받은 키값
+        // 이미지 수신 실패용(아무 키나 넘김) String key = "aldfakjlkajgj;fljg;sl";
         String apiURL2 = "https://openapi.naver.com/v1/captcha/ncaptcha.bin?key=" + key;
 
         // requestHeaders는 1) 캡차 키 발급 요청에서 이미 생성했으므로 또 생성할 필요가 없다.
@@ -67,9 +68,17 @@ public class GetImageCaptchaCommand implements Command {
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         */
-        String responseBody2 = get2(apiURL2, requestHeaders);
+        
+        // responseBody2
+        // 1) 성공: 이미지 캡차가 생성되었습니다.
+        // 2) 실패: {"result":false,"errorMessage":"Invalid key.","errorCode":"CT001"}
+        // String responseBody2 = get2(apiURL2, requestHeaders);
 
-        System.out.println(responseBody2);
+        // 성공했을 때는 캡차 이미지 파일이 생성되므로 생성된 파일명을 알아야 한다.
+        // responseBody2 -> filename
+        String filename = get2(request, apiURL2, requestHeaders);
+        
+        System.out.println(filename);
         
 		return null;
 		
@@ -129,7 +138,7 @@ public class GetImageCaptchaCommand implements Command {
     }
     
     // 2) 캡차 이미지 요청용 get2() 메소드
-    private static String get2(String apiUrl, Map<String, String> requestHeaders){
+    private static String get2(HttpServletRequest request, String apiUrl, Map<String, String> requestHeaders){
     	HttpURLConnection con = connect(apiUrl);
     	try {
     		con.setRequestMethod("GET");
@@ -139,7 +148,10 @@ public class GetImageCaptchaCommand implements Command {
     		
     		int responseCode = con.getResponseCode();
     		if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
-    			return getImage(con.getInputStream());
+    			// getImage()에 request를 전달하려면 get2() 메소드가 HttpServletRequest request를 받아와야 한다.
+    			// 기존: get2(String apiUrl, Map<String, String> requestHeaders) {
+    			// 수정: get2(HttpServletRequest request, String apiUrl, Map<String, String> requestHeaders) {
+    			return getImage(request, con.getInputStream());
     		} else { // 에러 발생
     			return error(con.getErrorStream());
     		}
@@ -151,18 +163,51 @@ public class GetImageCaptchaCommand implements Command {
     }
     
     // 2) 캡차 이미지 요청용 getImage() 메소드
-    private static String getImage(InputStream is){
+    private static String getImage(HttpServletRequest request, InputStream is){
         int read;
         byte[] bytes = new byte[1024];
-        // 랜덤한 이름으로  파일 생성
+        // 랜덤한 이름으로 파일 생성(X)
+        // 현재 시간: timestamp으로 파일 생성(O)
         String filename = Long.valueOf(new Date().getTime()).toString();
-        File f = new File(filename + ".jpg");
+        
+        // 캡차 이미지가 저장될 storage 디렉토리의 경로를 알아낸다.
+        String directory = "storage";
+        
+        // HttpServletRequest request가 있어야 realPath를 구할 수 있다.
+        // 따라서 execute() 메소드에게서 HttpServletRequest request를 받아 온다.
+        // 기존: getImage(InputStream is) { ... }
+        // 수정: getImage(HttpServletRequest request, InputStream is)       
+        String realPath = request.getServletContext().getRealPath(directory);
+       
+        // storage 디렉토리가 안 생기면 강제로 만들어 주는 코드
+        File dir = new File(realPath);  // File dir에는 storage 디렉토리 정보가 저장된다.
+        if ( !dir.exists() ) {  // dir(storage 디렉토리)이 없으면
+        	dir.mkdirs();  // 해당 디렉토리(storage 디렉토리)를 생성하라.
+        }
+        
+        // storage 디렉토리 경로를 포함하도록 File f를 수정한다.
+        // 기존: File f = new File(filename + ".jpg");
+        // 수정: File f = new File(realPath, filename + ".jpg");
+        File f = new File(realPath, filename + ".jpg");
+        
         try(OutputStream outputStream = new FileOutputStream(f)){
             f.createNewFile();
             while ((read = is.read(bytes)) != -1) {
                 outputStream.write(bytes, 0, read);
             }
-            return "이미지 캡차가 생성되었습니다.";
+            
+            
+            // realPath와 filename을 JSP(로그인화면)에서 확인할 수 있도록
+            // request에 저장해 둔다.
+            // GetImageCaptchaCommand의 execute() 메소드는 PathNRedirect를 반환하는데,
+            // 이 때 반환방법은 forward이다. (request의 데이터 유지를 위해서)
+            request.setAttribute("realPath", realPath);
+            request.setAttribute("filename", filename);
+            
+            
+            // return "이미지 캡차가 생성되었습니다.";
+            return filename;
+            
         } catch (IOException e) {
             throw new RuntimeException("이미지 캡차 파일 생성에 실패 했습니다.",e);
         }
