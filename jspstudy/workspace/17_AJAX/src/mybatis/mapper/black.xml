@@ -5,6 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="mybatis.mapper.black">
 
-	
+	<select id="blackList" resultType="dto.BlackDto">
+		SELECT *
+		  FROM BLACK
+	</select>
 
 </mapper>
