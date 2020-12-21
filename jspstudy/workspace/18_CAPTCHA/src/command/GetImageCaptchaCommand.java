@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -57,6 +58,15 @@ public class GetImageCaptchaCommand implements Command {
         	e.printStackTrace();
         }
         
+        
+        // 입력값 비교(InputKeyCheckCommand)에서 캡차 키를 필요로 하므로,
+        // session에 올려 둔다.
+        // session은 request에서 알아낸다.
+        HttpSession session = request.getSession();
+        session.setAttribute("key", (String)obj.get("key"));
+        
+        
+        
         // 2) 캡차 이미지 요청하기
         String key = (String)obj.get("key"); // https://openapi.naver.com/v1/captcha/nkey 호출로 받은 키값
         // 이미지 수신 실패용(아무 키나 넘김) String key = "aldfakjlkajgj;fljg;sl";
@@ -78,9 +88,13 @@ public class GetImageCaptchaCommand implements Command {
         // responseBody2 -> filename
         String filename = get2(request, apiURL2, requestHeaders);
         
-        System.out.println(filename);
+        // System.out.println(filename);
         
-		return null;
+        PathNRedirect pathNRedirect = new PathNRedirect();
+        pathNRedirect.setPath("login/loginPage.jsp");
+        pathNRedirect.setRedirect(false);  // request에 directory, filename 저장되어 있으므로 forward
+        
+		return pathNRedirect;
 		
 	}
 	
@@ -197,12 +211,12 @@ public class GetImageCaptchaCommand implements Command {
             }
             
             
-            // realPath와 filename을 JSP(로그인화면)에서 확인할 수 있도록
+            // directory(상대경로)와 filename을 JSP(로그인화면)에서 확인할 수 있도록
             // request에 저장해 둔다.
             // GetImageCaptchaCommand의 execute() 메소드는 PathNRedirect를 반환하는데,
             // 이 때 반환방법은 forward이다. (request의 데이터 유지를 위해서)
-            request.setAttribute("realPath", realPath);
-            request.setAttribute("filename", filename);
+            request.setAttribute("filename", filename + ".jpg");
+            request.setAttribute("directory", directory);
             
             
             // return "이미지 캡차가 생성되었습니다.";

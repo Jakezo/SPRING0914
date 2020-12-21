@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
 import command.GetImageCaptchaCommand;
+import command.InputKeyCheckCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.do")
@@ -34,6 +35,10 @@ public class Controller extends HttpServlet {
 		switch (cmd) {
 		case "/getImageCaptcha.do":
 			command = new GetImageCaptchaCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/login.do":
+			command = new InputKeyCheckCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
 		}
