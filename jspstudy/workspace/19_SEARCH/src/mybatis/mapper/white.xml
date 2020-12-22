@@ -5,6 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="mybatis.mapper.white">
 
-	
+	<select id="getList" resultType="dto.WhiteDto">
+		SELECT NO, TITLE, CONTENT, POSTDATE
+		  FROM WHITE
+	</select>
 
 </mapper>

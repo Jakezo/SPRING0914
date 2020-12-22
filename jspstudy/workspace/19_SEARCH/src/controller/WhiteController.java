@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.WhiteCommand;
+import command.WhiteListCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.white")
@@ -33,7 +34,10 @@ public class WhiteController extends HttpServlet {
 		WhiteCommand command = null;
 		
 		switch (cmd) {
-			
+		case "/listPage.white":
+			command = new WhiteListCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
 		}
 		
 		String path = pathNRedirect.getPath();

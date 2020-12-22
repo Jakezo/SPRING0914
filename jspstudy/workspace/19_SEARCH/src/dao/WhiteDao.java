@@ -1,7 +1,11 @@
 package dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import dto.WhiteDto;
 import mybatis.config.DBService;
 
 public class WhiteDao {
@@ -19,6 +23,21 @@ public class WhiteDao {
 	}
 	
 	// 메소드
+	public List<WhiteDto> list() {
+		SqlSession ss = factory.openSession();
+		List<WhiteDto> list = ss.selectList("mybatis.mapper.white.getList");
+		ss.close();
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }
