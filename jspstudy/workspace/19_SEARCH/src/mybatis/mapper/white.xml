@@ -15,5 +15,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM WHITE
 		 WHERE TITLE LIKE '%' || #{query} || '%'
 	</select>
+	
+	<select id="getContentList" parameterType="String" resultType="dto.WhiteDto">
+		SELECT NO, TITLE, CONTENT, POSTDATE
+		  FROM WHITE
+		 WHERE CONTENT LIKE CONCAT('%', CONCAT(#{query}, '%'))
+	</select>
+	
+	<select id="getBothList" parameterType="String" resultType="dto.WhiteDto">
+		SELECT NO, TITLE, CONTENT, POSTDATE
+		  FROM WHITE
+		 WHERE TITLE LIKE #{query}
+		    OR CONTENT LIKE #{query}
+	</select>
 
 </mapper>

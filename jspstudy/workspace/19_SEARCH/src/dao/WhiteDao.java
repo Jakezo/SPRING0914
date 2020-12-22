@@ -37,12 +37,18 @@ public class WhiteDao {
 		return list;
 	}
 	
+	public List<WhiteDto> contentList(String query) {
+		SqlSession ss = factory.openSession();
+		List<WhiteDto> list = ss.selectList("mybatis.mapper.white.getContentList", query);
+		ss.close();
+		return list;
+	}
 	
-	
-	
-	
-	
-	
-	
+	public List<WhiteDto> bothList(String query) {
+		SqlSession ss = factory.openSession();
+		List<WhiteDto> list = ss.selectList("mybatis.mapper.white.getBothList", query);
+		ss.close();
+		return list;
+	}
 
 }

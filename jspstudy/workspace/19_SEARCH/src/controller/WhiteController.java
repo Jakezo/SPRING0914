@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.WhiteBothCommand;
 import command.WhiteCommand;
+import command.WhiteContentCommand;
 import command.WhiteListCommand;
 import command.WhiteTitleCommand;
 import common.PathNRedirect;
@@ -41,6 +43,14 @@ public class WhiteController extends HttpServlet {
 			break;
 		case "/searchTitle.white":
 			command = new WhiteTitleCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/searchContent.white":
+			command = new WhiteContentCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/searchBoth.white":
+			command = new WhiteBothCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
 		}
