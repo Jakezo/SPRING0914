@@ -30,7 +30,12 @@ public class WhiteDao {
 		return list;
 	}
 	
-	
+	public List<WhiteDto> titleList(String query) {
+		SqlSession ss = factory.openSession();
+		List<WhiteDto> list = ss.selectList("mybatis.mapper.white.getTitleList", query);
+		ss.close();
+		return list;
+	}
 	
 	
 	
