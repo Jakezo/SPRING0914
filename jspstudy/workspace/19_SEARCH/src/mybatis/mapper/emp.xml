@@ -13,5 +13,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 	#{department_id}
 		 </foreach>
 	</select>
-
+	
+	<!--
+	<select id="dynamicList" parameterType="Map" resultType="dto.EmpDto">
+		SELECT *
+		  FROM EMP
+		 <if test="column=='EMPLOYEE_ID'">WHERE EMPLOYEE_ID = #{query}</if>
+		 <if test="column=='LAST_NAME'">WHERE LAST_NAME = INITCAP(#{query})</if>
+	</select>
+	-->
+	
+	<select id="dynamicList" parameterType="Map" resultType="dto.EmpDto">
+		SELECT *
+		  FROM EMP
+		 WHERE ${column} = INITCAP(#{query})
+	</select>
+	
+	<!--
+		SELECT *
+		  FROM EMP
+		 WHERE #{column} = #{query}
+		 WHERE 'EMPLOYEE_ID' = '102'
+		 WHERE 'EMPLOYEE_ID' = TO_NUMBER('102')
+	-->
+		<!--
+		SELECT *
+		  FROM EMP
+		 WHERE ${column} = #{query}
+		 WHERE EMPLOYEE_ID = '102'
+		 WHERE EMPLOYEE_ID = TO_NUMBER('102')
+	-->
+	
 </mapper>

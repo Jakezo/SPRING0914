@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.emp.SearchDeptCommand;
+import command.emp.SearchDynamicCommand;
 import common.Command;
 import common.PathNRedirect;
 
@@ -36,6 +37,10 @@ public class EmpController extends HttpServlet {
 		switch (cmd) {
 		case "/searchDept.emp":
 			command = new SearchDeptCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/searchDynamic.emp":
+			command = new SearchDynamicCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
 		}

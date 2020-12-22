@@ -31,7 +31,12 @@ public class EmpDao {
 		return list;
 	}
 	
-	
+	public List<EmpDto> dynamicList(Map<String, String> map) {
+		SqlSession ss = factory.openSession();
+		List<EmpDto> list = ss.selectList("mybatis.mapper.emp.dynamicList", map);
+		ss.close();
+		return list;
+	}
 	
 	
 	
