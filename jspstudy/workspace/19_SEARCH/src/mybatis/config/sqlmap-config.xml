@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<mappers>
         <mapper resource="mybatis/mapper/white.xml"/>
+        <mapper resource="mybatis/mapper/emp.xml"/>
 	</mappers>
 	
 </configuration>

@@ -1,21 +1,24 @@
-package command;
+package command.white;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.PathNRedirect;
+import common.Command;
 import dao.WhiteDao;
+import dto.WhiteDto;
 
-public class WhiteBothCommand implements WhiteCommand {
+public class WhiteTitleCommand implements Command {
 
 	@Override
 	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) {
-
-		// Command에서 만능문자(%)를 미리 처리해 두면
-		// mapper에서는 표준 SQL에 가까운 쿼리문의 작성이 가능하다.
-		String query = "%" + request.getParameter("query") + "%";
 		
-		request.setAttribute("list", WhiteDao.getInstance().bothList(query));
+		String query = request.getParameter("query");
+		
+		List<WhiteDto> list = WhiteDao.getInstance().titleList(query);
+		request.setAttribute("list", list);
 		
 		PathNRedirect pathNRedirect = new PathNRedirect();
 		pathNRedirect.setPath("white/listPage.jsp");

@@ -15,10 +15,10 @@ import command.white.WhiteTitleCommand;
 import common.PathNRedirect;
 import common.Command;
 
-@WebServlet("*.white")
-public class WhiteController extends HttpServlet {
+@WebServlet("*.emp")
+public class EmpController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public WhiteController() {
+    public EmpController() {
         super();
     }
 
@@ -37,22 +37,7 @@ public class WhiteController extends HttpServlet {
 		Command command = null;
 		
 		switch (cmd) {
-		case "/listPage.white":
-			command = new WhiteListCommand();
-			pathNRedirect = command.execute(request, response);
-			break;
-		case "/searchTitle.white":
-			command = new WhiteTitleCommand();
-			pathNRedirect = command.execute(request, response);
-			break;
-		case "/searchContent.white":
-			command = new WhiteContentCommand();
-			pathNRedirect = command.execute(request, response);
-			break;
-		case "/searchBoth.white":
-			command = new WhiteBothCommand();
-			pathNRedirect = command.execute(request, response);
-			break;
+			
 		}
 		
 		String path = pathNRedirect.getPath();
