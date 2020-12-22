@@ -5,6 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="mybatis.mapper.emp">
 
+	<select id="list" resultType="dto.EmpDto">
+		SELECT *
+		  FROM EMP
+	</select>
+
 	<select id="deptList" parameterType="Map" resultType="dto.EmpDto">
 		SELECT *
 		  FROM EMP

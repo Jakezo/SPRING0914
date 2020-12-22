@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.emp.EmpListCommand;
 import command.emp.SearchDeptCommand;
 import command.emp.SearchDynamicCommand;
 import common.Command;
@@ -41,6 +42,10 @@ public class EmpController extends HttpServlet {
 			break;
 		case "/searchDynamic.emp":
 			command = new SearchDynamicCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/listPage.emp":
+			command = new EmpListCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
 		}

@@ -24,6 +24,13 @@ public class EmpDao {
 	}
 	
 	// 메소드
+	public List<EmpDto> list() {
+		SqlSession ss = factory.openSession();
+		List<EmpDto> list = ss.selectList("mybatis.mapper.emp.list");
+		ss.close();
+		return list;
+	}
+	
 	public List<EmpDto> deptList(Map<String, String[]> map) {
 		SqlSession ss = factory.openSession();
 		List<EmpDto> list = ss.selectList("mybatis.mapper.emp.deptList", map);
