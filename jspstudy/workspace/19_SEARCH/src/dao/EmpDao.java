@@ -1,11 +1,12 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import dto.WhiteDto;
+import dto.EmpDto;
 import mybatis.config.DBService;
 
 public class EmpDao {
@@ -23,5 +24,18 @@ public class EmpDao {
 	}
 	
 	// 메소드
+	public List<EmpDto> deptList(Map<String, String[]> map) {
+		SqlSession ss = factory.openSession();
+		List<EmpDto> list = ss.selectList("mybatis.mapper.emp.deptList", map);
+		ss.close();
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

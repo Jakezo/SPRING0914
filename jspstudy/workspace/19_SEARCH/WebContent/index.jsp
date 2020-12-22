@@ -50,7 +50,7 @@
 		<input type="button" value="전체직원목록" onclick="location.href='/19_SEARCH/listPage.emp'" />
 		<br/><br/>
 		
-		<select name="department_id">
+		<select name="department_id" multiple="multiple">
 			<c:forEach begin="10" end="110" step="10" var="n">
 				<option value="${n}">${n}</option>
 			</c:forEach>

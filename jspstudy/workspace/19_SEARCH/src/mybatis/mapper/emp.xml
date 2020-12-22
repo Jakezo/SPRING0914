@@ -5,6 +5,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="mybatis.mapper.emp">
 
-	
+	<select id="deptList" parameterType="Map" resultType="dto.EmpDto">
+		SELECT *
+		  FROM EMP
+		 WHERE DEPARTMENT_ID IN 
+		 <foreach item="department_id" collection="department_list" open="(" close=")" separator=",">
+		 	#{department_id}
+		 </foreach>
+	</select>
 
 </mapper>

@@ -8,12 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import command.white.WhiteBothCommand;
-import command.white.WhiteContentCommand;
-import command.white.WhiteListCommand;
-import command.white.WhiteTitleCommand;
-import common.PathNRedirect;
+import command.emp.SearchDeptCommand;
 import common.Command;
+import common.PathNRedirect;
 
 @WebServlet("*.emp")
 public class EmpController extends HttpServlet {
@@ -37,7 +34,10 @@ public class EmpController extends HttpServlet {
 		Command command = null;
 		
 		switch (cmd) {
-			
+		case "/searchDept.emp":
+			command = new SearchDeptCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
 		}
 		
 		String path = pathNRedirect.getPath();
