@@ -15,6 +15,7 @@
 	function fn_findPw() {
 		$.ajax({
 			url: '/MyHome/MemberFindPw',
+			type: 'post',
 			data: 'mEmail=' + $('#mEmail').val(),
 			dataType: 'text',
 			success: function(responseText) {

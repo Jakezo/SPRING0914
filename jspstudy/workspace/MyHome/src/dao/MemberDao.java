@@ -33,7 +33,15 @@ public class MemberDao {
 		ss.close();
 		return dto;
 	}
-	
+	public int updatemPw(MemberDto memberDto) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.update("mybatis.mapper.member.updatemPw", memberDto);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	
