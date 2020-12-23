@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.member.MemberCommand;
-import command.member.MemberFindIdCommand;
 import command.member.MemberLoginCommand;
 import command.member.MemberLogoutCommand;
 import common.PathNRedirect;
@@ -45,10 +44,7 @@ public class MemberController extends HttpServlet {
 			command = new MemberLogoutCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
-		case "/findId.member":
-			command = new MemberFindIdCommand();
-			pathNRedirect = command.execute(request, response);
-			break;
+		
 		// 단순 이동
 		case "/index.member":
 			pathNRedirect = new PathNRedirect();

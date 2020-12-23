@@ -16,18 +16,17 @@ public class MemberLoginCommand implements MemberCommand {
 		String mId = request.getParameter("mId");
 		String mPw = request.getParameter("mPw");
 		
-		
 		MemberDto memberDto = new MemberDto();
 		memberDto.setmId(mId);
 		memberDto.setmPw(mPw);
 		
 		// 로그인 한 회원 정보는 session에 올린다.
 		MemberDto loginDto = MemberDao.getInstance().selectBymIdmPw(memberDto);
-		System.out.println(loginDto.getmEmail());
+		
 		if (loginDto != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginDto", loginDto);
-		}
+		} 
 		
 		PathNRedirect pathNRedirect = new PathNRedirect();
 		pathNRedirect.setPath("member/loginResult.jsp");
