@@ -66,6 +66,10 @@ public class MemberController extends HttpServlet {
 			pathNRedirect = new PathNRedirect();
 			pathNRedirect.setPath("member/changePwPage.jsp");
 			break;
+		case "/myPage.member":
+			pathNRedirect = new PathNRedirect();
+			pathNRedirect.setPath("member/myPage.jsp");
+			break;
 		}
 		
 		String path = pathNRedirect.getPath();

@@ -23,7 +23,7 @@
 					alert('해당하는 회원 정보가 없습니다.');
 				} else {
 					alert('회원 정보가 확인되었습니다. 새로운 비밀번호를 설정하세요.');
-					location.href = '/MyHome/changePwPage.member?mEmail=' + $('#mEmail').val();
+					location.href = '/MyHome/changePwPage.member?mNo=' + responseText.trim();
 				}
 			},
 			error: function(){ alert('실패'); }

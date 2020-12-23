@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <jsp:include page="../template/header.jsp">
 	<jsp:param value="비밀번호변경" name="title" />
 </jsp:include>
@@ -23,7 +24,7 @@
 		$.ajax({
 			url: '/MyHome/MemberChangePw',
 			type: 'post',
-			// data: 'mPw=' + $('#mPw').val() + '&mEmail=' + $('#mEmail').val(),
+			// data: 'mPw=' + $('#mPw').val() + '&mNo=' + $('#mNo').val(),
 			data: $('#f').serialize(),
 			dataType: 'text',
 			success: function(responseText) {
@@ -45,7 +46,10 @@
 	<input type="password" id="mPw" name="mPw" /><br/><br/>
 	<label for="mPw2">비밀번호 확인</label><br/>
 	<input type="password" id="mPw2" /><br/><br/>
-	<input type="hidden" name="mEmail" id="mEmail" value="${param.mEmail}" />
+	
+	<%-- hidden --%>
+	<input type="hidden" name="mNo" id="mNo" value="${param.mNo}" />
+	
 	<input type="button" value="비밀번호 변경" id="changePwBtn" />
 </form>
 

@@ -23,11 +23,11 @@ public class MemberChangePw extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		String mPw = request.getParameter("mPw");
-		String mEmail = request.getParameter("mEmail");
+		String mNo = request.getParameter("mNo");
 		
 		MemberDto memberDto = new MemberDto();
 		memberDto.setmPw(mPw);
-		memberDto.setmEmail(mEmail);
+		memberDto.setmNo(Integer.parseInt(mNo));
 		
 		int result = MemberDao.getInstance().updatemPw(memberDto);
 		

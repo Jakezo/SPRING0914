@@ -30,7 +30,7 @@ public class MemberFindPw extends HttpServlet {
 		if (memberDto == null) {
 			responseText = "no";
 		} else {
-			responseText = "yes";
+			responseText = memberDto.getmNo() + "";
 		}
 		
 		response.setContentType("text/plain; charset=UTF-8");

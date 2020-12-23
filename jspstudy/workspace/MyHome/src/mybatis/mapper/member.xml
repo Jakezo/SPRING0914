@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updatemPw" parameterType="dto.MemberDto">
 		UPDATE MEMBER
 		   SET MPW = #{mPw}
-		 WHERE MEMAIL = #{mEmail}
+		 WHERE MNO = #{mNo}
 	</update>
 
 </mapper>
