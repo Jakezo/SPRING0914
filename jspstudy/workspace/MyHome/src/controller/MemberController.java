@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.member.MemberCommand;
 import command.member.MemberLoginCommand;
+import command.member.MemberLogoutCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.member")
@@ -37,6 +38,10 @@ public class MemberController extends HttpServlet {
 		// command 필요
 		case "/login.member":
 			command = new MemberLoginCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/logout.member":
+			command = new MemberLogoutCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
 		// 단순 이동
