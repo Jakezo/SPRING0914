@@ -1,7 +1,9 @@
 package dao;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import dto.MemberDto;
 import mybatis.config.DBService;
 
 public class MemberDao {
@@ -19,5 +21,19 @@ public class MemberDao {
 	}
 	
 	// 메소드
+	public MemberDto selectBymIdmPw(MemberDto memberDto) {
+		SqlSession ss = factory.openSession();
+		MemberDto dto = ss.selectOne("mybatis.mapper.member.selectBymIdmPw", memberDto);
+		ss.close();
+		return dto;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import command.MemberCommand;
+import command.member.MemberCommand;
+import command.member.MemberLoginCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.member")
@@ -33,7 +34,20 @@ public class MemberController extends HttpServlet {
 		MemberCommand command = null;
 		
 		switch (cmd) {
-			
+		// command 필요
+		case "/login.member":
+			command = new MemberLoginCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		// 단순 이동
+		case "/index.member":
+			pathNRedirect = new PathNRedirect();
+			pathNRedirect.setPath("index.jsp");
+			break;
+		case "/loginPage.member":
+			pathNRedirect = new PathNRedirect();
+			pathNRedirect.setPath("member/loginPage.jsp");
+			break;
 		}
 		
 		String path = pathNRedirect.getPath();
