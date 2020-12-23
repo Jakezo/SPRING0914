@@ -24,7 +24,7 @@
 			url: '/MyHome/MemberChangePw',
 			type: 'post',
 			// data: 'mPw=' + $('#mPw').val() + '&mEmail=' + $('#mEmail').val(),
-			data: ('#f').serialize(),
+			data: $('#f').serialize(),
 			dataType: 'text',
 			success: function(responseText) {
 				if (responseText.trim() == 'no') {
