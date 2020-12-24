@@ -23,5 +23,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   SET MPW = #{mPw}
 		 WHERE MNO = #{mNo}
 	</update>
+	
+	<update id="update" parameterType="dto.MemberDto">
+		UPDATE MEMBER
+		   SET MNAME = #{mName},
+		       MEMAIL = #{mEmail},
+		       MPHONE = #{mPhone},
+		       MADDRESS = #{mAddress}
+		 WHERE MNO = #{mNo}
+	</update>
 
 </mapper>
+
+

@@ -42,7 +42,15 @@ public class MemberDao {
 		ss.close();
 		return result;
 	}
-	
+	public int update(MemberDto memberDto) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.update("mybatis.mapper.member.update", memberDto);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	
