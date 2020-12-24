@@ -116,7 +116,7 @@
 	<input type="hidden" name="mRegDate" value="${loginDto.mRegDate}" />
 	
 	<input type="button" value="정보 수정하기" id="updateBtn" />
-	<input type="button" value="되돌아가기" onclick="history.back()" />
+	<input type="button" value="되돌아가기" onclick="location.href=document.referrer" />
 	
 </form>
 
