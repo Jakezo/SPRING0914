@@ -31,7 +31,9 @@
 	<div class="wrap">
 		
 		<div class="head-wrap">
-			
+			<a href="/MyHome/index.member">
+				<img alt="로고" src="assets/images/logo.png" style="width: 200px; float: left;">
+			</a>
 			<%-- 1. 로그인 안 된 상태 --%>
 			<c:if test="${loginDto eq null}">
 				<input type="button" value="MyHome 로그인" onclick="location.href='/MyHome/loginPage.member'" />
