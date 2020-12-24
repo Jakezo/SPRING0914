@@ -44,6 +44,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		       MADDRESS = #{mAddress}
 		 WHERE MNO = #{mNo}
 	</update>
+	
+	<insert id="insert" parameterType="dto.MemberDto">
+		INSERT INTO
+		MEMBER (MNO, MID, MPW, MNAME, MEMAIL, MPHONE, MADDRESS, MREGDATE)
+		VALUES (MEMBER_SEQ.NEXTVAL, #{mId}, #{mPw}, #{mName}, #{mEmail}, #{mPhone}, #{mAddress}, SYSDATE)
+	</insert>
 
 </mapper>
 
