@@ -68,6 +68,7 @@
 			success: function(responseObj) {
 				if (responseObj.result) {
 					alert('회원 정보가 수정되었습니다.');
+					location.href = '/MyHome/myPage.member';
 				} else {
 					alert('회원 정보가 수정되지 않았습니다.');
 				}
@@ -115,6 +116,7 @@
 	<input type="hidden" name="mRegDate" value="${loginDto.mRegDate}" />
 	
 	<input type="button" value="정보 수정하기" id="updateBtn" />
+	<input type="button" value="되돌아가기" onclick="history.back()" />
 	
 </form>
 

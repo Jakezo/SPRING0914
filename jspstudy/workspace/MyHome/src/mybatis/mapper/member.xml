@@ -17,6 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM MEMBER
 		 WHERE MEMAIL = #{mEmail}
 	</select>
+
+	<select id="selectBymNo" parameterType="String" resultType="dto.MemberDto">
+		SELECT *
+		  FROM MEMBER
+		 WHERE MNO = #{mNo}
+	</select>
 	
 	<update id="updatemPw" parameterType="dto.MemberDto">
 		UPDATE MEMBER
