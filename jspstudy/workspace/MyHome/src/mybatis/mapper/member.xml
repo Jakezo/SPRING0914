@@ -50,7 +50,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		MEMBER (MNO, MID, MPW, MNAME, MEMAIL, MPHONE, MADDRESS, MREGDATE)
 		VALUES (MEMBER_SEQ.NEXTVAL, #{mId}, #{mPw}, #{mName}, #{mEmail}, #{mPhone}, #{mAddress}, SYSDATE)
 	</insert>
+	
+	<delete id="delete" parameterType="String">
+		DELETE
+		  FROM MEMBER
+		 WHERE MNO = #{mNo}
+	</delete>
 
 </mapper>
-
-

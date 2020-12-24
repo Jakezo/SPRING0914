@@ -72,10 +72,14 @@ public class MemberDao {
 		ss.close();
 		return result;
 	}
-	
-	
-	
-	
-	
+	public int delete(String mNo) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.delete("mybatis.mapper.member.delete", mNo);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 }
