@@ -30,7 +30,15 @@ public class GuestDao {
 		ss.close();
 		return list;
 	}
-	
+	public int guestInsert(GuestDto guestDto) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.insert("mybatis.mapper.guest.guestInsert", guestDto);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.guest.GuestCommand;
+import command.guest.GuestInsertCommand;
 import command.guest.GuestListCommand;
 import common.PathNRedirect;
 
@@ -40,7 +41,8 @@ public class GuestController extends HttpServlet {
 			pathNRedirect = command.execute(request, response);
 			break;
 		case "/guestInsert.guest":
-			
+			command = new GuestInsertCommand();
+			pathNRedirect = command.execute(request, response);
 			break;
 		
 		// 단순 이동
