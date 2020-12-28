@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.guest.DownloadCommand;
 import command.guest.GuestCommand;
 import command.guest.GuestInsertCommand;
 import command.guest.GuestListCommand;
@@ -44,7 +45,9 @@ public class GuestController extends HttpServlet {
 			command = new GuestInsertCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
-		
+		case "/download.guest":
+			DownloadCommand.download(request, response);
+			break;
 		// 단순 이동
 		case "/guestInsertPage.guest":
 			pathNRedirect = new PathNRedirect();

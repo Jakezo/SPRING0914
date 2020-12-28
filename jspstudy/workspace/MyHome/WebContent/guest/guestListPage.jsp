@@ -43,7 +43,7 @@
 					<td>${guestDto.gPostDate}</td>
 					<td>
 						<c:if test="${guestDto.gFilename ne null}">
-							<i class="fas fa-paperclip"></i>
+							<a href="/MyHome/download.guest?gFilename=${guestDto.gFilename}"><i class="fas fa-paperclip"></i></a>
 						</c:if>
 					</td>
 				</tr>
