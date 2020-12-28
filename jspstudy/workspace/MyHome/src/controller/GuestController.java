@@ -12,6 +12,7 @@ import command.guest.DownloadCommand;
 import command.guest.GuestCommand;
 import command.guest.GuestInsertCommand;
 import command.guest.GuestListCommand;
+import command.guest.GuestViewCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.guest")
@@ -47,6 +48,10 @@ public class GuestController extends HttpServlet {
 			break;
 		case "/download.guest":
 			DownloadCommand.download(request, response);
+			break;
+		case "/guestViewPage.guest":
+			command = new GuestViewCommand();
+			pathNRedirect = command.execute(request, response);
 			break;
 		// 단순 이동
 		case "/guestInsertPage.guest":

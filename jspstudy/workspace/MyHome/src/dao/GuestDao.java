@@ -39,6 +39,12 @@ public class GuestDao {
 		ss.close();
 		return result;
 	}
+	public GuestDto selectBygNo(int gNo) {
+		SqlSession ss = factory.openSession();
+		GuestDto guestDto = ss.selectOne("mybatis.mapper.guest.selectBygNo", gNo);
+		ss.close();
+		return guestDto;
+	}
 	
 	
 	
