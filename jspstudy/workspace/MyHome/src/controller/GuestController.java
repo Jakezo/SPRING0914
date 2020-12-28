@@ -39,9 +39,16 @@ public class GuestController extends HttpServlet {
 			command = new GuestListCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
+		case "/guestInsert.guest":
+			
+			break;
 		
 		// 단순 이동
-		
+		case "/guestInsertPage.guest":
+			pathNRedirect = new PathNRedirect();
+			pathNRedirect.setPath("guest/guestInsertPage.jsp");
+			pathNRedirect.setRedirect(false);
+			break;
 		}
 		
 		String path = pathNRedirect.getPath();
