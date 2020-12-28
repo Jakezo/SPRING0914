@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-	결과: ${result}
+<c:if test="${result eq true}">
+	<jsp:forward page="guestViewPage.jsp" />
+</c:if>
 
-</body>
-</html>
+<c:if test="${result eq false}">
+	<script>
+		alert('방명록을 열 수 없습니다. 다시 시도하세요.');
+		location.href = '/MyHome/guestListPage.guest';
+	</script>
+</c:if>
