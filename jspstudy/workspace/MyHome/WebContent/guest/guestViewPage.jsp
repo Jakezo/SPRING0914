@@ -18,6 +18,11 @@
 		f.action = '/MyHome/guestDeleteFile.guest';
 		f.submit();
 	}
+	
+	function fn_guestDeletePage(f) {
+		f.action = '/MyHome/guestDeletePage.guest';
+		f.submit();
+	}
 </script>
 
 <form method="post">
@@ -27,23 +32,25 @@
 	${guestDto.gWriter}<br/><br/>
 	파일첨부<br/>
 	<c:if test="${guestDto.gFilename eq null}">
-		없음
+		없음<br/><br/>
 	</c:if>
 	<c:if test="${guestDto.gFilename ne null}">
 		<a href="/MyHome/download.guest?gFilename=${guestDto.gFilename}">${guestDto.gFilename}</a>
 		&nbsp;&nbsp;
-		<input type="password" name="gPw" placeholder="삭제비밀번호" />
-		<input type="button" value="삭제" onclick="fn_deleteFile(this.form)" /><br/><br/>
+			<input type="password" name="gPw" placeholder="삭제비밀번호" />
+			<input type="button" value="삭제" onclick="fn_deleteFile(this.form)" /><br/><br/>
 	</c:if>
 	내용<br/>
 	<pre>${guestDto.gContent}</pre><br/><br/>
-	
+</form>
+<form method="post">
 	<%-- hidden에 담아 둘 것들 --%>
 	<input type="hidden" name="gNo" value="${guestDto.gNo}" />
 	<input type="hidden" name="gWriter" value="${guestDto.gWriter}" />
 	<input type="hidden" name="gTitle" value="${guestDto.gTitle}" />
 	<input type="hidden" name="gContent" value="${guestDto.gContent}" />
 	<input type="hidden" name="gFilename" value="${guestDto.gFilename}" />
+	<input type="hidden" name="gPw" value="${guestDto.gPw}" />
 	
 	<input type="button" value="방명록수정하기" onclick="fn_guestUpdatePage(this.form)" />
 	<input type="button" value="방명록삭제하기" onclick="fn_guestDeletePage(this.form)" />

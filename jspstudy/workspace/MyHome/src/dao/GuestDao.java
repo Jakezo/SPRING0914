@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import dto.GuestDto;
-import dto.MemberDto;
 import mybatis.config.DBService;
 
 public class GuestDao {
@@ -45,7 +44,24 @@ public class GuestDao {
 		ss.close();
 		return guestDto;
 	}
-	
+	public int guestDeleteFile(int gNo) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.update("mybatis.mapper.guest.guestDeleteFile", gNo);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	public int guestDelete(int gNo) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.delete("mybatis.mapper.guest.guestDelete", gNo);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	
