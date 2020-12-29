@@ -55,18 +55,10 @@
 			
 			<%-- 3. 고정 메뉴 --%>
 			<input type="button" value="방명록" onclick="location.href='/MyHome/guestListPage.guest'" />
-			<input type="button" value="BBS" onclick="location.href='/MyHome/'" />
+			<input type="button" value="BBS" onclick="location.href='/MyHome/bbsListPage.bbs'" />
 			<input type="button" value="게시판" onclick="location.href='/MyHome/'" />
 		
 		</div>
 		
 		<div class="body-wrap">
-		
-		
-		
-		
-		
-		
-		
-		
 		
