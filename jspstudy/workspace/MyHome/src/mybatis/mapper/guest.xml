@@ -41,7 +41,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE GNO = #{gNo}
 	</update>
 	
-	
+	<select id="queryList" parameterType="String" resultType="dto.GuestDto">
+		SELECT *
+		  FROM GUEST
+		 WHERE GTITLE LIKE '%' || #{query} || '%'
+		    OR GCONTENT LIKE '%' || #{query} || '%'
+	</select>
 	
 	
 

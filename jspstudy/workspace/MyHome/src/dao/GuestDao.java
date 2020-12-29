@@ -71,5 +71,10 @@ public class GuestDao {
 		ss.close();
 		return result;
 	}
-	
+	public List<GuestDto> queryList(String query) {
+		SqlSession ss = factory.openSession();
+		List<GuestDto> list = ss.selectList("mybatis.mapper.guest.queryList", query);
+		ss.close();
+		return list;
+	}
 }

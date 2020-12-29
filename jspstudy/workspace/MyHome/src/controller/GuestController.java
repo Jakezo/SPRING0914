@@ -16,6 +16,7 @@ import command.guest.GuestInsertCommand;
 import command.guest.GuestListCommand;
 import command.guest.GuestUpdateCommand;
 import command.guest.GuestViewCommand;
+import command.guest.QueryListCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.guest")
@@ -66,6 +67,10 @@ public class GuestController extends HttpServlet {
 			break;
 		case "/guestUpdate.guest":
 			command = new GuestUpdateCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/queryList.guest":
+			command = new QueryListCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
 		// 단순 이동
