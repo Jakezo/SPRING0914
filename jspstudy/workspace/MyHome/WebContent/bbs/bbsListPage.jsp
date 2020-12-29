@@ -43,9 +43,9 @@
 			</tr>
 		</c:if>
 		<c:if test="${not empty list}">
-			<c:forEach var="bbsDto" items="${list}">
+			<c:forEach var="bbsDto" items="${list}" varStatus="k">
 				<tr>
-					<td>${bbsDto.bbs_no}</td>
+					<td>${pageVo.totalRecord - ((pageVo.page - 1) * pageVo.recordPerPage + k.index)}</td>
 					<td>${bbsDto.bbs_title}</td>
 					<td>${bbsDto.bbs_writer}</td>
 					<td>${bbsDto.bbs_date}</td>
