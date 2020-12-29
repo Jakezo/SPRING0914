@@ -40,12 +40,16 @@
 	<c:if test="${guestDto.gFilename ne null}">
 		<a href="/MyHome/download.guest?gFilename=${guestDto.gFilename}">${guestDto.gFilename}</a>
 		&nbsp;&nbsp;
-			<input type="password" name="gPw" placeholder="삭제비밀번호" />
-			<input type="button" value="삭제" onclick="fn_deleteFile(this.form)" /><br/><br/>
+		<input type="password" name="gPw" placeholder="삭제비밀번호" />
+		<%-- hidden --%>
+		<input type="hidden" name="gNo" value="${guestDto.gNo}" />
+		<input type="hidden" name="gFilename" value="${guestDto.gFilename}" />
+		<input type="button" value="삭제" onclick="fn_deleteFile(this.form)" /><br/><br/>
 	</c:if>
 	내용<br/>
 	<pre>${guestDto.gContent}</pre><br/><br/>
 </form>
+
 <form method="post">
 	<%-- hidden에 담아 둘 것들 --%>
 	<input type="hidden" name="gNo" value="${guestDto.gNo}" />
