@@ -1,8 +1,12 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import common.PageVo;
+import dto.BBSDto;
 import mybatis.config.DBService;
 
 public class BBSDao {
@@ -25,6 +29,12 @@ public class BBSDao {
 		int totalRecord = ss.selectOne("mybatis.mapper.bbs.getTotalRecord");
 		ss.close();
 		return totalRecord;
+	}
+	public List<BBSDto> bbsList(PageVo pageVo) {
+		SqlSession ss = factory.openSession();
+		List<BBSDto> list = ss.selectList("mybatis.mapper.bbs.bbsList", pageVo);
+		ss.close();
+		return list;
 	}
 	
 	

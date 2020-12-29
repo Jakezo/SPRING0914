@@ -1,11 +1,14 @@
 package command.bbs;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.PageVo;
 import common.PathNRedirect;
 import dao.BBSDao;
+import dto.BBSDto;
 
 public class BBSListCommand implements BBSCommand {
 
@@ -44,6 +47,25 @@ public class BBSListCommand implements BBSCommand {
 		int endRecord = pageVo.getBeginRecord() + pageVo.getRecordPerPage() - 1;
 		endRecord = endRecord < totalRecord ? endRecord : totalRecord;
 		pageVo.setEndRecord( endRecord );
+		
+		// 6. beginRecord ~ endRecord 사이의 목록만 가져오기
+		List<BBSDto> list = BBSDao.getInstance().bbsList(pageVo);
+		
+		// 7. beginPage와 endPage 구하기
+		// 한 블록당 페이지가 5개 포함된다. (pagePerBlock)
+		// page=1~5인 경우	beginPage = 1, endPage = 5
+		// page=6~10인 경우	beginPage = 6, endPage = 10
+		// 실제로는
+		// page=6~7인 경우	beginPage = 6, endPage = 7
+		int beginPage = ((pageVo.getPage() - 1) / pageVo.getPagePerBlock()) * pageVo.getPagePerBlock() + 1;
+		pageVo.setBeginPage(beginPage);
+		int endPage = beginPage + pageVo.getPagePerBlock() - 1;
+		endPage = endPage < pageVo.getTotalPage() ? endPage : pageVo.getTotalPage();
+		pageVo.setEndPage(endPage);
+		
+		
+		request.setAttribute("list", list);
+		request.setAttribute("pageVo", pageVo);
 		
 		
 		PathNRedirect pathNRedirect = new PathNRedirect();

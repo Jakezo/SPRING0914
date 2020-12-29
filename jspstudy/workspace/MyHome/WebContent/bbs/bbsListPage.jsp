@@ -6,6 +6,23 @@
 	<jsp:param value="BBS게시판" name="title" />
 </jsp:include>
 
+<style>
+	tfoot.paging {
+		color: silver;
+	}
+	a {
+		text-decoration: none;
+		color: silver;
+	}
+	a:hover {
+		color: limegreen;
+	}
+	span.disable {
+		font-weight: 900;
+		color: limegreen;
+	}
+</style>
+
 <input type="button" value="새 글 작성하기" onclick="" /><br/><br/>
 
 <table border="1">
@@ -37,10 +54,34 @@
 			</c:forEach>
 		</c:if>
 	</tbody>
-	<tfoot>
+	<tfoot class="paging">
 		<tr>
 			<td colspan="5">
-				◀ 1 2 3 4 5 ▶
+				<%-- 1. 이전 버튼(이전 블록으로 이동) --%>
+				<c:if test="${pageVo.beginPage <= pageVo.pagePerBlock}">
+					이전&nbsp;
+				</c:if>
+				<c:if test="${pageVo.beginPage > pageVo.pagePerBlock}">
+					<a href="/MyHome/bbsListPage.bbs?page=${pageVo.beginPage - 1}">이전&nbsp;</a>
+				</c:if>
+				<%-- 2. 페이지 번호 --%>
+				<c:forEach var="page" begin="${pageVo.beginPage}" end="${pageVo.endPage}" step="1">
+					<%-- 1) 현재 페이지는 링크가 안 걸린다. --%>
+					<c:if test="${page eq pageVo.page}">
+						<span class="disable">${page}&nbsp;</span>
+					</c:if>
+					<%-- 2) 다른 페이지는 링크가 걸린다. --%>
+					<c:if test="${page ne pageVo.page}">
+						<a href="/MyHome/bbsListPage.bbs?page=${page}">${page}&nbsp;</a>
+					</c:if>
+				</c:forEach>
+				<%-- 3. 다음 버튼(다음 블록으로 이동) --%>
+				<c:if test="${pageVo.endPage >= pageVo.totalPage}">
+					다음
+				</c:if>
+				<c:if test="${pageVo.endPage < pageVo.totalPage}">
+					<a href="/MyHome/bbsListPage.bbs?page=${pageVo.endPage + 1}">다음</a>
+				</c:if>
 			</td>
 		</tr>
 	</tfoot>
