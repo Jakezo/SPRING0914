@@ -8,6 +8,10 @@
 
 <script>
 	function fn_guestUpdate(f) {
+		if ('${param.gPw}' != f.gPw.value) {
+			alert('비밀번호가 일치하지 않습니다.');
+			return;
+		}
 		if (f.gTitle.value == '') {
 			alert('제목은 필수입니다.');
 			f.gTitle.focus();
@@ -38,9 +42,12 @@
 	</c:if>
 	내용<br/>
 	<textarea rows="10" cols="40" name="gContent">${param.gContent}</textarea><br/><br/>
+	비밀번호확인<br/>
+	<input type="password" name="gPw" /><br/><br/>
 	
 	<%-- hidden --%>
 	<input type="hidden" name="gNo" value="${param.gNo}" />
+	<input type="hidden" name="gFilename2" value="${param.gFilename}" />
 	
 	<input type="button" value="변경내용수정하기" onclick="fn_guestUpdate(this.form)" />
 	<input type="reset" value="다시작성하기" />

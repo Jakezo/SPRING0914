@@ -62,13 +62,14 @@ public class GuestDao {
 		ss.close();
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+	public int guestUpdate(GuestDto guestDto) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.update("mybatis.mapper.guest.guestUpdate", guestDto);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 }

@@ -14,6 +14,7 @@ import command.guest.GuestDeleteCommand;
 import command.guest.GuestDeleteFileCommand;
 import command.guest.GuestInsertCommand;
 import command.guest.GuestListCommand;
+import command.guest.GuestUpdateCommand;
 import command.guest.GuestViewCommand;
 import common.PathNRedirect;
 
@@ -61,6 +62,10 @@ public class GuestController extends HttpServlet {
 			break;
 		case "/guestDelete.guest":
 			command = new GuestDeleteCommand();
+			pathNRedirect = command.execute(request, response);
+			break;
+		case "/guestUpdate.guest":
+			command = new GuestUpdateCommand();
 			pathNRedirect = command.execute(request, response);
 			break;
 		// 단순 이동
