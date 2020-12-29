@@ -36,6 +36,15 @@ public class BBSDao {
 		ss.close();
 		return list;
 	}
+	public int bbsInsert(BBSDto bbsDto) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.insert("mybatis.mapper.bbs.bbsInsert", bbsDto);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	

@@ -23,7 +23,7 @@
 	}
 </style>
 
-<input type="button" value="새 글 작성하기" onclick="" /><br/><br/>
+<input type="button" value="새 글 작성하기" onclick="location.href='/MyHome/bbsInsertPage.bbs'" /><br/><br/>
 
 <table border="1">
 	<caption>BBS게시판</caption>
