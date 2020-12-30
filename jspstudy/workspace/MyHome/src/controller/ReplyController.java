@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.reply.ReplyCommand;
+import command.reply.ReplyDeleteCommand;
 import command.reply.ReplyInsertCommand;
 import common.PathNRedirect;
 
@@ -40,8 +41,10 @@ public class ReplyController extends HttpServlet {
 				command = new ReplyInsertCommand();
 				pathNRedirect = command.execute(request, response);
 				break;
-			// 단순 이동
-			
+			case "/replyDelete.reply":
+				command = new ReplyDeleteCommand();
+				pathNRedirect = command.execute(request, response);
+				break;		
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

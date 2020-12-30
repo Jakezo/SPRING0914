@@ -13,7 +13,7 @@
 <div>
 
 	<input type="button" value="수정하기" onclick="location.href='/MyHome'" />
-	<input type="button" value="삭제하기" onclick="location.href='/MyHome'" />
+	<input type="button" value="삭제하기" onclick="location.href='/MyHome/bbsDeletePage.bbs?page=${param.page}'" />
 	<input type="button" value="목록으로이동하기" onclick="location.href='/MyHome/bbsListPage.bbs?page=${param.page}'" />
 	<br/><br/>
 	
@@ -65,7 +65,7 @@
 						<td>${replyDto.rWriter}</td>
 						<td>${replyDto.rContent}</td>
 						<td>${replyDto.rDate}</td>
-						<td><a href="">x</a></td>
+						<td><a href="/MyHome/replyDelete.reply?rNo=${replyDto.rNo}&bbs_no=${replyDto.bbs_no}&page=${param.page}">x</a></td>
 					</tr>
 				</c:forEach>
 			</c:if>

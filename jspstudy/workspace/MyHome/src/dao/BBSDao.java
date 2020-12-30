@@ -60,17 +60,14 @@ public class BBSDao {
 		ss.close();
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public int bbsDelete(int bbs_no) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.delete("mybatis.mapper.bbs.bbsDelete", bbs_no);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 }
