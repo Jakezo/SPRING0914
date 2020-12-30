@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -29,6 +31,12 @@ public class ReplyDao {
 		}
 		ss.close();
 		return result;
+	}
+	public List<ReplyDto> replyList(int bbs_no) {
+		SqlSession ss = factory.openSession();
+		List<ReplyDto> replyList = ss.selectList("mybatis.mapper.reply.replyList", bbs_no);
+		ss.close();
+		return replyList;
 	}
 	
 	

@@ -31,7 +31,7 @@ public class ReplyInsertCommand implements ReplyCommand {
 		PathNRedirect pathNRedirect = null;
 		if (result > 0) {
 			pathNRedirect = new PathNRedirect();
-			pathNRedirect.setPath("/MyHome/bbsViewPage.bbs");
+			pathNRedirect.setPath("/MyHome/bbsViewPage.bbs?bbs_no=" + bbs_no + "&page=" + request.getParameter("page"));
 			pathNRedirect.setRedirect(true);  // redirect
 		} else {
 			PrintWriter out = response.getWriter();
@@ -43,6 +43,7 @@ public class ReplyInsertCommand implements ReplyCommand {
 		}
 		
 		return pathNRedirect;
+		
 	}
 
 }

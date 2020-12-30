@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:include page="../template/header.jsp">
 	<jsp:param value="게시물보기" name="title" />
@@ -38,6 +39,7 @@
 		<form action="/MyHome/replyInsert.reply" method="post">
 			<%-- hidden --%>
 			<input type="hidden" name="bbs_no" value="${bbsDto.bbs_no}" />
+			<input type="hidden" name="page" value="${param.page}" />
 			<button>댓글 등록하기</button><br/><br/>
 			작성자<br/>
 			<input type="text" name="rWriter" /><br/><br/>
@@ -49,16 +51,26 @@
 	<br/><hr/><br/>
 	
 	<%-- 댓글 목록 --%>
-
-
-
-
-
-
-
-
-
-
+	<%-- session에 replyList가 저장되어 있다. --%>
+	<table>
+		<tbody>
+			<c:if test="${empty replyList}">
+				<tr>
+					<td colspan="4">첫 댓글을 남겨 주세요.</td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty replyList}">
+				<c:forEach var="replyDto" items="${replyList}">
+					<tr>
+						<td>${replyDto.rWriter}</td>
+						<td>${replyDto.rContent}</td>
+						<td>${replyDto.rDate}</td>
+						<td><a href="">x</a></td>
+					</tr>
+				</c:forEach>
+			</c:if>
+		</tbody>
+	</table>
 
 </div>
 

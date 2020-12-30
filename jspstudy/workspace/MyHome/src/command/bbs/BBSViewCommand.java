@@ -1,6 +1,7 @@
 package command.bbs;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import common.PathNRedirect;
 import dao.BBSDao;
+import dao.ReplyDao;
 import dto.BBSDto;
+import dto.ReplyDto;
 
 public class BBSViewCommand implements BBSCommand {
 
@@ -28,7 +31,9 @@ public class BBSViewCommand implements BBSCommand {
 		session.setAttribute("bbsDto", bbsDto);
 		
 		// 보고 있는 게시물에 달려 있는 답변 목록을 가져오기
-		
+		// 답변 목록을 session에 올려 둔다.
+		List<ReplyDto> replyList = ReplyDao.getInstance().replyList(bbs_no);
+		session.setAttribute("replyList", replyList);
 		
 		// 조회수 증가하기
 		// 처음으로 열었을 때만 (수정 후 다시 View로 되돌아 오는 경우 등을 제외하기 위해서)
@@ -44,7 +49,7 @@ public class BBSViewCommand implements BBSCommand {
 		PathNRedirect pathNRedirect = new PathNRedirect();		
 		if (bbsDto != null) {
 			pathNRedirect.setPath("bbs/bbsViewPage.jsp?page=" + request.getParameter("page"));
-			pathNRedirect.setRedirect(true);  // redirect
+			pathNRedirect.setRedirect(false);  // forward
 		} else {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
