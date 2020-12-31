@@ -29,8 +29,8 @@ public class BoardListCommand implements BoardCommand {
 		int page = Integer.parseInt(strPage);
 		
 		// page와 recordPerPage와 totalRecord를 알면 beginRecord와 endRecord를 구할 수 있다.
-		// BoardListCommand는 한 페이지에 3개를 표시한다.
-		int recordPerPage = 3;
+		// BoardListCommand는 한 페이지에 10개를 표시한다.
+		int recordPerPage = 10;
 		int beginRecord = (page - 1) * recordPerPage + 1;
 		int endRecord = beginRecord + recordPerPage - 1;
 		endRecord = endRecord < totalRecord ? endRecord : totalRecord;

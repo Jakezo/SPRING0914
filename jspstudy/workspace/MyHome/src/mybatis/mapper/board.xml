@@ -37,9 +37,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				)
 	</insert>
 	
+	<select id="boardView" parameterType="int" resultType="dto.BoardDto">
+		SELECT *
+		  FROM BOARD
+		 WHERE BNO = #{bNo}
+	</select>
 	
-	
-	
+	<update id="boardUpdatebHit" parameterType="int">
+		UPDATE BOARD
+		   SET BHIT = BHIT + 1
+		 WHERE BNO = #{bNo}
+	</update>
 	
 	
 	

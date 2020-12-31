@@ -77,6 +77,11 @@ CREATE TABLE REPLY
 );
 
 INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL, 'admin', '1111', '관리자', 'admin@myhome.com', '010-0000-0000', 'seoul', SYSDATE);
+INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL, 'user1', '1111', '사용자1', 'user1@myhome.com', '010-1111-1111', 'jeju', SYSDATE);
+INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL, 'user2', '1111', '사용자2', 'user2@myhome.com', '010-2222-2222', 'pochoen', SYSDATE);
+INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL, 'user3', '1111', '사용자3', 'user3@myhome.com', '010-3333-3333', 'seoul', SYSDATE);
+INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL, 'user4', '1111', '사용자4', 'user4@myhome.com', '010-4444-4444', 'inchoen', SYSDATE);
+INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL, 'user5', '1111', '사용자5', 'user5@myhome.com', '010-5555-5555', 'anyang', SYSDATE);
 
 INSERT INTO BBS VALUES (BBS_SEQ.NEXTVAL, '가길동', '질문입니다1', '이게 뭔가요1?', '1111', 0, '127.0.0.1', SYSDATE);
 INSERT INTO BBS VALUES (BBS_SEQ.NEXTVAL, '나길동', '질문입니다2', '이게 뭔가요2?', '1111', 0, '127.0.0.1', SYSDATE);
@@ -98,3 +103,11 @@ INSERT INTO BBS VALUES (BBS_SEQ.NEXTVAL, '스미스', '질문입니다17', '이�
 INSERT INTO BBS VALUES (BBS_SEQ.NEXTVAL, '데이빗', '질문입니다18', '이게 뭔가요18?', '1111', 0, '127.0.0.1', SYSDATE);
 INSERT INTO BBS VALUES (BBS_SEQ.NEXTVAL, '브라운', '질문입니다19', '이게 뭔가요19?', '1111', 0, '127.0.0.1', SYSDATE);
 INSERT INTO BBS VALUES (BBS_SEQ.NEXTVAL, '에밀리', '질문입니다20', '이게 뭔가요20?', '1111', 0, '127.0.0.1', SYSDATE);
+
+UPDATE BOARD SET BDELETE = 0 WHERE BNO = 8;
+
+SELECT * FROM BOARD;
+
+
+
+

@@ -45,8 +45,21 @@ public class BoardDao {
 		ss.close();
 		return result;
 	}
-	
-	
+	public BoardDto boardView(int bNo) {
+		SqlSession ss = factory.openSession();
+		BoardDto boardDto = ss.selectOne("mybatis.mapper.board.boardView", bNo);
+		ss.close();
+		return boardDto;
+	}
+	public int boardUpdatebHit(int bNo) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.update("mybatis.mapper.board.boardUpdatebHit", bNo);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	
