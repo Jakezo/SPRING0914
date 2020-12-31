@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.board.BoardCommand;
+import command.board.BoardListCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.board")
@@ -35,6 +36,10 @@ public class BoardController extends HttpServlet {
 		try {
 			switch (cmd) {
 			// command 필요
+			case "/boardListPage.board":
+				command = new BoardListCommand();
+				pathNRedirect = command.execute(request, response);
+				break;
 			// 단순 이동
 			}
 		} catch (Exception e) {

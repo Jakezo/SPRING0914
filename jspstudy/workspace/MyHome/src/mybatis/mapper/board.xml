@@ -5,6 +5,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="mybatis.mapper.board">
 
-	
+	<select id="getTotalRecord" resultType="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+	</select>
 
+	<select id="boardList" parameterType="Map" resultType="dto.BoardDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT	*
+		  		   		  FROM BOARD
+		  		   	  ORDER BY BGROUP DESC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	
 </mapper>

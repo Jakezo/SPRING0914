@@ -1,7 +1,12 @@
 package dao;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import dto.BoardDto;
 import mybatis.config.DBService;
 
 public class BoardDao {
@@ -19,5 +24,34 @@ public class BoardDao {
 	}
 	
 	// 메소드
+	public int getTotalRecord() {
+		SqlSession ss = factory.openSession();
+		int totalRecord = ss.selectOne("mybatis.mapper.board.getTotalRecord");
+		ss.close();
+		return totalRecord;
+	}
+	public List<BoardDto> boardList(Map<String, Integer> map) {
+		SqlSession ss = factory.openSession();
+		List<BoardDto> list = ss.selectList("mybatis.mapper.board.boardList", map);
+		ss.close();
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
