@@ -28,7 +28,7 @@
 	<input type="button" value="전체목록보기" onclick="" />
 	<c:if test="${loginDto ne null}">
 		<input type="button" value="내 게시글 보기" onclick="" />
-		<input type="button" value="새 게시글 작성하기" onclick="" />
+		<input type="button" value="새 게시글 작성하기" onclick="location.href='/MyHome/boardInsertPage.board?page=${page}'" />
 	</c:if>
 </form>
 <br/><br/>

@@ -19,4 +19,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
 	
+	<insert id="boardInsert" parameterType="dto.BoardDto">
+		INSERT INTO
+		 BOARD
+		VALUES (BOARD_SEQ.NEXTVAL,
+				#{mId},
+				#{bTitle},
+				#{bContent},
+				#{bIp},
+				0,  <!-- 조회수 -->
+				SYSDATE,
+				SYSDATE,
+				0,  <!-- 정상게시글: 0, 삭제된게시글: -1 -->
+				BOARD_SEQ.CURRVAL,  <!-- BOARD_SEQ.NEXTVAL로 생성한 번호(bNo와 같다.) -->
+				0,
+				0  <!-- 게시글: 0, 댓글: 1 이상 -->
+				)
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

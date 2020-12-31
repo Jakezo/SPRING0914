@@ -36,7 +36,15 @@ public class BoardDao {
 		ss.close();
 		return list;
 	}
-	
+	public int boardInsert(BoardDto boardDto) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.insert("mybatis.mapper.board.boardInsert", boardDto);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	
