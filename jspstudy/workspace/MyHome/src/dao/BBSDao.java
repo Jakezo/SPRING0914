@@ -69,5 +69,14 @@ public class BBSDao {
 		ss.close();
 		return result;
 	}
+	public int bbsUpdate(BBSDto bbsDto) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.update("mybatis.mapper.bbs.bbsUpdate", bbsDto);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 }

@@ -12,6 +12,7 @@ import command.bbs.BBSCommand;
 import command.bbs.BBSDeleteCommand;
 import command.bbs.BBSInsertCommand;
 import command.bbs.BBSListCommand;
+import command.bbs.BBSUpdateCommand;
 import command.bbs.BBSViewCommand;
 import common.PathNRedirect;
 
@@ -53,6 +54,10 @@ public class BBSController extends HttpServlet {
 				break;
 			case "/bbsDelete.bbs":
 				command = new BBSDeleteCommand();
+				pathNRedirect = command.execute(request, response);
+				break;
+			case "/bbsUpdate.bbs":
+				command = new BBSUpdateCommand();
 				pathNRedirect = command.execute(request, response);
 				break;
 			// 단순 이동
