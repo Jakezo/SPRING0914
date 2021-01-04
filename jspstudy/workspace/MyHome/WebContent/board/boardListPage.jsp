@@ -32,9 +32,9 @@
 </form>
 <br/><br/>
 
-<%-- 2. 게시판 작성(로그인 유저만 보인다.) --%>
+<%-- 2. 게시판 작성(로그인 상태의 유저만 보인다.) --%>
 <form>
-	<input type="button" value="전체목록보기" onclick="" />
+	<input type="button" value="전체목록보기" onclick="location.href='/MyHome/boardListPage.board?page=${page}'" />
 	<c:if test="${loginDto ne null}">
 		<input type="button" value="내 게시글 보기" onclick="" />
 		<input type="button" value="새 게시글 작성하기" onclick="location.href='/MyHome/boardInsertPage.board?page=${page}'" />

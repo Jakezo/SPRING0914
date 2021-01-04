@@ -51,7 +51,8 @@ ${boardDto.bIp}<br/><br/>
 	<input type="hidden" name="bNo" value="${boardDto.bNo}" />
 	<input type="hidden" name="page" value="${page}" />
 
-	<input type="button" value="전체목록으로이동" onclick="location.href='/MyHome/boardListPage.board?page=${page}'" />
+	<%-- <input type="button" value="전체목록으로이동" onclick="location.href='/MyHome/boardListPage.board?page=${page}'" /> --%>
+	<input type="button" value="목록으로이동" onclick="location.href='${referer}'" />
 
 	<%-- 작성자만 삭제할 수 있다. --%>
 	<c:if test="${boardDto.mId eq loginDto.mId}">

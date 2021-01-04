@@ -1,5 +1,7 @@
 package command.board;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class QueryBoardListCommand implements BoardCommand {
 	public PathNRedirect execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String column = request.getParameter("column");
-		String query = request.getParameter("query");
+		String query = URLDecoder.decode(request.getParameter("query"), "UTF-8");
 		
 		String strPage = request.getParameter("page");
 		int page = 1;
@@ -48,7 +50,7 @@ public class QueryBoardListCommand implements BoardCommand {
 		List<BoardDto> list = BoardDao.getInstance().queryBoardList(map);
 		
 		// paging을 만든다.
-		String paging = Paging.getPaging("/MyHome/queryBoardListPage.board?column=" + column + "&query=" + query, totalQueryRecord, recordPerPage, page); 
+		String paging = Paging.getPaging("/MyHome/queryBoardListPage.board?column=" + column + "&query=" + URLEncoder.encode(query, "UTF-8"), totalQueryRecord, recordPerPage, page); 
 		
 		// 조회수 관련
 		// 열린 게시글 닫기
