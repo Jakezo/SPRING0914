@@ -18,6 +18,11 @@
 			f.submit();
 		}
 	}
+	// 댓글 작성 창으로 이동
+	function fn_replyInsertPage(f) {
+		f.action = '/MyHome/replyInsertPage.board';
+		f.submit();
+	}
 </script>
 
 ${boardDto.bNo}번 게시글입니다.<br/><br/>
@@ -40,17 +45,22 @@ ${boardDto.bIp}<br/><br/>
 내용<br/>
 <pre>${boardDto.bContent}</pre><br/><br/>
 
-<input type="button" value="전체목록으로이동" onclick="location.href='/MyHome/boardListPage.board?page=${page}'" />
-
 <form method="post">
 
 	<%-- hidden --%>
 	<input type="hidden" name="bNo" value="${boardDto.bNo}" />
 	<input type="hidden" name="page" value="${page}" />
 
+	<input type="button" value="전체목록으로이동" onclick="location.href='/MyHome/boardListPage.board?page=${page}'" />
+
 	<%-- 작성자만 삭제할 수 있다. --%>
 	<c:if test="${boardDto.mId eq loginDto.mId}">
 		<input type="button" value="삭제하기" onclick="fn_boardDelete(this.form)" />
+	</c:if>
+	
+	<%-- 로그인을 해야만 댓글을 작성할 수 있다. --%>
+	<c:if test="${loginDto ne null}">
+		<input type="button" value="댓글달기" onclick="fn_replyInsertPage(this.form)" />
 	</c:if>
 
 </form>
