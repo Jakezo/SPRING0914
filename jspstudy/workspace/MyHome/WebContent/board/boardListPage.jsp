@@ -7,7 +7,16 @@
 </jsp:include>
 
 <script>
-
+	// 게시판 검색
+	function fn_queryBoardListPage(f) {
+		if (f.query.value == '') {
+			alert('검색어를 입력하세요.');
+			f.query.focus();
+			return;
+		}
+		f.action = '/MyHome/queryBoardListPage.board';
+		f.submit();
+	}
 </script>
 
 <%-- 1. 게시판 검색 --%>
@@ -19,7 +28,7 @@
 		<option value="BOTH">제목+내용</option>
 	</select>
 	<input type="text" name="query" />
-	<input type="button" value="검색" onclick="" />
+	<input type="button" value="검색" onclick="fn_queryBoardListPage(this.form)" />
 </form>
 <br/><br/>
 
@@ -65,7 +74,20 @@
 							<td>-</td>
 						</c:if>
 						<c:if test="${boardDto.bDelete eq 0}">
-							<td><a href="/MyHome/boardViewPage.board?bNo=${boardDto.bNo}&page=${page}">${boardDto.bTitle}</a></td>
+							<td>
+								<!-- 1. 댓글은 댓글 수준(bDepth)만큼 들여쓰기를 한다. -->
+								<c:forEach begin="1" end="${boardDto.bDepth}" step="1">
+									&nbsp;&nbsp;&nbsp;&nbsp;
+								</c:forEach>
+								<a href="/MyHome/boardViewPage.board?bNo=${boardDto.bNo}&page=${page}">
+									<!-- 2. 댓글은 제목 앞에 [re]를 붙인다. -->								
+									<c:if test="${boardDto.bDepth > 0}">
+										[re]&nbsp;
+									</c:if>
+									<!-- 3. 제목을 표시한다. -->
+									${boardDto.bTitle}
+								</a>
+							</td>
 							<td>${boardDto.mId}</td>
 							<td>${boardDto.bLastModify}</td>
 							<td>${boardDto.bHit}</td>							

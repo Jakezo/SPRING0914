@@ -58,10 +58,12 @@ ${boardDto.bIp}<br/><br/>
 		<input type="button" value="삭제하기" onclick="fn_boardDelete(this.form)" />
 	</c:if>
 	
+	<%-- 1단 댓글만 가능한 경우 --%>
 	<%-- 로그인을 해야만 댓글을 작성할 수 있다. --%>
-	<c:if test="${loginDto ne null}">
+	<c:if test="${loginDto ne null and boardDto.bDepth eq 0}">
 		<input type="button" value="댓글달기" onclick="fn_replyInsertPage(this.form)" />
 	</c:if>
+	
 
 </form>
 
