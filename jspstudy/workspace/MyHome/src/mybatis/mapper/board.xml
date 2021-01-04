@@ -49,7 +49,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE BNO = #{bNo}
 	</update>
 	
-	
+	<update id="boardDelete" parameterType="int">
+		UPDATE BOARD
+		   SET BDELETE = -1
+		 WHERE BNO = #{bNo}
+	</update>
 	
 	
 	

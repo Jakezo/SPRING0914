@@ -60,7 +60,16 @@ public class BoardDao {
 		ss.close();
 		return result;
 	}
-	
+	public int boardDelete(int bNo) {
+		SqlSession ss = factory.openSession(false);
+		// 실제로는 UPDATE를 시행
+		int result = ss.update("mybatis.mapper.board.boardDelete", bNo);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.board.BoardCommand;
+import command.board.BoardDeleteCommand;
 import command.board.BoardInsertCommand;
 import command.board.BoardListCommand;
 import command.board.BoardViewCommand;
@@ -50,6 +51,11 @@ public class BoardController extends HttpServlet {
 				command = new BoardViewCommand();
 				pathNRedirect = command.execute(request, response);
 				break;
+			case "/boardDelete.board":
+				command = new BoardDeleteCommand();
+				pathNRedirect = command.execute(request, response);
+				break;
+				
 			// 단순 이동
 			case "/boardInsertPage.board":
 				pathNRedirect = new PathNRedirect();

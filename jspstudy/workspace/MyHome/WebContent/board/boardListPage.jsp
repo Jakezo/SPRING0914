@@ -57,21 +57,20 @@
 					<tr>
 						<td>${totalRecord - ((page - 1) * recordPerPage + k.index)}</td>
 						
-						<td>
+						<%-- 삭제된 게시글은 링크를 제공하지 않는다. --%>
+						<c:if test="${boardDto.bDelete eq -1}">
+							<td>삭제된 게시글입니다</td>
+							<td>-</td>
+							<td>-</td>
+							<td>-</td>
+						</c:if>
+						<c:if test="${boardDto.bDelete eq 0}">
+							<td><a href="/MyHome/boardViewPage.board?bNo=${boardDto.bNo}&page=${page}">${boardDto.bTitle}</a></td>
+							<td>${boardDto.mId}</td>
+							<td>${boardDto.bLastModify}</td>
+							<td>${boardDto.bHit}</td>							
+						</c:if>
 						
-							<%-- 삭제된 게시글은 링크를 제공하지 않는다. --%>
-							<c:if test="${boardDto.bDelete eq 0}">
-								<a href="/MyHome/boardViewPage.board?bNo=${boardDto.bNo}&page=${page}">${boardDto.bTitle}</a>							
-							</c:if>
-							<c:if test="${boardDto.bDelete eq -1}">
-								삭제된 게시글입니다							
-							</c:if>
-							
-						</td>
-						
-						<td>${boardDto.mId}</td>
-						<td>${boardDto.bLastModify}</td>
-						<td>${boardDto.bHit}</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

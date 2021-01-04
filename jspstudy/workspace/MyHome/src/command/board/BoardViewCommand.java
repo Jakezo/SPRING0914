@@ -37,11 +37,3 @@ public class BoardViewCommand implements BoardCommand {
 	}
 
 }
-
-
-
-
-
-
-
-
