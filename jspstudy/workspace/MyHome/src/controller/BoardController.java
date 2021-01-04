@@ -13,6 +13,7 @@ import command.board.BoardDeleteCommand;
 import command.board.BoardInsertCommand;
 import command.board.BoardListCommand;
 import command.board.BoardViewCommand;
+import command.board.ReplyInsertCommand;
 import common.PathNRedirect;
 
 @WebServlet("*.board")
@@ -56,7 +57,7 @@ public class BoardController extends HttpServlet {
 				pathNRedirect = command.execute(request, response);
 				break;
 			case "/replyInsert.board":
-				
+				command = new ReplyInsertCommand();
 				pathNRedirect = command.execute(request, response);
 				break;
 				
