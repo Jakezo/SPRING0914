@@ -47,6 +47,13 @@ public class Paging {
 		// 페이징 (< 1 2 3 4 5 >) 만들기
 		StringBuffer sb = new StringBuffer();
 		
+		/*
+			/MyHome/boardListPage.board  ?page=1
+			/MyHome/myBoardListPage.board  ?page=1
+			
+			/MyHome/queryBoardListPage.board?column=BTITLE&query=검색어  &page=1
+		*/	
+		
 		// 1) 이전 버튼
 		if (beginPage <= pagePerBlock) {
 			sb.append("이전&nbsp;");
@@ -57,11 +64,6 @@ public class Paging {
 				sb.append("<a href=\"" + path + "?page=" + (beginPage - 1) + "\">이전&nbsp;</a>");				
 			}
 		}
-		
-		/*
-			/MyHome/boardListPage.board  ?page=1
-			/MyHome/queryBoardListPage.board?column=BTITLE&query=검색어  &page=1
-		*/	
 		
 		// 2) 페이지 번호
 		for (int p = beginPage; p <= endPage; p++) {
