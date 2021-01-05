@@ -1,70 +1,50 @@
 bGroup: 같은 그룹인가?
 bGroupOrd: 그룹 내부 순서
 bDepth: 댓글 단계(수준)
-bParent: 원글의 댓글 유무 판단 (원글의 bDepth)
-
-bNo    bTitle    bGroup    bGroupOrd    bDepth     bParent
-----------------------------------------------------------
-10     게시글10  10        0            0 (게시글) 0
-11      ㄴ댓글1  10        1            1 (댓글)   0
 
 
-bNo    bTitle    bGroup    bGroupOrd    bDepth     bParent
-----------------------------------------------------------
-10     게시글10  10        0            0 (게시글) 0
-11      ㄴ댓글1  10        2            1 (댓글)   0
-12       ㄴ대댓1 10        2            2 (대댓글) 1
-
-bNo    bTitle    bGroup    bGroupOrd    bDepth     bParent
-----------------------------------------------------------
-10     게시글10  10        0            0 (게시글) 0
-11      ㄴ댓글1  10        3            1 (댓글)   0
-12       ㄴ대댓1 10        3            2 (대댓글) 1
-13      ㄴ댓글2  10        1            1 (댓글)   0
-
-bNo    bTitle    bGroup    bGroupOrd    bDepth     bParent
-----------------------------------------------------------
-10     게시글10  10        0            0 (게시글) 0
-11      ㄴ댓글1  10        4            1 (댓글)   0
-12       ㄴ대댓1 10        4            2 (대댓글) 1
-14       ㄴ대댓2 10        4            2 (대댓글) 1
-13      ㄴ댓글2  10        1            1 (댓글)   0
-
-bNo    bTitle    bGroup    bGroupOrd    bDepth     bParent
-----------------------------------------------------------
-10     게시글10  10        0            0 (게시글) 0
-11      ㄴ댓글1  10        5            1 (댓글)   0
-12       ㄴ대댓1 10        5            2 (대댓글) 1
-14       ㄴ대댓2 10        5            2 (대댓글) 1
-13      ㄴ댓글2  10        2            1 (댓글)   0
-15      ㄴ댓글3  10        2            1 (댓글)   0
+원글
+BoardDto boardDto = BoardDao.getInstance().boardView(bNo);
 
 
+1. 같은 bGroup에서 원글의 gGroupOrd보다 큰 bGroupOrd를 1씩 증가시킨다.
 
-목록 정렬 방식
-
-
-1. 원글이 게시글이면, (댓글이면)
-   1) bGroup: 게시글 bNo와 같다.
-   2) bGroupOrd
-      (1) 게시글의 bGroupOrd + 1를 가진다.
-      (2) 기존 댓글들의 bGroupOrd를 1씩 증가시킨다.
-   3) bDepth: 게시글의 bDepth + 1이다.
-   4) bParent: 게시글의 bDepth이다.
-
-2. 댓글이 게시글이면, (첫 번째 대댓이면)
-   1) bGroup: 게시글 bNo와 같다.
-   2) bGroupOrd
-      (1) 게시글의 bGroupOrd를 가진다.
-      (2) bGroupOrd 이상의 값을 가지는 댓글들의 bGroupOrd를 1씩 증가시킨다.
-   3) bDepth: 게시글의 bDepth + 1이다.
-   4) bParent: 게시글의 bDepth이다.
+2. 댓글의 정보 (replyDto)
+   1) bGroup	: 원글의 bGroup (boardDto.getbGroup())
+   2) bGroupOrd	: 원글의 bGroupOrd + 1 (boardDto.getbGroupOrd() + 1)
+   3) bDepth	: 원글의 bDepth + 1
 
 
+bNo    bTitle    bGroup    bGroupOrd    bDepth
+----------------------------------------------
+10     게시글       10        0            0
+11      ㄴ댓1       10        3            1
+12      ㄴ댓2       10        2            1
+13      ㄴ댓3       10        1            1
 
-대댓글 삽입 시
-1. bGroup: 게시글 bNo와 같다.
-2. bGroupOrd
-   1) 게시글의 bGroupOrd를 가진다.
-   2) 모든 게시글의 댓글들의 bGroupOrd를 1씩 증가시킨다.
-3. bDepth: 게시글의 bDepth + 1이다.
+bNo    bTitle      bGroup    bGroupOrd    bDepth
+----------------------------------------------
+10     게시글       10        0            0
+11      ㄴ댓1       10        4            1
+14       ㄴ대댓1    10        7            2
+17        ㄴ대대댓1 10        9            3
+18        ㄴ대대댓2 10        8            3
+15       ㄴ대댓2    10        6            2
+16       ㄴ대댓3    10        5            2
+12      ㄴ댓2       10        2            1
+19       ㄴ대댓1    10        3            2
+13      ㄴ댓3       10        1            1
+
+순서대로 조정해 보면,
+bNo    bTitle    bGroup    bGroupOrd    bDepth
+----------------------------------------------
+10     게시글       10        0            0
+13      ㄴ댓3       10        1            1
+12      ㄴ댓2       10        2            1
+19       ㄴ대댓1    10        3            2
+11      ㄴ댓1       10        4            1
+16       ㄴ대댓3    10        5            2
+15       ㄴ대댓2    10        6            2
+14       ㄴ대댓1    10        7            2
+18        ㄴ대대댓2 10        8            3
+17        ㄴ대대댓1 10        9            3
