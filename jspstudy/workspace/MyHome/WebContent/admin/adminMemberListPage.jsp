@@ -58,6 +58,11 @@
 		}
 	}
 	
+	function fn_adminMemberUpdate(f) {
+		f.action = '/MyHome/adminMemberUpdate.admin';
+		f.submit();
+	}
+	
 </script>
 
 <%-- 1. 회원 검색 기능 --%>
@@ -76,8 +81,11 @@
 			<td>전체 <input type="checkbox" name="checkAll" id="checkAll" /></td>
 			<td>순번</td>
 			<td>아이디</td>
+			<td>비밀번호</td>
 			<td>성명</td>
 			<td>연락처</td>
+			<td>이메일</td>
+			<td>주소</td>
 			<td>회원가입일</td>
 			<td>비고</td>
 		</tr>
@@ -93,8 +101,11 @@
 					</td>
 					<td>${totalMemberCount - ((page - 1) * recordPerPage + k.index)}</td>
 					<td>${memberDto.mId}</td>
-					<td>${memberDto.mName}</td>
-					<td>${memberDto.mPhone}</td>
+					<td><input type="password" name="mPw" /></td>
+					<td><input type="text" name="mName" value="${memberDto.mName}" /></td>
+					<td><input type="text" name="mPhone" value="${memberDto.mPhone}" /></td>
+					<td><input type="text" name="mEmail" value="${memberDto.mEmail}" /></td>
+					<td><input type="text" name="mAddress" value="${memberDto.mAddress}" /></td>
 					<td>${memberDto.mRegDate}</td>
 					<td>
 						<%-- hidden --%>
@@ -102,7 +113,8 @@
 						<input type="hidden" name="mId" value="${memberDto.mId}" />
 						<input type="hidden" name="page" value="${page}" />
 						
-						<input type="button" value="수정" onclick="" />
+						<input type="button" value="수정" onclick="fn_adminMemberUpdate(this.form)" />
+						<input type="button" value="비밀번호수정" onclick="" />
 						<input type="button" value="삭제" onclick="fn_adminMemberDelete(this.form)" />
 					</td>
 				</tr>
@@ -111,7 +123,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="7">${paging}</td>
+			<td colspan="10">${paging}</td>
 		</tr>
 	</tfoot>
 </table>
