@@ -24,7 +24,7 @@ public class ReplyInsertCommand implements BoardCommand {
 		BoardDto boardDto = BoardDao.getInstance().boardView(bNo);
 		
 		// 1. 같은 bGroup에서 원글의 gGroupOrd보다 큰 bGroupOrd를 1씩 증가시킨다.
-		
+		BoardDao.getInstance().replyUpdatebGroupOrd(boardDto);
 		
 		// 2. 댓글 만들기
 		//    1) bGroup		: 원글의 bGroup (boardDto.getbGroup())

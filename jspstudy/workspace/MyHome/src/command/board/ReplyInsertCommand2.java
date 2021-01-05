@@ -49,7 +49,7 @@ public class ReplyInsertCommand2 implements BoardCommand {
 		// (가장 먼저 달린 댓글의 bGroupOrd값이 가장 크다.)
 		// 기존에 달린 댓글: bGroup이 같고, bGroupOrd가 0이 아닌(bDepth가 0이 아닌) 게시글
 		if (result > 0) {
-			BoardDao.getInstance().replyUpdatebGroupOrd(bNo);
+			// BoardDao.getInstance().replyUpdatebGroupOrd2(bNo);
 		}
 		
 		PathNRedirect pathNRedirect = new PathNRedirect();

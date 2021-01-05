@@ -79,9 +79,22 @@ public class BoardDao {
 		ss.close();
 		return result;
 	}
-	public int replyUpdatebGroupOrd(int bNo) {
+	/* 1단 댓글용 */
+	/*
+	public int replyUpdatebGroupOrd2(int bNo) {
 		SqlSession ss = factory.openSession(false);
 		int result = ss.update("mybatis.mapper.board.replyUpdatebGroupOrd", bNo);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	*/
+	/* 대댓글 */
+	public int replyUpdatebGroupOrd(BoardDto boardDto) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.update("mybatis.mapper.board.replyUpdatebGroupOrd", boardDto);
 		if (result > 0) {
 			ss.commit();
 		}
