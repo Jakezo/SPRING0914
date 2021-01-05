@@ -33,6 +33,14 @@
 				checkAll.checked = true;  // 체크 해제된 박스가 하나도 없어야만 여기에 도착할 수 있다.
 			});
 		}
+		
+	}  // end onload
+	
+	function fn_memberDelete(f) {
+		if (confirm(f.mId.value + ' 회원을 삭제할까요?')) {
+			f.action = '/MyHome/adminMemberDelete.admin';
+			f.submit();
+		}
 	}
 	
 </script>
@@ -40,6 +48,9 @@
 <%-- 1. 회원 검색 기능 --%>
 
 <%-- 2. 관리자 버튼 --%>
+<input type="button" value="신규회원추가" onclick="" />
+<input type="button" value="선택회원삭제" onclick="" /><br/><br/>
+
 
 <%-- 3. 회원 목록 --%>
 전체 회원 수: ${totalMemberCount}명<br/><br/>
@@ -53,6 +64,7 @@
 			<td>성명</td>
 			<td>연락처</td>
 			<td>회원가입일</td>
+			<td>비고</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -69,13 +81,22 @@
 					<td>${memberDto.mName}</td>
 					<td>${memberDto.mPhone}</td>
 					<td>${memberDto.mRegDate}</td>
+					<td>
+						<%-- hidden --%>
+						<input type="hidden" name="mNo" value="${memberDto.mNo}" />
+						<input type="hidden" name="mId" value="${memberDto.mId}" />
+						<input type="hidden" name="page" value="${page}" />
+						
+						<input type="button" value="수정" onclick="" />
+						<input type="button" value="삭제" onclick="fn_memberDelete(this.form)" />
+					</td>
 				</tr>
 			</form>
 		</c:forEach>
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="6">${paging}</td>
+			<td colspan="7">${paging}</td>
 		</tr>
 	</tfoot>
 </table>
