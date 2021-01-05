@@ -43,13 +43,24 @@
 		}
 	}
 	
+	function fn_selectMemberDelete() {
+		var chkList = document.getElementsByName('chk');
+		// chkList = [1, 2, 3, 4]
+		var target = '';
+		for (var i = 0; i < chkList.length; i++) {
+			target = (target + chkList[i].value + ',');
+		}
+		// target = '1,2,3,4,'
+		location.href = '/MyHome/adminSelectMemberDelete.admin?target=' + target;
+	}
+	
 </script>
 
 <%-- 1. 회원 검색 기능 --%>
 
 <%-- 2. 관리자 버튼 --%>
 <input type="button" value="신규회원추가" onclick="" />
-<input type="button" value="선택회원삭제" onclick="" /><br/><br/>
+<input type="button" value="선택회원삭제" onclick="fn_selectMemberDelete()" /><br/><br/>
 
 
 <%-- 3. 회원 목록 --%>
