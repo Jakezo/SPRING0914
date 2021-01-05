@@ -7,10 +7,16 @@
 
 <c:if test="${loginDto.mId eq 'admin'}">
 	<h1>관리자 님 환영합니다</h1>
-	<a href="/MyHome/memberList.admin">회원관리</a><br/>
+	<a href="/MyHome/adminMemberListPage.admin">회원관리</a><br/>
 	<a href="/MyHome/guestList.admin">방명록관리</a><br/>
 	<a href="/MyHome/bbsList.admin">BBS관리</a><br/>
 	<a href="/MyHome/boardList.admin">게시판관리</a><br/>
+	<%--
+	<a href="/MyHome/memberList.member">회원관리</a><br/>
+	<a href="/MyHome/guestList.guest">방명록관리</a><br/>
+	<a href="/MyHome/bbsList.bbs">BBS관리</a><br/>
+	<a href="/MyHome/boardList.board">게시판관리</a><br/>
+	--%>
 </c:if>
 
 <c:if test="${loginDto.mId ne 'admin'}">
