@@ -33,7 +33,7 @@ public class AdminMemberDeleteCommand implements AdminCommand {
 		int result = AdminDao.getInstance().adminMemberDelete(mNo);
 		
 		PathNRedirect pathNRedirect = new PathNRedirect();
-		pathNRedirect.setPath("admin/adminMemberDeleteResult.jsp?result=" + result + "&page=" + page);
+		pathNRedirect.setPath("admin/adminMemberDeleteResult.jsp?result=" + (result > 0) + "&page=" + page);
 		pathNRedirect.setRedirect(true);
 		return pathNRedirect;
 		

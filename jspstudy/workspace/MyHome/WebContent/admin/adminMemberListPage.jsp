@@ -36,22 +36,26 @@
 		
 	}  // end onload
 	
-	function fn_memberDelete(f) {
+	function fn_adminMemberDelete(f) {
 		if (confirm(f.mId.value + ' 회원을 삭제할까요?')) {
 			f.action = '/MyHome/adminMemberDelete.admin';
 			f.submit();
 		}
 	}
 	
-	function fn_selectMemberDelete() {
+	function fn_adminSelectMemberDelete() {
 		var chkList = document.getElementsByName('chk');
 		// chkList = [1, 2, 3, 4]
 		var target = '';
 		for (var i = 0; i < chkList.length; i++) {
-			target = (target + chkList[i].value + ',');
+			if (chkList[i].checked) {
+				target = (target + chkList[i].value + ',');				
+			}
 		}
 		// target = '1,2,3,4,'
-		location.href = '/MyHome/adminSelectMemberDelete.admin?target=' + target;
+		if (target != '') {
+			location.href = '/MyHome/adminSelectMemberDelete.admin?target=' + target + '&page=${page}';			
+		}
 	}
 	
 </script>
@@ -60,7 +64,7 @@
 
 <%-- 2. 관리자 버튼 --%>
 <input type="button" value="신규회원추가" onclick="" />
-<input type="button" value="선택회원삭제" onclick="fn_selectMemberDelete()" /><br/><br/>
+<input type="button" value="선택회원삭제" onclick="fn_adminSelectMemberDelete()" /><br/><br/>
 
 
 <%-- 3. 회원 목록 --%>
@@ -99,7 +103,7 @@
 						<input type="hidden" name="page" value="${page}" />
 						
 						<input type="button" value="수정" onclick="" />
-						<input type="button" value="삭제" onclick="fn_memberDelete(this.form)" />
+						<input type="button" value="삭제" onclick="fn_adminMemberDelete(this.form)" />
 					</td>
 				</tr>
 			</form>
