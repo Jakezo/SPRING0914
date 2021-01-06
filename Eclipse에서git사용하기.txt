@@ -1,0 +1,67 @@
+Eclipse에서 Git 사용하기
+
+1. Window - Show View - Other... - Git - Git Repositories
+
+## 프로젝트를 github.com에 올리기 위해서 프로젝트를 만든다.
+
+2. 새 프로젝트 만들기
+   D:/workspace/Homepage
+
+3. 생성된 프로젝트를 로컬저장소로 지정한다.
+   1) Git Repositories
+   2) Create a new local Git repository
+      -> D:/workspace/Homepage
+
+4. Homepage 프로젝트에 .git 숨김 폴더가 생긴다.
+
+5. Homepage 프로젝트에 .gitignore 파일이 생긴다.
+   (관리 안해도 되는 파일들)
+
+6. github.com에 Homepage라는 Repository를 만든다. (원격저장소)
+
+7. github.com에 만든 Homepage Repository를 원격저장소로 등록한다.
+   1) Git Repositories
+   2) Homepage 프로젝트를 열고 Romotes에서 마우스 오른쪽 버튼
+   3) create remote
+   4) 원격저장소 이름: origin
+   5) uri change 후 uri 등록(https://github.com/itlecture/Homepage.git)
+   6) Authentication
+      User/Password (github.com에 가입한 내용으로)
+      Store in Secure Store 체크 권장
+
+8. Window - Show View - Other... - Git - Git Staging
+
+9. Unstaged Changes의 모든 것 -> Staged Changes 보내고 (++버튼)
+
+10. commit 메시지 작성 후 commit
+
+11. 다시 Git Repositories로 돌아와서 Homepage 프로젝트의 마우스 오른쪽 버튼 Properties
+
+12. Add Entry... 버튼 클릭 후 아래 입력  (11.번 12.번 pull이 안 되면 진행)
+   key    remote.origin.fetch
+  value   +refs/heads/*:refs/remotes/origin/*
+
+13. Homepage 프로젝트의 마우스 오른쪽 버튼 Pull..
+
+14. Homepage 프로젝트의 마우스 오른쪽 버튼 Push to origin
+
+15. github.com Homepage Repository에 잘 올라왔는지 확인
+
+----------------------------------------------------------
+
+github.com 의 Homepage Repository를 불러오는 가장 쉬운 방법: 복제(clone)
+
+1. Git Repositories
+
+2. Clone a Git repository
+
+3. uri에 https://github.com/itlecture/Homepage.git 등록 후 Next
+
+4. 마지막 단계 Destination의 Directory 설정 (복제한 Homepage를 어디에 저장할 것인가? workspace를 결정한다는 의미)
+
+5. Git Repositories에는 Homepage가 등록되지만 좌측 Project Explorer에는 등록되지 않는다.
+
+6. 좌측 Project Explorer에 Homepage 프로젝트를 등록하기 위해서 import한다.
+   - import - General - Existing Projects into Workspace
+
+7. 모든 가져오기가 끝났으므로 코드 작업 후 Git Staging에서 add -> commit -> push 하면 된다.

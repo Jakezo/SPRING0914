@@ -154,32 +154,29 @@ $ git log --oneline
 ## create repository 클릭해서 새 저장소(repository) 만들기
 ##   - public
 ##   - add README.md 체크
-## repository에서 Code버튼을 클릭하면 원격저장소 확인
+## repository에서 Code버튼을 클릭하면 원격저장소 확인 가능
 ##   -> https://github.com/itlecture/local_vcs.git
 
+## 로컬저장소(local_vcs)의 내용을 올리는 
+## 원격저장소(https://github.com/itlecture/local_vcs.git)를 등록해야 한다.
 
+## 원격저장소 등록하기(앞으로 원격저장소는 origin이라고 부른다.)
+$ git remote add origin https://github.com/itlecture/local_vcs.git
 
+## 로컬저장소 -> 원격저장소 : push  (올리기)
+## 로컬저장소 <- 원격저장소 : pull  (내려받기)
 
+## 중요. 원격저장소에 올리려면 가장 먼저 pull을 해야 한다. (pull -> push)
 
+$ git push origin main  ## origin의 main브랜치로 올리기 (최초 실패)
 
+$ git pull origin main  ## origin의 main브랜치를 받아오기 (최초 실패)
 
+## 최초 pull을 할 때는 로컬저장소와 원격저장소가 서로 상관 없는 저장소이기 때문에 실패한다.
+## 상관 없어도 pull을 진행하는 옵션(--allow-unrelated-histories)을 써야 한다.
 
+$ git pull origin main --allow-unrelated-histories
 
+## vim 편집기가 실행되면  :wq  눌러서 종료한다.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$ git push origin main  ## 로컬저장소의 내용을 origin의 main 브랜치로 올린다.
