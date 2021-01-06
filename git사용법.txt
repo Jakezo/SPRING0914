@@ -1,0 +1,185 @@
+1. git-scm.com 에서 git 다운로드 및 설치가 필요합니다.
+
+2. sourcetreeapp.com 에서 sourcetree 다운로드 및 설치를 할 수 있습니다.
+   - sourcetree : git을 관리하는 gui 도구
+
+형상관리도구(버전관리도구)
+: 프로젝트의 개발과정에서 필요한 필수 도구
+
+git 개요
+개인 PC에 로컬저장소(local)를 만든다. (폴더를 만든다.)
+git init 명령을 통해서 로컬저장소를 git으로 관리한다. (.git 이라는 숨김 폴더가 생긴다.)
+로컬저장소에 파일을 추가한다. 그렇다고 git이 관리하지 않는다.
+관리할 파일을 git add 명령으로 관리할 수 있다. (staging)
+관리할 파일을 git commit 할 수 있다. (로컬저장소에 저장)
+commit이 완료되면 git push 명령으로 원격저장소(server)에 올릴 수 있다.
+
+git 연습 (시작 메뉴 - Git폴더 - Git Bash)
+
+~  : 루트 디렉토리 (사용자 폴더  C:/Users/ITSC)
+.  : 현재 디렉토리
+.. : 상위 디렉토리
+
+$ pwd  ## 현재 경로 확인하기
+/c/Users/ITSC
+
+$ cd ~  ## 루트 디렉토리로 이동하기
+$ pwd
+/c/Users/ITSC
+
+$ cd .  ## 현재 디렉토리로 이동하기
+$ pwd
+/c/Users/ITSC
+
+$ cd ..  ## 상위 디렉토리로 이동하기
+$ pwd
+/c/Users
+
+$ clear  ## 화면 초기화
+
+ITSC@DESKTOP-L7VVF0L MINGW64 /c/Users
+$ mkdir local_vcs  ## 현재 경로(/c/Users)에 local_vcs 디렉토리 만들기
+
+ITSC@DESKTOP-L7VVF0L MINGW64 /c/Users
+$ cd local_vcs  ## local_vcs 디렉토리로 이동하기
+
+ITSC@DESKTOP-L7VVF0L MINGW64 /c/Users/local_vcs
+$ cd ..  ## local_vcs 디렉토리의 상위 디렉토리로 이동하기
+
+ITSC@DESKTOP-L7VVF0L MINGW64 /c/Users
+$ rmdir local_vcs  ## local_vcs 디렉토리 삭제하기
+
+ITSC@DESKTOP-L7VVF0L MINGW64 /c/Users
+$ ls
+'All Users'@  'Default User'@   ITSC/
+ Default/      desktop.ini      Public/
+
+$ git config --global user.name  ## 사용자 확인하기
+MINKYONGTAE
+
+$ git config --global user.email  ## 사용자 이메일 확인하기
+gt_min@naver.com
+
+$ git config --global user.name "USERNAME"  ## 사용자 이름 등록하기
+$ git config --global user.email "EMAIL"  ## 사용자 이메일 등록하기
+
+$ cd ~  ## 루트 디렉토리로 이동
+
+$ mkdir local_vcs  ## local_vcs 디렉토리 만들기
+
+$ cd local_vcs  ## local_vcs 디렉토리로 이동하기
+
+$ git init  ## 현재 디렉토리를 git으로 관리하라.
+Initialized empty Git repository in C:/Users/ITSC/local_vcs/.git/
+
+$ ls -al  ## 현재 디렉토리의 파일/디렉토리 목록 확인 (숨김파일확인+리스트보기)
+$ ls -a  ## -a(숨김파일보기옵션)
+
+$ touch master.txt  ## master.txt 파일 만들기
+
+$ echo 'hello git' >> master.txt  ## 'hello git'을 master.txt로 보내기(기록하기)
+
+$ cat master.txt  ## master.txt 파일 열기
+hello git
+
+$ git status  ## 상태보기(아직 Untracked 상태: 추적하기 전이다.)
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        master.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+$ git add master.txt  ## master.txt 파일을 추적하라. (인덱스 영역으로 올린다. staging: 스태이징)
+                      ## 처음으로 git add 할 때는 git commit -am 명령이 불가능하다. 단독 명령으로 git add를 해야한다.
+
+$ git status  ## 다시 상태보기 (staging 확인)
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   master.txt
+
+$ git rm --cached master.txt  ## master.txt 파일을 더 이상 추적하지 않는다. (unstaging)
+rm 'master.txt'
+
+$ git add master.txt  ## 다시 master.txt 파일을 추적하라. (인덱스 영역으로 올린다. staging: 스태이징)
+
+$ git commit  ## 현재 로컬저장소(local_vcs)를 commit 하겠다. 커밋 메시지 작성을 위한 vim 에디터가 열린다.
+
+## vim 에디터 사용 ##
+단축키 i : 끼워넣기 상태
+단축키 a : 끼워넣기 상태
+키워넣기 상태에서 작성
+작성 후 Esc (끼워넣기 상태에서 빠져나옴)
+종료를 위해서 :wq (저장하고 닫기)
+#####################
+
+$ git status  ## 다시 상태보기 (commit이 완료되면 clean 상태가 되고, 원격저장소에 데이터를 올릴 수 있다.)
+On branch master
+nothing to commit, working tree clean
+
+$ git log  ## 로그 확인하기 (커밋한 사람, 일시, 커밋메시지)
+
+$ git log --oneline  ## 로그 한 줄로 보여주기
+
+$ echo ' nice to meet you' >> master.txt  ## ' nice to meet you'를 master.txt에 추가하기
+
+$ git status  ## 다시 상태를 확인하면 Untracked 상태이므로 git add가 필요하다.
+
+$ git add .  ## 로컬저장소의 모든 파일을 staging하라. (바뀐 파일이 많으면 사용)
+
+$ git commit -m '[02]master=>modify master.txt add nice to meet you'  ## 커밋하면서 커밋메시지 동시에 작성하기
+
+$ git log --oneline  ## 로그보기 (2번의 커밋이 모두 나타난다. 최근 커밋 아이디를 HEAD라고 한다.)
+2239f0b (HEAD -> master) [02]master=>modify master.txt add nice to meet you
+af48e77 [01]master=>create master.txt add hello git
+
+$ git diff --word-diff 2239f0b af48e77  ## 두 커밋 아이디를 이용해서 차이를 비교
+
+$ git diff --word-diff HEAD HEAD~1  ## HEAD(가장 최근 commit)와 HEAD~1(HEAD 이전 commit)의 차이를 비교
+
+$ echo ' how are you today?' >> master.txt  ## ' how are you today?'를 master.txt에 추가하기
+
+$ git commit -am '[03]master=>modify master.txt add how are you today?'  ## git add + git commit -m == git commit -am
+
+$ git log --oneline
+
+## github.com 에 접속해서 회원가입하기
+## create repository 클릭해서 새 저장소(repository) 만들기
+##   - public
+##   - add README.md 체크
+## repository에서 Code버튼을 클릭하면 원격저장소 확인
+##   -> https://github.com/itlecture/local_vcs.git
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
