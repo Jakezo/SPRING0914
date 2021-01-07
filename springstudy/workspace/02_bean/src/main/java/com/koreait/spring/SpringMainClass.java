@@ -16,6 +16,8 @@ public class SpringMainClass {
 		SetHandler handler2 = ctx.getBean("setHandler", SetHandler.class);
 		handler2.setInfo();
 		
+		MapHandler handler3 = ctx.getBean("mapHandler", MapHandler.class);
+		handler3.mapInfo();
 		
 		ctx.close();
 		
