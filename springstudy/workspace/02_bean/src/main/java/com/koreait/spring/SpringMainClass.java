@@ -13,6 +13,10 @@ public class SpringMainClass {
 		ListHandler handler1 = ctx.getBean("listHandler", ListHandler.class);
 		handler1.listInfo();
 		
+		SetHandler handler2 = ctx.getBean("setHandler", SetHandler.class);
+		handler2.setInfo();
+		
+		
 		ctx.close();
 		
 	}
