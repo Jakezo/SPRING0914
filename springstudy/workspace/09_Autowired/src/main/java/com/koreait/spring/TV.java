@@ -1,9 +1,23 @@
 package com.koreait.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class TV {
 	
 	// field
+	
+	/*
+		@Autowired
+		이 애너테이션이 붙어 있는 객체 선언부(private Speaker speaker;)는
+		해당 Bean(객체)을 자동으로 찾아서 생성을 해 줍니다.
+		
+		xml 이라면 <bean id="speaker" class="Speaker" /> 를 자동으로 찾고,
+		java 라면 public Speaker speaker() { return new Speaker(); } 를 자동으로 찾습니다.
+	*/
+	@Autowired
 	private Speaker speaker;
+	
+	// 아래 필드는 @Autowired와 상관이 음써요.
 	private int channel;
 	
 	// method
