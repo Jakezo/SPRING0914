@@ -40,18 +40,8 @@ public class BoardController {
 		return "board/boardInsertPage";	// return "/board/boardInsertPage"; 슬래시(/)로 시작해도 차이가 없습니다.
 	}
 	
-	
 	// @RequestMapping을 작성할 때 URLMapping값은
 	// 슬래시(/)로 시작해도 되고, 없어도 되지만
 	// 슬래시(/)를 안 넣는 것으로 연습하겠습니다.
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
