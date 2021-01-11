@@ -1,10 +1,14 @@
 package com.koreait.mvc05.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.koreait.mvc05.dto.PersonDto;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -64,13 +68,44 @@ public class Controller {
 	
 	// 3. PersonDto 1개 넘기기
 	// com.koreait.mvc05.dto 패키지에 PersonDto 생성 (name, age)
-	
+	@RequestMapping("v03")
+	public String goView03(Model model) {
+		
+		PersonDto personDto = new PersonDto();
+		personDto.setName("아만다");
+		personDto.setAge(25);
+		
+		model.addAttribute("personDto", personDto);
+		
+		return "view03";	// return "/WEB-INF/views/view03.jsp";
+		
+	}
 	
 	
 	// 4. PersonDto 2개를 ArrayList에 담아서 넘기기
 	
+	// @Autowired는 필드, 메소드에 추가할 수 있어요.
+	// @Autowired는 지역변수에는 추가할 수 없어요.
 	
+	// root-context.xml 에 2개의 Bean을 생성해 두었습니다.
 	
+	@Autowired  // id가 person1이고, class가 PersonDto인 Bean을 자동으로 만들어 주세요.
+	private PersonDto person1;
 	
+	@Autowired	// id가 person2이고, class가 PersonDto인 Bean을 자동으로 만들어 주세요.
+	private PersonDto person2;
+
+	@RequestMapping("v04")
+	public String goView04(Model model) {
+		
+		ArrayList<PersonDto> list = new ArrayList<PersonDto>();
+		list.add(person1);
+		list.add(person2);
+		
+		model.addAttribute("list", list);
+		
+		return "view04";	// return "/WEB-INF/views/view04.jsp";
+		
+	}
 	
 }
