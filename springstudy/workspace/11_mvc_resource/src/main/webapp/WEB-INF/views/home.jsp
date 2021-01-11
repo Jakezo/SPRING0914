@@ -10,5 +10,12 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<!-- resources 디렉토리 아래의 image -->
+<img style="width: 200px;" alt="사람이미지" src="/mvc01/resources/person.jpg">
+
+<!-- assets/images 디렉토리 아래의 image -->
+<img style="width: 200px;" alt="사람이미지" src="/mvc01/assets/images/person.jpg">
+
 </body>
 </html>
