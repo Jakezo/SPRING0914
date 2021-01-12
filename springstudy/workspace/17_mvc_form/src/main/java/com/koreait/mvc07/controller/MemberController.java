@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-
 public class MemberController {
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
@@ -32,12 +31,5 @@ public class MemberController {
 		return "member/loginResult";  // member 폴더 아래 loginResult.jsp 를 의미합니다.
 		
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 }

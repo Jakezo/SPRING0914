@@ -8,8 +8,12 @@
 </head>
 <body>
 
-	아이디: ${id}<br/>
-	비밀번호: ${pw}<br/>
+	<h3>view03.jsp</h3>
 	
+	<ul>
+		<li>${personDto.name}</li>
+		<li>${personDto.age}</li>
+	</ul>
+
 </body>
 </html>
