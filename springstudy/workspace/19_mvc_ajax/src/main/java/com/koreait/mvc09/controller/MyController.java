@@ -24,7 +24,7 @@ public class MyController {
 					produces="text/plain; charset=utf-8")  // return text; 할 때  text가 "text/plain" 타입입니다.
 	
 	@ResponseBody  // return 하는 데이터는 응답입니다. (뷰나 다른 매핑값이 아니고, 데이터를 반환합니다.)
-	public String getText(@RequestParam(value="send") String send) {
+	public String getText(@RequestParam("send") String send) {
 		
 		String text = send + "를 받았습니다.";
 		
