@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.koreait.mvc06.dto.PersonDto;
+
 @Controller
 @RequestMapping("board")
 public class BoardController {
@@ -85,7 +87,7 @@ public class BoardController {
 	// 조회수: 1
 	// 작성일: 2021-01-11
 	@RequestMapping("v04")
-	public String goView04(@RequestParam("title") String title,
+	public String goView04( @RequestParam("title") String title,
 							@RequestParam("hit") int hit,
 							Model model) {
 		
@@ -96,6 +98,61 @@ public class BoardController {
 		return "view04";	// return "/WEB-INF/views/view04.jsp";
 		
 	}
+	
+	// 3. @RequestParam의 추가 속성
+	/*
+	@RequestMapping(value="v05")
+	@RequestMapping(value="/v05")
+	@RequestMapping("v05")
+	@RequestMapping("/v05")
+	*/
+	@RequestMapping("v05")
+	public String goView05( @RequestParam(value="name", required=false) String name,
+						    @RequestParam(value="age", required=false, defaultValue="0") int age,
+						    Model model) {
+		
+		// 받은 파라미터를 model에 다시 저장한다.
+		model.addAttribute("name", name == null ? "이름없음" : name);
+		model.addAttribute("age", age);
+		
+		return "view05";
+		
+	}
+	
+	// 연습
+	// http://localhost:9090/board/v06
+	// view06.jsp
+	// 제목: 공지사항
+	// 조회수: 1
+	// 작성일: 2021-01-12
+	@RequestMapping("v06")
+	public String goView06(	@RequestParam(value="title", required=false, defaultValue="공지사항") String title,
+							@RequestParam(value="hit", required=false, defaultValue="1") int hit,
+							Model model) {
+		
+		model.addAttribute("title", title);
+		model.addAttribute("hit", hit);
+		model.addAttribute("date", new Date(System.currentTimeMillis()));
+		
+		return "view06";
+		
+	}
+	
+	// 4. Dto
+	@RequestMapping("v07")
+	public String goView07(PersonDto personDto,
+						   Model model) {
+		
+		// 파라미터 name과 age가 personDto에 저장된다.
+		model.addAttribute("name", personDto.getName());
+		model.addAttribute("age", personDto.getAge());
+		
+		return "view07";
+		
+	}
+	
+	
+	
 	
 	
 	
