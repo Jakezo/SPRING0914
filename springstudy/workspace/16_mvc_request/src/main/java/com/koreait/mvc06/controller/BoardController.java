@@ -6,9 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.koreait.mvc06.dto.BoardDto;
 import com.koreait.mvc06.dto.PersonDto;
 
 @Controller
@@ -40,7 +42,7 @@ public class BoardController {
 	}
 	
 	// 연습
-	// http://localhost:9090/board/v02?title=공지사항&hit=1
+	// http://localhost:9090/mvc06/board/v02?title=공지사항&hit=1
 	
 	// view02.jsp
 	// 제목: 공지사항
@@ -64,9 +66,9 @@ public class BoardController {
 	// 2. @RequestParam
 	// request로 전달되는 파라미터를 처리하는 애너테이션
 	@RequestMapping("v03")
-	public String goView03(@RequestParam("name") String name,
-						   @RequestParam("age") int age,
-						   Model model) {
+	public String goView03(	@RequestParam("name") String name,
+						   	@RequestParam("age") int age,
+						   	Model model) {
 		
 		// @RequestParam("name") String name : 파라미터 name을 String name에 저장하세요.
 		// @RequestParam("age") int age : 파라미터 age를 int age에 저장하세요.
@@ -81,13 +83,13 @@ public class BoardController {
 	
 	
 	// 연습
-	// http://localhost:9090/board/v04?title=공지사항&hit=1
+	// http://localhost:9090/mvc06/board/v04?title=공지사항&hit=1
 	// view04.jsp
 	// 제목: 공지사항
 	// 조회수: 1
 	// 작성일: 2021-01-11
 	@RequestMapping("v04")
-	public String goView04( @RequestParam("title") String title,
+	public String goView04(	@RequestParam("title") String title,
 							@RequestParam("hit") int hit,
 							Model model) {
 		
@@ -107,7 +109,7 @@ public class BoardController {
 	@RequestMapping("/v05")
 	*/
 	@RequestMapping("v05")
-	public String goView05( @RequestParam(value="name", required=false) String name,
+	public String goView05(	@RequestParam(value="name", required=false) String name,
 						    @RequestParam(value="age", required=false, defaultValue="0") int age,
 						    Model model) {
 		
@@ -120,7 +122,7 @@ public class BoardController {
 	}
 	
 	// 연습
-	// http://localhost:9090/board/v06
+	// http://localhost:9090/mvc06/board/v06
 	// view06.jsp
 	// 제목: 공지사항
 	// 조회수: 1
@@ -147,17 +149,63 @@ public class BoardController {
 		model.addAttribute("name", personDto.getName());
 		model.addAttribute("age", personDto.getAge());
 		
+		model.addAttribute("personDto", personDto);
+		
 		return "view07";
 		
 	}
 	
+	// 연습
+	// http://localhost:9090/mvc06/board/v08?title=공지사항&hit=1
+	// view08.jsp
+	// 제목: 공지사항
+	// 조회수: 1
+	// 작성일: 2021-01-11
+	@RequestMapping("v08")
+	public String goView08(BoardDto boardDto,
+						   Model model) {
+		
+		model.addAttribute("title", boardDto.getTitle());
+		model.addAttribute("hit", boardDto.getHit());
+		model.addAttribute("date", new Date(System.currentTimeMillis()));
+		
+		return "view08";
+		
+	}
 	
+	// 5. @ModelAttribute
+	// 파라미터를 받아서 Model에 저장해 줍니다.
 	
+	@RequestMapping("v09")
+	public String goView09(	@ModelAttribute("name") String name,
+							@ModelAttribute("age") int age) {
+		
+		return "view09";
+		
+	}
 	
+	@RequestMapping("v10")
+	public String goView10(	@ModelAttribute("personDto") PersonDto personDto ) {
+		
+		return "view10";
+		
+	}
 	
-	
-	
-	
-	
+	// 연습
+	// http://localhost:9090/mvc06/board/v11?title=공지사항&hit=1
+	// view11.jsp
+	// 제목: 공지사항
+	// 조회수: 1
+	// 작성일: 2021-01-11
+	@RequestMapping("v11")
+	public String goView11(	@ModelAttribute("title") String title,
+						   	@ModelAttribute("hit") int hit,
+						   	Model model) {
+		
+		model.addAttribute("date", new Date(System.currentTimeMillis()));
+		
+		return "view11";
+		
+	}
 	
 }

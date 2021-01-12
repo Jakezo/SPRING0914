@@ -8,14 +8,12 @@
 </head>
 <body>
 
-	<h3>view07.jsp</h3>
+	<h3>view09.jsp</h3>
 	
 	<%-- model이 저장한 속성(Controller에서 전달된 값) --%>
 	<ul>
 		<li>${name}</li>
 		<li>${age}</li>
-		<li>${personDto.name}</li>
-		<li>${personDto.age}</li>
 	</ul>
 
 </body>
