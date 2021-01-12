@@ -28,6 +28,14 @@
 		<input type="text" name="age" /><br/><br/>
 		<button>전송</button>
 	</form>
+	<br/>
+	<form action="v04" method="get">
+		이름<br/>
+		<input type="text" name="name" /><br/><br/>
+		나이<br/>
+		<input type="text" name="age" /><br/><br/>
+		<button>전송</button>
+	</form>
 
 </body>
 </html>
