@@ -50,8 +50,6 @@ public class MyController {
 	}
 	
 	
-	
-	
 	/*
 		redirect를 할 때 값을 전달하고 싶으면,
 		새로운 파라미터를 만들지 말고,
