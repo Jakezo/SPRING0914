@@ -1,11 +1,13 @@
 package com.koreait.simple1.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.koreait.simple1.command.SimpleCommand;
-import com.koreait.simple1.dao.SimpleDao;
+import com.koreait.simple1.command.SimpleListCommand;
 
 public class SimpleController {
 
@@ -34,9 +36,29 @@ public class SimpleController {
 			return "simple/simpleListPage";
 		*/
 		
+		command = new SimpleListCommand();  // 개발자 직접 생성
+		command.execute(model);
+		return "simple/simpleListPage";  // simple 폴더 아래 simpleListPage.jsp로 forward합니다.
+		
 	}
 	
+	@RequestMapping(value="simpleInsertPage.do")
+	public String simpleInsertPage() {
+		return "simple/simpleInsertPage";  // simple 폴더 아래 simpleInsertPage.jsp로 forward합니다.
+	}
 	
+	@RequestMapping(value="simpleInsert.do")
+	public String simpleInsert(HttpServletRequest request, Model model) {
+		
+		// SimpleInsertCommand 가 삽입을 담당합니다.
+		// 모든 command들은 model이 필요합니다.
+		
+		// SimpleInsertCommand에게 request를 전달하려면?
+		// 모든 command들은 실행할 때 model만 전달 받습니다.
+		// 따라서, model에 request를 저장해 둡니다. 그리고 model을 전달합니다.
+		model.addAttribute("request", request);
+		
+	}
 	
 	
 	
