@@ -11,6 +11,7 @@
 	<form action="calc">
 		첫 번째 수 : <input type="text" name="n1" /><br/>
 		두 번째 수 : <input type="text" name="n2" /><br/>
+		<input type="hidden" name="btn" value="덧셈" />
 		<button>덧셈</button>
 	</form>
 
