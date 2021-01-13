@@ -87,7 +87,24 @@ public class SimpleDao {
 	}
 	
 	
-	
+	/***** 2. insert *****/
+	public void simpleInsert(SimpleDto simpleDto) {
+		
+		try {
+			con = dataSource.getConnection();
+			sql = "INSERT INTO SIMPLE VALUES (SIMPLE_SEQ.NEXTVAL, ?, ?, ?, SYSDATE)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, simpleDto.getWriter());
+			ps.setString(2, simpleDto.getTitle());
+			ps.setString(3, simpleDto.getContent());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		
+	}
 	
 	
 	

@@ -2,13 +2,17 @@ package com.koreait.simple1.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.koreait.simple1.command.SimpleCommand;
+import com.koreait.simple1.command.SimpleInsertCommand;
 import com.koreait.simple1.command.SimpleListCommand;
 
+
+@Controller
 public class SimpleController {
 
 	
@@ -57,6 +61,12 @@ public class SimpleController {
 		// 모든 command들은 실행할 때 model만 전달 받습니다.
 		// 따라서, model에 request를 저장해 둡니다. 그리고 model을 전달합니다.
 		model.addAttribute("request", request);
+		
+		command = new SimpleInsertCommand();  // 개발자가 직접 생성
+		command.execute(model);
+		
+		// return "simple/simpleListPage";  // insert 후에는 forward하면 안 됩니다.
+		return "redirect:simpleList.do";  // insert 후에는 redirect 합니다.
 		
 	}
 	

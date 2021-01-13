@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
+import com.koreait.simple1.dao.SimpleDao;
 import com.koreait.simple1.dto.SimpleDto;
 
 public class SimpleInsertCommand implements SimpleCommand {
@@ -34,6 +35,7 @@ public class SimpleInsertCommand implements SimpleCommand {
 		simpleDto.setTitle(title);
 		simpleDto.setContent(content);
 		
+		SimpleDao.getInstance().simpleInsert(simpleDto);
 
 	}
 
