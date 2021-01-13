@@ -107,21 +107,69 @@ public class SimpleDao {
 	}
 	
 	
+	/***** 3. view *****/
+	public SimpleDto simpleView(int no) {
+		
+		SimpleDto simpleDto = null;
+		
+		try {
+			con = dataSource.getConnection();
+			sql = "SELECT * FROM SIMPLE WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, no);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				String writer = rs.getString("WRITER");
+				String title = rs.getString("TITLE");
+				String content = rs.getString("CONTENT");
+				Date regDate = rs.getDate("REGDATE");
+				simpleDto = new SimpleDto(no, writer, title, content, regDate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, rs);
+		}
+		
+		return simpleDto;
+		
+	}
+	
+	/***** 4. delete *****/
+	public void simpleDelete(int no) {
+		
+		try {
+			con = dataSource.getConnection();
+			sql = "DELETE FROM SIMPLE WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, no);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/***** 5. update *****/
+	public void simpleUpdate(SimpleDto simpleDto) {
+		
+		try {
+			con = dataSource.getConnection();
+			sql = "UPDATE SIMPLE SET TITLE = ?, CONTENT = ? WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, simpleDto.getTitle());
+			ps.setString(2, simpleDto.getContent());
+			ps.setInt(3, simpleDto.getNo());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		
+	}
 	
 }
