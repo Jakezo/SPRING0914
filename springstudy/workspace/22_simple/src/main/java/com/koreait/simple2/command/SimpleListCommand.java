@@ -20,7 +20,6 @@ public class SimpleListCommand implements SimpleCommand {
 		}
 	*/
 	
-	
 	// method
 	@Override
 	public void execute(Model model) {
