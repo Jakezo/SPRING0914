@@ -29,7 +29,7 @@
 					<tr>
 						<td>${simpleDto.no}</td>
 						<td>${simpleDto.writer}</td>
-						<td>${simpleDto.title}</td>
+						<td><a href="simpleViewPage.do?no=${simpleDto.no}">${simpleDto.title}</a></td>
 						<td>${simpleDto.regDate}</td>
 					</tr>
 				</c:forEach>
