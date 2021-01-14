@@ -49,7 +49,6 @@ public class SimpleDao {
 		}
 	}
 	
-	
 	/***** 1. list *****/
 	public List<SimpleDto> simpleList() {
 		

@@ -78,7 +78,7 @@ public class SimpleController {
 	}
 	
 	
-	@RequestMapping(value="simpleList.do")
+	@RequestMapping(value="simpleListPage.do")
 	public String simpleList(Model model) {
 		simpleListCommand.execute(model);
 		return "simple/simpleListPage";
@@ -125,7 +125,7 @@ public class SimpleController {
 	public String simpleDelete(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 		simpleDeleteCommand.execute(model);
-		return "redirect:simpleList.do";
+		return "redirect:simpleListPage.do";
 	}
 
 	

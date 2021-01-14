@@ -32,7 +32,7 @@ public class SimpleController {
 		return "index";
 	}
 	
-	@RequestMapping(value="simpleList.do")
+	@RequestMapping(value="simpleListPage.do")
 	public String simpleList(Model model) {
 		// DB에서 list를 가져와서 simpleListPage.jsp로 이동시킵니다.
 		// simpleListPage.jsp로 보낼 데이터인 list는 Model에 저장합니다.
@@ -126,7 +126,7 @@ public class SimpleController {
 		command = new SimpleDeleteCommand();  // 개발자 직접 생성
 		command.execute(model);
 		
-		return "redirect:simpleList.do";
+		return "redirect:simpleListPage.do";
 		
 	}
 	

@@ -9,7 +9,7 @@
 <body>
 
 	<!-- 이동합니다. -->
-	<a href="simpleList.do">간단게시판으로 이동</a>
+	<a href="simpleListPage.do">간단게시판으로 이동</a>
 
 </body>
 </html>
