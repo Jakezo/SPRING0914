@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.koreait.simple1.command.SimpleCommand;
+import com.koreait.simple1.command.SimpleDeleteCommand;
 import com.koreait.simple1.command.SimpleInsertCommand;
 import com.koreait.simple1.command.SimpleListCommand;
+import com.koreait.simple1.command.SimpleUpdateCommand;
 import com.koreait.simple1.command.SimpleViewCommand;
 import com.koreait.simple1.dto.SimpleDto;
 
@@ -73,7 +75,6 @@ public class SimpleController {
 		
 	}
 	
-	
 	@RequestMapping(value="simpleViewPage.do")
 	public String simpleViewPage(HttpServletRequest request, Model model) {
 		
@@ -104,12 +105,28 @@ public class SimpleController {
 		return "simple/simpleUpdatePage";
 	}
 	
+	@RequestMapping(value="simpleUpdate.do", method=RequestMethod.POST)
+	public String simpleUpdate(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request", request);
+		
+		command = new SimpleUpdateCommand();  // 개발자 직접 생성
+		command.execute(model);
+		
+		return "redirect:simpleViewPage.do?no=" + request.getParameter("no");
+		
+	}
 	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value="simpleDelete.do", method=RequestMethod.POST)
+	public String simpleDelete(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request", request);
+		
+		command = new SimpleDeleteCommand();
+		command.execute(model);
+		
+		return "redirect:simpleList.do";
+		
+	}
 	
 }

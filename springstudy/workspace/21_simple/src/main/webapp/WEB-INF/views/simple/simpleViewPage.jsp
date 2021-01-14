@@ -20,6 +20,7 @@
 		<input type="hidden" name="title" value="${simpleDto.title}" />
 		<input type="hidden" name="content" value="${simpleDto.content}" />
 		<input type="button" value="수정하러가기" onclick="fn_simpleUpdatePage(this.form)" />
+		<input type="button" value="삭제하기" onclick="fn_simpleDelete(this.form)" />
 	</form>
 	
 	<script type="text/javascript">
@@ -27,9 +28,13 @@
 			f.action = 'simpleUpdatePage.do';
 			f.submit();
 		}
+		function fn_simpleDelete(f) {
+			if (confirm('삭제할까요?')) {
+				f.action = 'simpleDelete.do';
+				f.submit();
+			}
+		}
 	</script>
 	
-	
-
 </body>
 </html>
