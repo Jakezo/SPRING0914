@@ -81,7 +81,8 @@ public class SimpleController {
 		// SimpleViewCommand에 전달을 위해서
 		// request를 model에 저장합니다.
 		model.addAttribute("request", request);
-		command = new SimpleViewCommand();
+		
+		command = new SimpleViewCommand();  // 개발자 직접 생성
 		command.execute(model);
 		
 		return "simple/simpleViewPage";
@@ -122,7 +123,7 @@ public class SimpleController {
 		
 		model.addAttribute("request", request);
 		
-		command = new SimpleDeleteCommand();
+		command = new SimpleDeleteCommand();  // 개발자 직접 생성
 		command.execute(model);
 		
 		return "redirect:simpleList.do";
