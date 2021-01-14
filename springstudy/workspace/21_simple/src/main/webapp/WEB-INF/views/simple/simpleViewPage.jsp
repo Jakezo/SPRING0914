@@ -13,7 +13,23 @@
 	작성자: ${simpleDto.writer}<br/>
 	제목: ${simpleDto.title}<br/>
 	내용: ${simpleDto.content}<br/>
-	작성일: ${simpleDto.regDate}<br/>
+	작성일: ${simpleDto.regDate}<br/><br/>
+	
+	<form method="post">
+		<input type="hidden" name="no" value="${simpleDto.no}" />
+		<input type="hidden" name="title" value="${simpleDto.title}" />
+		<input type="hidden" name="content" value="${simpleDto.content}" />
+		<input type="button" value="수정하러가기" onclick="fn_simpleUpdatePage(this.form)" />
+	</form>
+	
+	<script type="text/javascript">
+		function fn_simpleUpdatePage(f) {
+			f.action = 'simpleUpdatePage.do';
+			f.submit();
+		}
+	</script>
+	
+	
 
 </body>
 </html>

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,6 +12,7 @@ import com.koreait.simple1.command.SimpleCommand;
 import com.koreait.simple1.command.SimpleInsertCommand;
 import com.koreait.simple1.command.SimpleListCommand;
 import com.koreait.simple1.command.SimpleViewCommand;
+import com.koreait.simple1.dto.SimpleDto;
 
 
 @Controller
@@ -84,8 +86,23 @@ public class SimpleController {
 		return "simple/simpleViewPage";
 		
 	}
-	
-	
+	/*
+	@RequestMapping(value="simpleUpdatePage.do", method=RequestMethod.POST)
+	public String simpleUpdatePage(@ModelAttribute("simpleDto") SimpleDto simpleDto) {
+		return "simple/simpleUpdatePage";
+	}
+	*/
+	/*
+	@RequestMapping(value="simpleUpdatePage.do", method=RequestMethod.POST)
+	public String simpleUpdatePage(SimpleDto simpleDto) {
+		return "simple/simpleUpdatePage";
+	}
+	*/
+	@RequestMapping(value="simpleUpdatePage.do", method=RequestMethod.POST)
+	public String simpleUpdatePage(SimpleDto simpleDto, Model model) {
+		model.addAttribute("simpleDto", simpleDto);
+		return "simple/simpleUpdatePage";
+	}
 	
 	
 	
