@@ -103,14 +103,31 @@ public class ContactDao {
 		});
 	}
 	
+	/***** 4. update *****/
+	public void contactUpdate(ContactDto contactDto) {
+		sql = "UPDATE CONTACT SET NAME = ?, PHONE = ?, ADDRESS = ?, EMAIL = ?, NOTE = ? WHERE NO = ?";
+		template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, contactDto.getName());
+				ps.setString(2, contactDto.getPhone());
+				ps.setString(3, contactDto.getAddress());
+				ps.setString(4, contactDto.getEmail());
+				ps.setString(5, contactDto.getNote());
+				ps.setInt(6, contactDto.getNo());
+			}
+		});
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	/***** 5. delete *****/
+	public void contactDelete(int no) {
+		sql = "DELETE FROM CONTACT WHERE NO = ?";
+		template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, no);
+			}
+		});
+	}
 	
 }

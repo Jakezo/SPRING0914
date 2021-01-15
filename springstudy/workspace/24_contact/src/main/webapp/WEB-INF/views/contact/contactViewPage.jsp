@@ -31,6 +31,21 @@
 		<input type="button" value="전체연락처" onclick="location.href='contactListPage.do'" />
 		
 	</form>
+	
+	<script type="text/javascript">
+		function fn_contactUpdate(f) {
+			if (confirm('수정할까요?')) {
+				f.action = 'contactUpdate.do';
+				f.submit();
+			}
+		}
+		function fn_contactDelete(f) {
+			if (confirm('삭제할까요?')) {
+				f.action = 'contactDelete.do';
+				f.submit();
+			}
+		}
+	</script>
 
 </body>
 </html>

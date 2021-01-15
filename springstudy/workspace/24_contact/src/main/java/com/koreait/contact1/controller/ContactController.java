@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.koreait.contact1.command.ContactCommand;
+import com.koreait.contact1.command.ContactDeleteCommand;
 import com.koreait.contact1.command.ContactInsertCommand;
 import com.koreait.contact1.command.ContactListCommand;
+import com.koreait.contact1.command.ContactUpdateCommand;
 import com.koreait.contact1.command.ContactViewCommand;
 import com.koreait.contact1.common.SpringJdbc;
 
@@ -61,12 +63,20 @@ public class ContactController {
 		return "contact/contactViewPage";
 	}
 	
+	@RequestMapping(value="contactUpdate.do", method=RequestMethod.POST)
+	public String update(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		command = new ContactUpdateCommand();
+		command.execute(model);
+		return "redirect:contactViewPage.do?no=" + request.getParameter("no");
+	}
 	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value="contactDelete.do", method=RequestMethod.POST)
+	public String delete(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		command = new ContactDeleteCommand();
+		command.execute(model);
+		return "redirect:contactListPage.do";
+	}
 	
 }
