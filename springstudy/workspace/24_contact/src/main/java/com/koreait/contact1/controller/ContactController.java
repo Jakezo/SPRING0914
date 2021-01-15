@@ -14,19 +14,13 @@ import com.koreait.contact1.common.SpringJdbc;
 @Controller
 public class ContactController {
 
-	// field (컨트롤러에서 사용할 template)
-	private JdbcTemplate template;
-	
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {  // @Autowired로 injection된 매개변수 JdbcTemplate template를
-		this.template = template;  // 컨트롤러에서 사용할 수 있도록 넘겨 주고,
-		SpringJdbc.template = template;  // 다른 곳에서도 사용할 수 있도록 넘겨 줍니다.
+		SpringJdbc.template = template;  // 다른 곳(dao)에서 사용할 수 있도록 넘겨 줍니다.
 	}
-	
 	
 	// ContactCommand 인터페이스 선언해 둡니다.
 	private ContactCommand command;
-	
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index() {
