@@ -20,7 +20,8 @@ public class ContactViewCommand implements ContactCommand {
 		int no = Integer.parseInt(request.getParameter("no"));
 
 		ContactDao contactDao = new ContactDao();
-		ContactDto contactDto = contactDao.contactView(no);
+		// ContactDto contactDto = contactDao.contactView1(no);
+		ContactDto contactDto = contactDao.contactView2(no);
 		
 		model.addAttribute("contactDto", contactDto);
 		

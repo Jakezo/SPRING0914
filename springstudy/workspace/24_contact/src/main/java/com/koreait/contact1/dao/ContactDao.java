@@ -3,6 +3,7 @@ package com.koreait.contact1.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -26,8 +27,24 @@ public class ContactDao {
 	
 	// common 패키지의 SpringJdbc.template을 불러와서 사용하면 됩니다.
 	
-	
-	
+	/*
+		예전에 parameter들을 해킹하려는 시도가 있었습니다.
+		그래서 스프링에서는 매개변수를 final 처리를 요구할 수 있습니다.
+		
+		이렇게 전달되지 않는다면,
+		public ContactDto contactView1(int no) {
+			sql = "SELECT * FROM CONTACT WHERE NO = " + no;
+			ContactDto contactDto = template.queryForObject(sql, new BeanPropertyRowMapper<ContactDto>(ContactDto.class));
+			return contactDto;
+		}
+		
+		이렇게 전달하면 됩니다.
+		public ContactDto contactView1(final int no) {
+			sql = "SELECT * FROM CONTACT WHERE NO = " + no;
+			ContactDto contactDto = template.queryForObject(sql, new BeanPropertyRowMapper<ContactDto>(ContactDto.class));
+			return contactDto;
+		}
+	*/
 	
 	// field
 	private JdbcTemplate template;
@@ -47,10 +64,16 @@ public class ContactDao {
 		return list;
 	}
 	
-	/***** 2. view *****/
-	public ContactDto contactView(int no) {
+	/***** 2-1. view *****/
+	public ContactDto contactView1(final int no) {
 		sql = "SELECT * FROM CONTACT WHERE NO = " + no;
 		ContactDto contactDto = template.queryForObject(sql, new BeanPropertyRowMapper<ContactDto>(ContactDto.class));
+		return contactDto;
+	}
+	/***** 2-2. view *****/
+	public ContactDto contactView2(int no) {
+		sql = "SELECT * FROM CONTACT WHERE NO = ?";
+		ContactDto contactDto = template.queryForObject(sql, new BeanPropertyRowMapper<ContactDto>(ContactDto.class), no);
 		return contactDto;
 	}
 	
