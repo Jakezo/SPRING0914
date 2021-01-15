@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.koreait.contact1.command.ContactCommand;
 import com.koreait.contact1.command.ContactInsertCommand;
 import com.koreait.contact1.command.ContactListCommand;
+import com.koreait.contact1.command.ContactViewCommand;
 import com.koreait.contact1.common.SpringJdbc;
 
 @Controller
@@ -51,6 +52,15 @@ public class ContactController {
 		command.execute(model);
 		return "redirect:contactListPage.do";
 	}
+	
+	@RequestMapping(value="contactViewPage.do", method=RequestMethod.GET)
+	public String viewPage(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		command = new ContactViewCommand();
+		command.execute(model);
+		return "contact/contactViewPage";
+	}
+	
 	
 	
 	

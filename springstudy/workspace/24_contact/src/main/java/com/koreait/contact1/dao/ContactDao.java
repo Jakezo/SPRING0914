@@ -47,9 +47,12 @@ public class ContactDao {
 		return list;
 	}
 	
-
-	
-	
+	/***** 2. view *****/
+	public ContactDto contactView(int no) {
+		sql = "SELECT * FROM CONTACT WHERE NO = " + no;
+		ContactDto contactDto = template.queryForObject(sql, new BeanPropertyRowMapper<ContactDto>(ContactDto.class));
+		return contactDto;
+	}
 	
 	
 	// INSERT, UPDATE, DELETE문은 모두 template.update()를 사용합니다.
