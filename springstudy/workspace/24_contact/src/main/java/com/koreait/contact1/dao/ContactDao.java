@@ -1,11 +1,13 @@
 package com.koreait.contact1.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import com.koreait.contact1.common.SpringJdbc;
@@ -53,20 +55,53 @@ public class ContactDao {
 	// INSERT, UPDATE, DELETE문은 모두 template.update()를 사용합니다.
 
 	
-	/***** 3. insert *****/
-	public void contactInsert() {
+	/***** 3-1. insert *****/
+	public void contactInsert1(ContactDto contactDto) {
 		sql = "INSERT INTO CONTACT VALUES (CONTACT_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
 		template.update(sql, new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setString(1, x);
-				ps.setString(2, x);
-				ps.setString(3, x);
-				ps.setString(4, x);
-				ps.setString(5, x);				
+				ps.setString(1, contactDto.getName());
+				ps.setString(2, contactDto.getPhone());
+				ps.setString(3, contactDto.getAddress());
+				ps.setString(4, contactDto.getEmail());
+				ps.setString(5, contactDto.getNote());
 			}
 		});
 	}
+	/***** 3-2. insert *****/
+	public void contactInsert2(String name, String phone, String address, String email, String note) {
+		sql = "INSERT INTO CONTACT VALUES (CONTACT_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
+		template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, name);
+				ps.setString(2, phone);
+				ps.setString(3, address);
+				ps.setString(4, email);
+				ps.setString(5, note);
+			}
+		});
+	}
+	/***** 3-3. insert *****/
+	public void contactInsert3(ContactDto contactDto) {
+		template.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				sql = "INSERT INTO CONTACT VALUES (CONTACT_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, contactDto.getName());
+				ps.setString(2, contactDto.getPhone());
+				ps.setString(3, contactDto.getAddress());
+				ps.setString(4, contactDto.getEmail());
+				ps.setString(5, contactDto.getNote());
+				return ps;
+			}
+		});
+	}
+	
+	
+	
 	
 	
 	

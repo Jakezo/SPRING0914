@@ -1,5 +1,7 @@
 package com.koreait.contact1.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.koreait.contact1.command.ContactCommand;
+import com.koreait.contact1.command.ContactInsertCommand;
 import com.koreait.contact1.command.ContactListCommand;
 import com.koreait.contact1.common.SpringJdbc;
 
@@ -37,6 +40,16 @@ public class ContactController {
 	@RequestMapping(value="contactInsertPage.do", method=RequestMethod.GET)
 	public String insertPage() {
 		return "contact/contactInsertPage";
+	}
+	
+	@RequestMapping(value="contactInsert.do", method=RequestMethod.POST)
+	public String insert(HttpServletRequest request, Model model) {
+		// request : contactInsertPage.jsp에서 전달된 5개 파라미터
+		// model : ContactInsertCommand에 전달하는 파라미터
+		model.addAttribute("request", request);
+		command = new ContactInsertCommand();
+		command.execute(model);
+		return "redirect:contactListPage.do";
 	}
 	
 	
