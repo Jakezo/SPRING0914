@@ -3,7 +3,6 @@ package com.koreait.contact1.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
