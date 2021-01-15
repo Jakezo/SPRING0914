@@ -40,7 +40,10 @@ public class ContactController {
 		return "contact/contactListPage";
 	}
 	
-	
+	@RequestMapping(value="contactInsertPage.do", method=RequestMethod.GET)
+	public String insertPage() {
+		return "contact/contactInsertPage";
+	}
 	
 	
 	
