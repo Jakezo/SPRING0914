@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.koreait.mybatis1.dao.UsersDao;
+import com.koreait.mybatis1.dto.UsersDto;
 
 @Controller
 public class UserController {
@@ -44,6 +46,32 @@ public class UserController {
 		model.addAttribute("list", usersDao.usersList());
 		return "users/usersListPage";
 	}
+	
+	/*
+	@RequestMapping(value="usersInsert.do", method=RequestMethod.POST)
+	public String usersInsert1(@RequestParam("name") String name,
+			                 @RequestParam("phone") String phone) {
+		UsersDao usersDao = sqlSession.getMapper(UsersDao.class);
+		usersDao.usersInsert1(name, phone);
+		return "redirect:usersListPage.do";
+	}
+	*/
+	@RequestMapping(value="usersInsert.do", method=RequestMethod.POST)
+	public String usersInsert2(UsersDto usersDto) {
+		UsersDao usersDao = sqlSession.getMapper(UsersDao.class);
+		usersDao.usersInsert2(usersDto);
+		return "redirect:usersListPage.do";
+	}
+	
+	@RequestMapping(value="usersViewPage.do", method=RequestMethod.GET)
+	public String usersView(@RequestParam("no") int no, Model model) {
+		UsersDao usersDao = sqlSession.getMapper(UsersDao.class);
+		model.addAttribute("usersDto", usersDao.usersView(no));
+		return "users/usersViewPage";
+	}
+	
+	
+	
 	
 	
 	
