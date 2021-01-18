@@ -70,7 +70,12 @@ public class UserController {
 		return "users/usersViewPage";
 	}
 	
-	
+	@RequestMapping(value="usersUpdate.do", method=RequestMethod.POST)
+	public String usersUpdate(UsersDto usersDto) {
+		UsersDao usersDao = sqlSession.getMapper(UsersDao.class);
+		usersDao.usersUpdate(usersDto);
+		return "redirect:usersViewPage.do?no=" + usersDto.getNo();
+	}
 	
 	
 	

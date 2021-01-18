@@ -19,6 +19,8 @@ public interface UsersDao {
 	
 	public UsersDto usersView(int no);
 	
+	public void usersUpdate(UsersDto usersDto);
+	
 	
 	
 }
