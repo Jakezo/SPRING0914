@@ -23,6 +23,7 @@
 	
 	<context:component-scan base-package="com.koreait.simple2" />
 	
+	
 	<beans:bean id="simpleListCommand" class="com.koreait.simple2.command.SimpleListCommand"></beans:bean>
 	<beans:bean id="simpleViewCommand" class="com.koreait.simple2.command.SimpleViewCommand"></beans:bean>
 	<beans:bean id="simpleInsertCommand" class="com.koreait.simple2.command.SimpleInsertCommand"></beans:bean>

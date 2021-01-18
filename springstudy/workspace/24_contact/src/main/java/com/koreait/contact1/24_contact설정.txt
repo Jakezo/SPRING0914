@@ -35,7 +35,7 @@
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-jdbc</artifactId>
-	    <version>4.1.4.RELEASE</version>
+	    <version>5.1.4.RELEASE</version>
 	</dependency>
 
 5. root-context.xml에 JdbcTemplate template Bean을 정의해 둔다.
