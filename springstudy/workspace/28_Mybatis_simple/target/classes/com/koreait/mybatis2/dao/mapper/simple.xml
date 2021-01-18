@@ -16,7 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM SIMPLE
 	</select>
 	
-	
+	<insert id="simpleInsert">
+		INSERT INTO
+		SIMPLE (NO, WRITER, TITLE, CONTENT, REGDATE)
+		VALUES (SIMPLE_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, SYSDATE)
+	</insert>
 	
 	
 	
