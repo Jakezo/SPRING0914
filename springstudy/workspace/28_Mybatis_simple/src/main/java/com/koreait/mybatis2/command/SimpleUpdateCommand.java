@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koreait.mybatis2.dao.SimpleDao;
 
-public class SimpleInsertCommand implements SimpleCommand {
+public class SimpleUpdateCommand implements SimpleCommand {
 
 	@Override
 	public void execute(SqlSession sqlSession, Model model) {
@@ -19,23 +19,16 @@ public class SimpleInsertCommand implements SimpleCommand {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		RedirectAttributes rttr = (RedirectAttributes)map.get("rttr");
 		
-		String writer = request.getParameter("writer");
+		int no = Integer.parseInt(request.getParameter("no"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
 		SimpleDao simpleDao = sqlSession.getMapper(SimpleDao.class);
 		
-		int insertResult = simpleDao.simpleInsert(writer, title, content);
+		int updateResult = simpleDao.simpleUpdate(title, content, no);
 		
-		// model은 리다이렉트할 때 값의 전달이 안 됩니다.
-		// model.addAttribute("insertResult", insertResult);
-		
-		// rttr은 리다이렉트할 때도 값을 전달할 수 있습니다.
-		rttr.addAttribute("a", insertResult).addFlashAttribute("insertResult", insertResult);
-		
-		// insert 후에 이동되었음을 JSP에게 알려주겠습니다.
-		rttr.addFlashAttribute("afterInsert", true);
-		
+		rttr.addFlashAttribute("updateResult", updateResult);
+		rttr.addFlashAttribute("afterUpdate", true);
 		
 	}
 

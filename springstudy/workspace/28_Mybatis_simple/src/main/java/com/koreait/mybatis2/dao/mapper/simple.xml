@@ -22,6 +22,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES (SIMPLE_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, SYSDATE)
 	</insert>
 	
+	<select id="simpleView" parameterType="int" resultType="com.koreait.mybatis2.dto.SimpleDto">
+		SELECT *
+		  FROM SIMPLE
+		 WHERE NO = #{no}
+	</select>
+	
+	<update id="simpleUpdate">
+		UPDATE SIMPLE
+		   SET TITLE = #{param1},
+		       CONTENT = #{param2}
+		 WHERE NO = #{param3}
+	</update>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 </mapper>

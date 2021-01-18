@@ -5,6 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<script type="text/javascript">
+
+	var afterUpdate = ${afterUpdate};
+	if (afterUpdate) {
+		var updateResult = ${updateResult};
+		if (updateResult > 0) {
+			alert('수정되었습니다.');
+		} else {
+			alert('수정되지 않았습니다.');
+		}
+	}
+
+</script>
+
 </head>
 <body>
 
