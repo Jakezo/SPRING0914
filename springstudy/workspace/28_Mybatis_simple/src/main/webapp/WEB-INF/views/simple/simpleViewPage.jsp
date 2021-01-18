@@ -8,9 +8,9 @@
 
 <script type="text/javascript">
 
-	var afterUpdate = ${afterUpdate};
-	if (afterUpdate) {
-		var updateResult = ${updateResult};
+	var afterUpdate = '${afterUpdate}';
+	if (afterUpdate == 'true') {  // if (afterUpdate != '') {
+		var updateResult = '${updateResult}';
 		if (updateResult > 0) {
 			alert('수정되었습니다.');
 		} else {

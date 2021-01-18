@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.koreait.mybatis2.command.SimpleCommand;
+import com.koreait.mybatis2.command.SimpleDeleteCommand;
 import com.koreait.mybatis2.command.SimpleInsertCommand;
 import com.koreait.mybatis2.command.SimpleListCommand;
 import com.koreait.mybatis2.command.SimpleUpdateCommand;
@@ -103,8 +104,20 @@ public class SimpleController {
 		
 	}
 	
-	
-	
+	@RequestMapping(value="simpleDelete.do", method=RequestMethod.POST)
+	public String simpleDelete(HttpServletRequest request,
+			                   RedirectAttributes rttr,
+			                   Model model) {
+
+		model.addAttribute("request", request);
+		model.addAttribute("rttr", rttr);
+		
+		command = new SimpleDeleteCommand();
+		command.execute(sqlSession, model);
+		
+		return "redirect:simpleListPage.do";
+		
+	}
 	
 	
 	

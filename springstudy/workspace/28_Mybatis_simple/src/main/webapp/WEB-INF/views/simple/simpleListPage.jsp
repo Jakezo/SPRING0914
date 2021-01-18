@@ -7,11 +7,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	if (${afterInsert}) {
-		if (${insertResult} > 0 && '${param.a}' > 0) {
+	var afterInsert = '${afterInsert}';
+	if (afterInsert == 'true') {  // if (afterInsert != '') {
+		var insertResult = '${insertResult}';
+		if (insertResult > 0 && '${param.a}' > 0) {  //  && '${param.a}' > 0 : addAttribute("a", InsertResult) 테스트용 코드입니다. 
 			alert('삽입되었습니다.');
 		} else {
 			alert('실패하였습니다.');
+		}
+	}
+	var afterDelete = '${afterDelete}';
+	if (afterDelete == 'true') {  // if (afterDelete != '') {
+		var deleteResult = '${deleteResult}';
+		if (deleteResult > 0) {
+			alert('삭제되었습니다.');
+		} else {
+			alert('삭제되지 않았습니다.');
 		}
 	}
 </script>
