@@ -77,10 +77,11 @@ public class UserController {
 		return "redirect:usersViewPage.do?no=" + usersDto.getNo();
 	}
 	
-	
-	
-	
-	
-	
+	@RequestMapping(value="usersDelete.do", method=RequestMethod.POST)
+	public String usersDelete(@RequestParam("no") int no) {
+		UsersDao usersDao = sqlSession.getMapper(UsersDao.class);
+		usersDao.usersDelete(no);
+		return "redirect:usersListPage.do";
+	}
 	
 }

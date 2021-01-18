@@ -12,6 +12,12 @@
 			f.submit();
 		}
 	}
+	function fn_usersDelete(f) {
+		if (confirm('삭제할까요?')) {
+			f.action = 'usersDelete.do';
+			f.submit();
+		}
+	}
 </script>
 </head>
 <body>
