@@ -6,10 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css" href="resources/style/common.css">
+
 </head>
 <body>
 
-	<table border="1">
+	<table>
 		<thead>
 			<tr>
 				<td>번호</td>
@@ -20,6 +23,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		<!-- 
 			<c:if test="${empty list}">
 				<tr>
 					<td colspan="5">없음</td>
@@ -36,6 +40,7 @@
 					</tr>
 				</c:forEach>
 			</c:if>
+		-->
 		</tbody>
 		<tfoot>
 			<tr>
