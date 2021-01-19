@@ -23,7 +23,6 @@
 			</tr>
 		</thead>
 		<tbody>
-		<!-- 
 			<c:if test="${empty list}">
 				<tr>
 					<td colspan="5">없음</td>
@@ -33,14 +32,15 @@
 				<c:forEach var="boardDto" items="${list}">
 					<tr>
 						<td>${boardDto.no}</td>
-						<td>${boardDto.filename}</td>
+						<td>
+							<img alt="${boardDto.filename}" src="resources/storage/${boardDto.filename}">
+						</td>
 						<td>${boardDto.writer}</td>
 						<td>${boardDto.title}</td>
 						<td>${boardDto.regDate}</td>
 					</tr>
 				</c:forEach>
 			</c:if>
-		-->
 		</tbody>
 		<tfoot>
 			<tr>
