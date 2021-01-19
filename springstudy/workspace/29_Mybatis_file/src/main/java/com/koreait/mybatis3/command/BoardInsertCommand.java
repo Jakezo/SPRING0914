@@ -38,16 +38,20 @@ public class BoardInsertCommand implements BoardCommand {
 			List<MultipartFile> files = multipartRequest.getFiles("files");
 		*/
 		
+		
+		BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
+		
+		
 		List<MultipartFile> files = multipartRequest.getFiles("files");
 		
 		// 첨부를 했는지 검사
-		if (files != null) {
+		if (files != null && !files.isEmpty()) {
 			
 			// 첨부를 하나씩 꺼내기
 			for (MultipartFile file : files) {
 				
 				// 꺼낸 첨부가 있는지 검사
-				if (file != null) {
+				if (file != null && !file.isEmpty()) {
 					
 					// MultipartFile file에서 첨부하는 파일명을 알아냅니다.
 					String originalFilename = file.getOriginalFilename();
@@ -90,7 +94,6 @@ public class BoardInsertCommand implements BoardCommand {
 					}
 					
 					// 테이블에 데이터를 저장합니다.
-					BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
 					boardDao.boardInsert(writer, title, content, uploadFilename);
 					
 				}  // if (file != null) {
@@ -98,6 +101,9 @@ public class BoardInsertCommand implements BoardCommand {
 			}  // for (MultipartFile file : files) {
 			
 		}  // if (files != null) {
+		
+		// 첨부가 없는 데이터를 테이블에 저장합니다.
+		boardDao.boardInsert(writer, title, content, "");
 		
 	}
 
