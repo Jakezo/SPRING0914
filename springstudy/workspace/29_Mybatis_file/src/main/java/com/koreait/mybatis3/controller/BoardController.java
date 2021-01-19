@@ -1,7 +1,5 @@
 package com.koreait.mybatis3.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.koreait.mybatis3.command.BoardInsertCommand;
 import com.koreait.mybatis3.command.BoardListCommand;
 
 @Controller
@@ -20,11 +19,14 @@ public class BoardController {
 	
 	
 	private BoardListCommand boardListCommand;
+	private BoardInsertCommand boardInsertCommand;
 	
 	
 	@Autowired
-	public void setCommand(BoardListCommand boardListCommand) {
+	public void setCommand(BoardListCommand boardListCommand,
+			               BoardInsertCommand boardInsertCommand) {
 		this.boardListCommand = boardListCommand;
+		this.boardInsertCommand = boardInsertCommand;
 	}
 	
 	
@@ -52,7 +54,8 @@ public class BoardController {
 		// 첨부가 없을 때 파라미터 : HttpServletRequest request
 		// 첨부가 있을 때 파라미터 : MultipartHttpServletRequest multipartRequest
 		model.addAttribute("multipartRequest", multipartRequest);
-		return "";
+		boardInsertCommand.execute(sqlSession, model);
+		return "redirect:boardListPage.do";
 	}
 	
 }
