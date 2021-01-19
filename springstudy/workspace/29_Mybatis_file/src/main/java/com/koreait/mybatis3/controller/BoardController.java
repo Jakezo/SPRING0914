@@ -1,6 +1,7 @@
 package com.koreait.mybatis3.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.koreait.mybatis3.command.BoardInsertCommand;
 import com.koreait.mybatis3.command.BoardListCommand;
 import com.koreait.mybatis3.command.BoardViewCommand;
+import com.koreait.mybatis3.command.DownloadCommand;
 
 @Controller
 public class BoardController {
@@ -24,14 +26,17 @@ public class BoardController {
 	private BoardListCommand boardListCommand;
 	private BoardInsertCommand boardInsertCommand;
 	private BoardViewCommand boardViewCommand;
+	private DownloadCommand downloadCommand;
 	
 	@Autowired
 	public void setCommand(BoardListCommand boardListCommand,
 			               BoardInsertCommand boardInsertCommand,
-			               BoardViewCommand boardViewCommand) {
+			               BoardViewCommand boardViewCommand,
+			               DownloadCommand downloadCommand) {
 		this.boardListCommand = boardListCommand;
 		this.boardInsertCommand = boardInsertCommand;
 		this.boardViewCommand = boardViewCommand;
+		this.downloadCommand = downloadCommand;
 	}
 	
 	
@@ -71,6 +76,17 @@ public class BoardController {
 		return "board/boardViewPage";
 	}
 	
+	@RequestMapping(value="download.do", method=RequestMethod.GET)
+	public void download( HttpServletRequest request,
+			              HttpServletResponse response,  // 다운로드는 response가 필요합니다.
+			              Model model) {
+		
+		model.addAttribute("request", request);
+		model.addAttribute("response", response);
+		
+		downloadCommand.execute(sqlSession, model);
+		
+	}
 	
 	
 	

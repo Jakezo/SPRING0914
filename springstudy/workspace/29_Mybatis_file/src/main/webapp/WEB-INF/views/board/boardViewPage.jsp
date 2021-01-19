@@ -16,7 +16,8 @@
 		<input type="text" name="title" value="${boardDto.title}"/><br/><br/>
 		내용<br/>
 		<input type="text" name="content" value="${boardDto.content}"/><br/><br/>
-		첨부 이미지<br/>
+		첨부 이미지 <a href="download.do?filename=${boardDto.filename}">첨부파일 다운로드</a>
+		<br/><br/>
 		<img alt="${boardDto.filename}" src="resources/storage/${boardDto.filename}">
 		
 	</form>
