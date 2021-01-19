@@ -69,6 +69,7 @@ public class DownloadCommand implements BoardCommand {
 			// response.setHeader("Content-Type", "application/x-msdownload");
 			response.setHeader("Content-Type", MediaType.APPLICATION_OCTET_STREAM_VALUE);
 			response.setHeader("Content-Disposition", "attachment; filename=" + new String(URLEncoder.encode(downloadFilename, "utf-8")));
+			//response.setHeader("Content-Disposition", "attachment; filename=" + downloadFilename);
 			response.setHeader("Content-Length", file.length() + "");
 			
 			// 입력 스트림 : 다운로드 할 파일을 읽어서,

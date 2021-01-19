@@ -12,5 +12,7 @@ public interface BoardDao {
 	
 	public BoardDto boardView(int no);
 	
+	public int boardDelete(int no);
+	
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.koreait.mybatis3.command.BoardDeleteCommand;
 import com.koreait.mybatis3.command.BoardInsertCommand;
 import com.koreait.mybatis3.command.BoardListCommand;
 import com.koreait.mybatis3.command.BoardViewCommand;
@@ -26,16 +27,19 @@ public class BoardController {
 	private BoardListCommand boardListCommand;
 	private BoardInsertCommand boardInsertCommand;
 	private BoardViewCommand boardViewCommand;
+	private BoardDeleteCommand boardDeleteCommand;
 	private DownloadCommand downloadCommand;
 	
 	@Autowired
 	public void setCommand(BoardListCommand boardListCommand,
 			               BoardInsertCommand boardInsertCommand,
 			               BoardViewCommand boardViewCommand,
+			               BoardDeleteCommand boardDeleteCommand,
 			               DownloadCommand downloadCommand) {
 		this.boardListCommand = boardListCommand;
 		this.boardInsertCommand = boardInsertCommand;
 		this.boardViewCommand = boardViewCommand;
+		this.boardDeleteCommand = boardDeleteCommand;
 		this.downloadCommand = downloadCommand;
 	}
 	
@@ -88,15 +92,14 @@ public class BoardController {
 		
 	}
 	
-	
-	
+	@RequestMapping(value="boardDelete.do", method=RequestMethod.POST)
+	public String boardDelete(HttpServletRequest request,
+			                  Model model) {
+		
+		model.addAttribute("request", request);
+		boardDeleteCommand.execute(sqlSession, model);
+		return "redirect:boardListPage.do";
+		
+	}
 	
 }
-
-
-
-
-
-
-
-
