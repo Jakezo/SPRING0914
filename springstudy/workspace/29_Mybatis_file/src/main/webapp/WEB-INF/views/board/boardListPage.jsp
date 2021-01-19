@@ -36,7 +36,7 @@
 							<img alt="${boardDto.filename}" src="resources/storage/${boardDto.filename}">
 						</td>
 						<td>${boardDto.writer}</td>
-						<td>${boardDto.title}</td>
+						<td><a href="boardViewPage.do?no=${boardDto.no}">${boardDto.title}</a></td>
 						<td>${boardDto.regDate}</td>
 					</tr>
 				</c:forEach>

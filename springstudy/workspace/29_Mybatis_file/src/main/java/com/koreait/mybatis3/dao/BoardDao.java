@@ -10,4 +10,7 @@ public interface BoardDao {
 	
 	public int boardInsert(String writer, String title, String content, String filename);
 	
+	public BoardDto boardView(int no);
+	
+	
 }

@@ -100,11 +100,11 @@ public class BoardInsertCommand implements BoardCommand {
 				
 			}  // for (MultipartFile file : files) {
 			
-		}  // if (files != null) {
+		} else {  // 첨부가 없는 데이터를 테이블에 저장합니다.
+			
+			boardDao.boardInsert(writer, title, content, "");
 		
-		// 첨부가 없는 데이터를 테이블에 저장합니다.
-		boardDao.boardInsert(writer, title, content, "");
-		
+		}
 	}
 
 }
