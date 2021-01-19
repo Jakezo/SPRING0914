@@ -33,7 +33,8 @@
 	</bean>
 	
 	
-	
+	<!-- command -->
+	<bean id="boardListCommand" class="com.koreait.mybatis3.command.BoardListCommand" />
 	
 	
 	
