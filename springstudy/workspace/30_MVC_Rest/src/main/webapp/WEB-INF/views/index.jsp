@@ -190,13 +190,12 @@
 		});
 	}
 	
-
-	
-	
 </script>
 <title>Insert title here</title>
 </head>
 <body>
+
+	<a href="memberManagePage.do">테이블 예제로 이동하기</a><br/><br/>
 
 	<input type="button" value="텍스트가져오기" id="btn1" /><br/>
 	<div id="content1"></div>
