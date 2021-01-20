@@ -1,10 +1,13 @@
 package com.koreait.rest.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,10 +62,20 @@ public class MyRestController {
 	}
 	*/
 	
+	@GetMapping(value="getJSONByMap",
+		        produces="application/json; charset=utf-8")
+	public Map<String, Object> getJSONByMap() {
+		// Map도 jackson이 자동으로 변환해서 보내줍니다.
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("name", "제시카");
+		map.put("age", 30);
+		return map;
+	}
+	
 	@GetMapping(value="getXML",
 			    produces="application/xml; charset=utf-8")
 	public PersonDto getXML() {
-		return new PersonDto("앨리스", 30);
+		return new PersonDto("앨리스", 40);
 		// jackson 라이브러리가 Bean을 XML로 자동으로 변환합니다.
 		/*
 			<name>앨리스</name>
@@ -99,15 +112,21 @@ public class MyRestController {
 	}
 	
 	
+	// REST : URI + Method(GET, POST, PUT, DELETE)
+	// 요청 파라미터를 URI에 포함시킬 수 있습니다.
 	
+	// 기존 : simpleView?no=1
+	// REST : simple/1
 	
+	// @PathVariable
+	// 1. 주로 @RestController에서 사용됩니다.
+	// 2. URI의 일부를 '{파라미터}'로 처리해서 변수에 저장할 수 있습니다.
 	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping(value="name/{name}/age/{age}",  // URI에 {name}과 {age}는 요청 파라미터입니다.
+			    produces="application/json; charset=utf-8")
+	public PersonDto sendPath(@PathVariable("name") String name,
+			                  @PathVariable("age") int age) {  // 파라미터가 URI에 포함된 경우 @PathVariable을 사용합니다.
+		return new PersonDto(name, age);
+	}
 	
 }

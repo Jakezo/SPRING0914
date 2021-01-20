@@ -11,10 +11,12 @@
 	$(document).ready(function(){
 		$('#btn1').click( fn_getText );  // btn1을 클릭하면 fn_getText 함수가 실행됩니다.
 		$('#btn2').click( fn_getJSON );
-		$('#btn3').click( fn_getXML );
-		$('#btn4').click( fn_getJSONList );
-		$('#btn5').click( fn_getXMLList );
-		$('#btn6').click( fn_sendJSON );
+		$('#btn3').click( fn_getJSONByMap );
+		$('#btn4').click( fn_getXML );
+		$('#btn5').click( fn_getJSONList );
+		$('#btn6').click( fn_getXMLList );
+		$('#btn7').click( fn_sendJSON );
+		$('#btn8').click( fn_sendPath );
 	});
 	
 	// 함수
@@ -49,6 +51,20 @@
 		});
 	}
 
+	function fn_getJSONByMap() {
+		$.ajax({
+			url: 'getJSONByMap',
+			type: 'get',
+			dataType: 'json',
+			success: function(responseObj) {
+				$('#content3').text('이름: ' + responseObj.name + ', 나이: ' + responseObj.age + '살');
+			},
+			error: function() {
+				alert('실패');
+			}
+		});
+	}
+	
 	function fn_getXML() {
 		$.ajax({
 			url: 'getXML',
@@ -60,7 +76,7 @@
 				// $(responseXML).find('age'))          <age>30</age>
 				// $(responseXML).find('name').text()   앨리스
 				// $(responseXML).find('age').text()    30
-				$('#content3').text('이름: ' + $(responseXML).find('name').text() + ', 나이: ' + $(responseXML).find('age').text() + '살');
+				$('#content4').text('이름: ' + $(responseXML).find('name').text() + ', 나이: ' + $(responseXML).find('age').text() + '살');
 			},
 			error: function() {
 				alert('실패');
@@ -84,13 +100,13 @@
 						...	
 					]
 				*/
-				$('#content4').empty();
+				$('#content5').empty();
 				$.each(responseList, function(idx, person) {
 					$('<tr>')
 					.append( $('<td>').html(idx + 1) )
 					.append( $('<td>').html(person.name) )
 					.append( $('<td>').html(person.age) )
-					.appendTo('tbody')
+					.appendTo('#content5')
 				});
 			},
 			error: function() {
@@ -120,14 +136,14 @@
 						...
 					]
 				*/
-				$('#content5').empty();
+				$('#content6').empty();
 				$(responseList).find('item').each(function(idx){
 					// $(responseList).find('item') == $(this)
 					$('<tr>')
 					.append( $('<td>').html(idx + 1) )
 					.append( $('<td>').html($(this).find('name').text()) )
 					.append( $('<td>').html($(this).find('age').text()) )
-					.appendTo('tbody');
+					.appendTo('#content6');
 				});
 			},
 			error: function() {
@@ -150,13 +166,32 @@
 			contentType: 'application/json',  // 컨트롤러로 보내는 데이터의 타입입니다.
 			dataType: 'json',  // 컨트롤러에서 받아 오는 데이터의 타입입니다.
 			success: function(responseObj){
-				$('#content6').text('이름: ' + responseObj.name + ', 나이: ' + responseObj.age + '살');
+				$('#content7').text('이름: ' + responseObj.name + ', 나이: ' + responseObj.age + '살');
 			},
 			error: function() {
 				alert('실패');
 			}
 		});
 	}
+	
+	function fn_sendPath() {
+		var name = $('#name2').val();
+		var age = $('#age2').val();
+		$.ajax({
+			url: 'name/' + name + '/age/' + age,  // @GetMapping(value="name/{name}/age/{age}")
+			type: 'get',
+			dataType: 'json',
+			success: function(responseObj) {
+				$('#content8').text('이름: ' + responseObj.name + ', 나이: ' + responseObj.age + '살');
+			},
+			error: function() {
+				alert('실패');
+			}
+		});
+	}
+	
+
+	
 	
 </script>
 <title>Insert title here</title>
@@ -173,26 +208,17 @@
 	
 	<br/>
 	
-	<input type="button" value="XML가져오기" id="btn3" /><br/>
+	<input type="button" value="Map을 JSON으로 가져오기" id="btn3" /><br/>
 	<div id="content3"></div>
 	
 	<br/>
 	
-	<input type="button" value="JSON List 가져오기" id="btn4" /><br/>
-	<table border="1">
-		<thead>
-			<tr>
-				<td>번호</td>
-				<td>성명</td>
-				<td>나이</td>
-			</tr>
-		</thead>
-		<tbody id="content4"></tbody>
-	</table>
-
+	<input type="button" value="XML가져오기" id="btn4" /><br/>
+	<div id="content4"></div>
+	
 	<br/>
 	
-	<input type="button" value="XML List 가져오기" id="btn5" /><br/>
+	<input type="button" value="JSON List 가져오기" id="btn5" /><br/>
 	<table border="1">
 		<thead>
 			<tr>
@@ -203,15 +229,38 @@
 		</thead>
 		<tbody id="content5"></tbody>
 	</table>
+
+	<br/>
+	
+	<input type="button" value="XML List 가져오기" id="btn6" /><br/>
+	<table border="1">
+		<thead>
+			<tr>
+				<td>번호</td>
+				<td>성명</td>
+				<td>나이</td>
+			</tr>
+		</thead>
+		<tbody id="content6"></tbody>
+	</table>
 	
 	<br/>
 	
 	<form>
 		<input type="text" id="name" placeholder="이름" /><br/>
 		<input type="text" id="age" placeholder="나이" /><br/>
-		<input type="button" value="정보보내기" id="btn6" /><br/>
+		<input type="button" value="정보보내기" id="btn7" /><br/>
 	</form>
-	<div id="content6"></div>
+	<div id="content7"></div>
+	
+	<br/>
+	
+	<form>
+		<input type="text" id="name2" placeholder="이름" /><br/>
+		<input type="text" id="age2" placeholder="나이" /><br/>
+		<input type="button" value="정보보내기" id="btn8" /><br/>
+	</form>
+	<div id="content8"></div>
 	
 </body>
 </html>
