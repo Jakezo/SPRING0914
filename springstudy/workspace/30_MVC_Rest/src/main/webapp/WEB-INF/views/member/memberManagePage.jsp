@@ -14,6 +14,7 @@
 		memberInsert();
 		memberUpdate();
 		memberDelete();
+		init();
 	});
 	
 	/***** 1. 회원 목록 *****/
@@ -40,6 +41,18 @@
 	function memberDelete() {
 		
 	}
+	
+	/***** 6. 초기화 *****/
+	function init() {
+		$('#btnInit').click(function(){
+			$('input:text[name="id"]').val('');
+			$('input:text[name="name"]').val('');
+			$('input:radio[name="gender"]').prop('checked', false);
+			$('select[name="address"]').val('');
+			memberList();
+		});
+	}
+	
 </script>
 <title>Insert title here</title>
 <style type="text/css">
@@ -82,6 +95,7 @@
 			<input type="radio" name="gender" value="여" />여<br/><br/>
 			주소<br/>
 			<select name="address">
+				<option value="">지역 선택</option>
 				<option value="서울">서울</option>
 				<option value="인천">인천</option>
 				<option value="부산">부산</option>
