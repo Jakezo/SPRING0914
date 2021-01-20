@@ -45,7 +45,7 @@ public class BoardInsertCommand implements BoardCommand {
 		List<MultipartFile> files = multipartRequest.getFiles("files");
 		
 		// 첨부를 했는지 검사
-		if (files != null && !files.isEmpty()) {
+		if (files != null) {
 			
 			// 첨부를 하나씩 꺼내기
 			for (MultipartFile file : files) {
