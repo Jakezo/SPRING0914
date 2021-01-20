@@ -99,12 +99,12 @@
 			<table>
 				<thead>
 					<tr>
-						<td>회원번호</td>
-						<td>아이디</td>
-						<td>이름</td>
-						<td>성별</td>
-						<td>주소</td>
-						<td>비고</td>
+						<th>회원번호</th>
+						<th>아이디</th>
+						<th>이름</th>
+						<th>성별</th>
+						<th>주소</th>
+						<th>비고</th>
 					</tr>
 				</thead>
 				<tbody id="memberList"></tbody>
