@@ -78,7 +78,15 @@ public class MyRestController {
 		return list;
 	}
 	
-	
+	@GetMapping(value="getXMLList",
+			    produces="application/xml; charset=utf-8")
+	public List<PersonDto> getXMLList() {
+		List<PersonDto> list = new ArrayList<PersonDto>();
+		for (int i = 0; i < 10; i++) {
+			list.add(new PersonDto("사용자" + (i + 1), 20 + i));
+		}
+		return list;
+	}
 	
 	
 	

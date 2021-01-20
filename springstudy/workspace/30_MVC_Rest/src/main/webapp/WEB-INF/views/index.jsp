@@ -13,6 +13,7 @@
 		$('#btn2').click( fn_getJSON );
 		$('#btn3').click( fn_getXML );
 		$('#btn4').click( fn_getJSONList );
+		$('#btn5').click( fn_getXMLList );
 	});
 	
 	// 함수
@@ -82,7 +83,14 @@
 						...	
 					]
 				*/
-				
+				$('#content4').empty();
+				$.each(responseList, function(idx, person) {
+					$('<tr>')
+					.append( $('<td>').html(idx + 1) )
+					.append( $('<td>').html(person.name) )
+					.append( $('<td>').html(person.age) )
+					.appendTo('tbody')
+				});
 			},
 			error: function() {
 				alert('실패');
@@ -90,10 +98,42 @@
 		});
 	}
 	
-	
-	
-	
-	
+	function fn_getXMLList() {
+		$.ajax({
+			url: 'getXMLList',
+			type: 'get',
+			dataType: 'xml',
+			success: function(responseList) {
+				/*
+					responseList는 아래와 같습니다.
+					
+					확인하려면 "http://localhost:9090/rest/getXMLList" 실행 후 주소를 입력합니다. 
+						<item>
+							<name>사용자1</name>
+							<age>20</age>
+						</item>
+						<item>
+							<name>사용자2</name>
+							<age>21</age>
+						</item>
+						...
+					]
+				*/
+				$('#content5').empty();
+				$(responseList).find('item').each(function(idx){
+					// $(responseList).find('item') == $(this)
+					$('<tr>')
+					.append( $('<td>').html(idx + 1) )
+					.append( $('<td>').html($(this).find('name').text()) )
+					.append( $('<td>').html($(this).find('age').text()) )
+					.appendTo('tbody');
+				});
+			},
+			error: function() {
+				alert('실패');
+			}
+		});
+	}
 	
 </script>
 <title>Insert title here</title>
@@ -116,7 +156,30 @@
 	<br/>
 	
 	<input type="button" value="JSON List 가져오기" id="btn4" /><br/>
-	<div id="content4"></div>
+	<table border="1">
+		<thead>
+			<tr>
+				<td>번호</td>
+				<td>성명</td>
+				<td>나이</td>
+			</tr>
+		</thead>
+		<tbody id="content4"></tbody>
+	</table>
+
+	<br/>
+	
+	<input type="button" value="XML List 가져오기" id="btn5" /><br/>
+	<table border="1">
+		<thead>
+			<tr>
+				<td>번호</td>
+				<td>성명</td>
+				<td>나이</td>
+			</tr>
+		</thead>
+		<tbody id="content5"></tbody>
+	</table>
 	
 	
 	
