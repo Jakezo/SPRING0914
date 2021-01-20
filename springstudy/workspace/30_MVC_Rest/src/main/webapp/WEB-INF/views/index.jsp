@@ -71,7 +71,7 @@
 			type: 'get',
 			dataType: 'xml',
 			success: function(responseXML) {
-				// responseXML                          <name>앨리스</name><age>30</age>
+				// responseXML                          <PersonDto><name>앨리스</name><age>30</age></PersonDto>
 				// $(responseXML).find('name')          <name>앨리스</name>
 				// $(responseXML).find('age'))          <age>30</age>
 				// $(responseXML).find('name').text()   앨리스
