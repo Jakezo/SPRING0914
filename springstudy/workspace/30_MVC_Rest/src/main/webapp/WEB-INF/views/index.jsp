@@ -10,6 +10,9 @@
 	// 페이지 로드 이벤트
 	$(document).ready(function(){
 		$('#btn1').click( fn_getText );  // btn1을 클릭하면 fn_getText 함수가 실행됩니다.
+		$('#btn2').click( fn_getJSON );
+		$('#btn3').click( fn_getXML );
+		$('#btn4').click( fn_getJSONList );
 	});
 	
 	// 함수
@@ -27,7 +30,71 @@
 			}
 		});
 	}
+	
+	function fn_getJSON() {
+		$.ajax({
+			url: 'getJSON',
+			type: 'get',
+			dataType: 'json',
+			success: function(responseObj) {
+				// JSON 데이터는 Javascript의 객체입니다.
+				$('#content2').text('이름: ' + responseObj.name + ', 나이: ' + responseObj.age + '살');
+				// $('#content2').text('이름: ' + responseObj['name'] + ', 나이: ' + responseObj['age'] + '살');
+			},
+			error: function() {
+				alert('실패');
+			}
+		});
+	}
 
+	function fn_getXML() {
+		$.ajax({
+			url: 'getXML',
+			type: 'get',
+			dataType: 'xml',
+			success: function(responseXML) {
+				// responseXML                          <name>앨리스</name><age>30</age>
+				// $(responseXML).find('name')          <name>앨리스</name>
+				// $(responseXML).find('age'))          <age>30</age>
+				// $(responseXML).find('name').text()   앨리스
+				// $(responseXML).find('age').text()    30
+				$('#content3').text('이름: ' + $(responseXML).find('name').text() + ', 나이: ' + $(responseXML).find('age').text() + '살');
+			},
+			error: function() {
+				alert('실패');
+			}
+		});
+	}
+	
+	function fn_getJSONList() {
+		$.ajax({
+			url: 'getJSONList',
+			type: 'get',
+			dataType: 'json',
+			success: function(responseList) {
+				// 자바의 ArrayList는 jackson에 의해서
+				// 자바스크립트의 배열로 변환됩니다.  
+				/*
+					responseList = [
+						{"name": "사용자1", "age": 20},
+						{"name": "사용자2", "age": 21},
+						{"name": "사용자3", "age": 22},
+						...	
+					]
+				*/
+				
+			},
+			error: function() {
+				alert('실패');
+			}
+		});
+	}
+	
+	
+	
+	
+	
+	
 </script>
 <title>Insert title here</title>
 </head>
@@ -35,7 +102,29 @@
 
 	<input type="button" value="텍스트가져오기" id="btn1" /><br/>
 	<div id="content1"></div>
-
+	
+	<br/>
+	
+	<input type="button" value="JSON가져오기" id="btn2" /><br/>
+	<div id="content2"></div>
+	
+	<br/>
+	
+	<input type="button" value="XML가져오기" id="btn3" /><br/>
+	<div id="content3"></div>
+	
+	<br/>
+	
+	<input type="button" value="JSON List 가져오기" id="btn4" /><br/>
+	<div id="content4"></div>
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
 

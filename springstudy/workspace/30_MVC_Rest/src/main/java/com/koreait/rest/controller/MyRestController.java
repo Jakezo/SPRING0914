@@ -1,9 +1,15 @@
 package com.koreait.rest.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.koreait.rest.dto.PersonDto;
 
 /*
 	
@@ -28,6 +34,53 @@ public class MyRestController {
 	public String getText() {
 		return "안녕하세요";
 	}
+	
+	
+	@GetMapping(value="getJSON",
+			    produces="application/json; charset=utf-8")
+	public PersonDto getJSON() {
+		return new PersonDto("제임스", 20);
+		// jackson 라이브러리는
+		// Bean을 자동으로 JSON으로 바꿔줍니다.
+	}
+	
+	/*
+	public String getJSON() {
+		// 1) 우리가 연습한 json-simple
+		JSONObject obj = new JSONObject();
+		obj.put("name", "제임스");
+		obj.put("age", 20);
+		return obj.toJSONString();
+		// 2) open api
+		String responseBody = "{\"name\": \"제임스\", \"age\": 20}";
+		return responseBody;
+	}
+	*/
+	
+	@GetMapping(value="getXML",
+			    produces="application/xml; charset=utf-8")
+	public PersonDto getXML() {
+		return new PersonDto("앨리스", 30);
+		// jackson 라이브러리가 Bean을 XML로 자동으로 변환합니다.
+		/*
+			<name>앨리스</name>
+			<age>30</age>
+		*/
+	}
+	
+	@GetMapping(value="getJSONList",
+			    produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<PersonDto> getJSONList() {
+		List<PersonDto> list = new ArrayList<PersonDto>();
+		for (int i = 0; i < 10; i++) {
+			list.add(new PersonDto("사용자" + (i + 1), 20 + i));
+		}
+		return list;
+	}
+	
+	
+	
+	
 	
 	
 	
