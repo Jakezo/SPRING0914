@@ -14,6 +14,7 @@
 		$('#btn3').click( fn_getXML );
 		$('#btn4').click( fn_getJSONList );
 		$('#btn5').click( fn_getXMLList );
+		$('#btn6').click( fn_sendJSON );
 	});
 	
 	// 함수
@@ -135,6 +136,28 @@
 		});
 	}
 	
+	function fn_sendJSON() {
+		var name = $('#name').val();
+		var age = $('#age').val();
+		var sendObj = {
+				'name': name,
+				'age': age
+			};  // 아직은 자바스크립트의 객체입니다. JSON이 아닙니다.
+		$.ajax({
+			url: 'sendJSON',
+			type: 'post',  // @PostMapping
+			data: JSON.stringify(sendObj),  // 컨트롤러로 보내는 데이터 (JSON문자열로 바꿔서 보냅니다.)
+			contentType: 'application/json',  // 컨트롤러로 보내는 데이터의 타입입니다.
+			dataType: 'json',  // 컨트롤러에서 받아 오는 데이터의 타입입니다.
+			success: function(responseObj){
+				$('#content6').text('이름: ' + responseObj.name + ', 나이: ' + responseObj.age + '살');
+			},
+			error: function() {
+				alert('실패');
+			}
+		});
+	}
+	
 </script>
 <title>Insert title here</title>
 </head>
@@ -181,13 +204,14 @@
 		<tbody id="content5"></tbody>
 	</table>
 	
+	<br/>
 	
-	
-	
-	
-	
-	
+	<form>
+		<input type="text" id="name" placeholder="이름" /><br/>
+		<input type="text" id="age" placeholder="나이" /><br/>
+		<input type="button" value="정보보내기" id="btn6" /><br/>
+	</form>
+	<div id="content6"></div>
 	
 </body>
 </html>
-
