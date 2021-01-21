@@ -84,6 +84,32 @@
 	/***** 3. 회원 삽입 *****/
 	function memberInsert() {
 		
+		// URI : member, Method : POST
+		// 입력데이터 -> JSON 데이터로 만듭니다.
+		// 만들어진 JSON 데이터를 컨트롤러로 넘겨줍니다.
+		// POST 방식은 파라미터를 본문(body)에 실어 줍니다. (JSON 데이터를 body에 실어 줍니다.)
+		// 그래서 컨트롤러는 요청 파라미터(request)를 본문에서 꺼내야 합니다. -> @RequestBody 애너테이션이 필요하다는 의미입니다.
+		
+		$('#btnInsert').click(function(){
+			var id = $('input:text[name="id"]').val();
+			var name = $('input:text[name="name"]').val();
+			var gender = $('input:radio[name="gender"]:checked').val();
+			var address = $('select[name="address"]').val();
+			var sendObj = {
+					"id": id,
+					"name": name,
+					"gender": gender,
+					"address": address
+				};
+			$.ajax({
+				url: 'member',
+				type: 'post',
+				data: JSON.stringify(sendObj),  // 컨트롤러로 보내는 JSON 데이터(신규회원정보)
+				contentType: 'application/json',  // 컨트롤러로 보내는 데이터의 타입
+			});
+			
+		});
+		
 	}
 	
 	/***** 4. 회원 수정 *****/
