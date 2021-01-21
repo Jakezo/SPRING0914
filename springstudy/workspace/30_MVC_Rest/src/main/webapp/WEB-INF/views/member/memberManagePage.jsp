@@ -106,6 +106,25 @@
 				type: 'post',
 				data: JSON.stringify(sendObj),  // 컨트롤러로 보내는 JSON 데이터(신규회원정보)
 				contentType: 'application/json',  // 컨트롤러로 보내는 데이터의 타입
+				dataType: 'json',
+				success: function(responseObj) {
+					/*
+						responseObj = {
+							"result": 1 (성공)
+							또는
+							"result": 0 (실패)
+						}
+					*/
+					if (responseObj.result == 1) {
+						alert('신규 회원이 등록되었습니다.');
+						memberList();  // 새로 회원 목록을 출력합니다.
+					} else {
+						alert('신규 회원 등록에 실패했습니다.');
+					}
+				},
+				error: function(){
+					alert('실패');
+				}
 			});
 			
 		});
