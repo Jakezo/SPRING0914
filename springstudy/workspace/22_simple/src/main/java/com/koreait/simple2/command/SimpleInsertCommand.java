@@ -20,7 +20,6 @@ public class SimpleInsertCommand implements SimpleCommand {
 	public void execute(Model model) {
 		
 		Map<String, Object> map = model.asMap();
-		
 		HttpServletRequest request = (HttpServletRequest) map.get("request");  // model에 저장된 속성(attribute)을 키 값으로 사용하면 됩니다.
 		
 		String writer = request.getParameter("writer");

@@ -8,17 +8,8 @@ import com.koreait.simple2.dao.SimpleDao;
 public class SimpleListCommand implements SimpleCommand {
 
 	// field
-	//@Autowired
-	//private SimpleDao simpleDao;
-	
-	
-		private SimpleDao simpleDao;
-		
-		@Autowired
-		public void setDao(SimpleDao simpleDao) {
-			this.simpleDao = simpleDao;
-		}
-	
+	@Autowired
+	private SimpleDao simpleDao;
 	
 	// method
 	@Override

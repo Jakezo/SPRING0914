@@ -29,8 +29,10 @@ public class ContactUpdateCommand implements ContactCommand {
 		
 		AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppContext.class);
 		ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
+		
 		contactDao.contactUpdate(new ContactDto(no, name, phone, address, email, note));
-		//ctx.close();
+		
+		ctx.close();
 
 	}
 

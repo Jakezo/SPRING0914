@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import com.koreait.simple2.dao.SimpleDao;
-import com.koreait.simple2.dto.SimpleDto;
 
 public class SimpleViewCommand implements SimpleCommand {
 
@@ -24,9 +23,7 @@ public class SimpleViewCommand implements SimpleCommand {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
 		
-		SimpleDto simpleDto = simpleDao.simpleView(no);
-		
-		model.addAttribute("simpleDto", simpleDto);
+		model.addAttribute("simpleDto", simpleDao.simpleView(no));
 
 	}
 

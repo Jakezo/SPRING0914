@@ -20,8 +20,9 @@ public class SimpleDeleteCommand implements SimpleCommand {
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
 		simpleDao.simpleDelete(Integer.parseInt(request.getParameter("no")));
-
+		
 	}
 
 }

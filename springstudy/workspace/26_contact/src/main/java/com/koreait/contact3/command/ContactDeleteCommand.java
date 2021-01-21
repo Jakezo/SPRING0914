@@ -23,8 +23,10 @@ public class ContactDeleteCommand implements ContactCommand {
 		
 		AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppContext.class);
 		ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
+		
 		contactDao.contactDelete(no);
-		//ctx.close();
+		
+		ctx.close();
 
 	}
 

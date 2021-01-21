@@ -4,22 +4,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
-import com.koreait.contact2.common.SpringJdbc;
 import com.koreait.contact2.dto.ContactDto;
 
 public class ContactDao {
 
 	// field
+	@Autowired
 	private JdbcTemplate template;
 	
-	public ContactDao() {
-		this.template = SpringJdbc.template;
-	}
-
 	private String sql;
 	
 	

@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 
 import com.koreait.simple2.dto.SimpleDto;
 
-
 /*
 	이번 SimpleDao는 singleton으로 만들지 않습니다.
 	대신 SimpleDao의 생성을 Spring에게 맡기는 DI 방식을 사용하겠습니다.

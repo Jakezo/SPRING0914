@@ -20,11 +20,9 @@ public class SimpleUpdateCommand implements SimpleCommand {
 	public void execute(Model model) {
 		
 		Map<String, Object> map = model.asMap();
-		
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		SimpleDto simpleDto = new SimpleDto();
-		
 		simpleDto.setNo(Integer.parseInt(request.getParameter("no")));
 		simpleDto.setTitle(request.getParameter("title"));
 		simpleDto.setContent(request.getParameter("content"));

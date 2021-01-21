@@ -3,7 +3,6 @@ package com.koreait.contact2.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,6 @@ import com.koreait.contact2.command.ContactInsertCommand;
 import com.koreait.contact2.command.ContactListCommand;
 import com.koreait.contact2.command.ContactUpdateCommand;
 import com.koreait.contact2.command.ContactViewCommand;
-import com.koreait.contact2.common.SpringJdbc;
 
 @Controller
 public class ContactController {
@@ -25,17 +23,13 @@ public class ContactController {
 	private ContactInsertCommand contactInsertCommand;
 	private ContactUpdateCommand contactUpdateCommand;
 	private ContactDeleteCommand contactDeleteCommand;
-	private JdbcTemplate template;
 	
 	@Autowired
-	public void setBeans(JdbcTemplate template,
-			             ContactListCommand contactListCommand,
-			             ContactViewCommand contactViewCommand,
-			             ContactInsertCommand contactInsertCommand,
-			             ContactUpdateCommand contactUpdateCommand,
-			             ContactDeleteCommand contactDeleteCommand) {
-		this.template = template;
-		SpringJdbc.template = this.template;
+	public void setBeans(ContactListCommand contactListCommand,
+			              ContactViewCommand contactViewCommand,
+			              ContactInsertCommand contactInsertCommand,
+			              ContactUpdateCommand contactUpdateCommand,
+			              ContactDeleteCommand contactDeleteCommand) {
 		this.contactListCommand = contactListCommand;
 		this.contactViewCommand = contactViewCommand;
 		this.contactInsertCommand = contactInsertCommand;

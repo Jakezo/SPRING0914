@@ -23,8 +23,10 @@ public class ContactViewCommand implements ContactCommand {
 
 		AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppContext.class);
 		ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
+		
 		model.addAttribute("contactDto", contactDao.contactView(no));
-		//ctx.close();
+		
+		ctx.close();
 		
 	}
 

@@ -2,10 +2,8 @@ package com.koreait.contact3.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,21 +14,12 @@ import com.koreait.contact3.command.ContactInsertCommand;
 import com.koreait.contact3.command.ContactListCommand;
 import com.koreait.contact3.command.ContactUpdateCommand;
 import com.koreait.contact3.command.ContactViewCommand;
-import com.koreait.contact3.common.SpringJdbc;
 import com.koreait.contact3.config.AppContext;
 
 @Controller
 public class ContactController {
 
 	// field
-	private JdbcTemplate template;
-	
-	@Autowired
-	public void setTemplate(JdbcTemplate template) {
-		this.template = template;
-		SpringJdbc.template = this.template;
-	}
-	
 	private AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppContext.class);
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)

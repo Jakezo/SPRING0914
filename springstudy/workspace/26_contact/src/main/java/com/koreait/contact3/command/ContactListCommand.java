@@ -14,8 +14,10 @@ public class ContactListCommand implements ContactCommand {
 		
 		AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppContext.class);
 		ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
+		
 		model.addAttribute("list", contactDao.contactList());
-		//ctx.close();
+		
+		ctx.close();
 		
 	}
 
