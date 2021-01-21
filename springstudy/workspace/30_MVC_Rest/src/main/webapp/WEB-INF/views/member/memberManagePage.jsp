@@ -70,6 +70,7 @@
 			.append( $('<td>').html(member.name) )
 			.append( $('<td>').html(member.gender) )
 			.append( $('<td>').html(member.address) )
+			.append( $('<input type="hidden" name="no" />').val(member.no) )
 			.append( $('<td>').html('<input type="button" value="조회" id="btnView" />'))
 			.append( $('<td>').html('<input type="button" value="삭제" id="btnDelete" />'))
 			.appendTo('#memberList');
@@ -78,6 +79,17 @@
 	
 	/***** 2. 회원 정보 *****/
 	function memberView() {
+		
+		// jquery의 append() 등의 메소드를 이용해서 생성한 버튼은
+		// $('#btnView').click(function(){}) 와 같은 click 이벤트 처리가 불가능합니다.
+		
+		// 동적 요소 : append()나 html() 메소드로 만든 요소
+		// 동적 요소의 이벤트 연결(바인딩)은 on() 메소드를 사용해야 합니다.
+		
+		$('body').on('click', '#btnView', function(){
+			// <input type="hidden" name="no" /> 태그의 value를 알아내야 합니다.
+			
+		});
 		
 	}
 	
