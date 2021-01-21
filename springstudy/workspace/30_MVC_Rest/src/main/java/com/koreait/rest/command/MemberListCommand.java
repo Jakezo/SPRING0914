@@ -20,7 +20,11 @@ public class MemberListCommand implements MemberCommand {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		map.put("result", true);
+		if (list.size() > 0) {
+			map.put("result", true);
+		} else {
+			map.put("result", false);
+		}
 		
 		return map;
 		

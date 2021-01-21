@@ -36,11 +36,43 @@
 			type: 'get',
 			dataType: 'json',
 			success: function(responseList) {
-				
+				/*
+					responseList = {
+						"list": [
+							{
+								"no": 1,
+								"id": "user1",
+								"name": "제임스",
+								"gender": "남",
+								"address": "서울"
+							},
+							...
+						],
+						"result": true
+					}
+				*/
+				if (responseList.result == true) {
+					memberListTable(responseList.list);  // 서브 함수 호출
+				}
 			},
 			error: function(){
 				alert('실패');
 			}
+		});
+	}
+	// 서브 함수: 회원 목록을 테이블로 만들어 주는 함수
+	function memberListTable(list) {
+		$('#memberList').empty();  // 기존 목록을 제거합니다.
+		$.each(list, function(idx, member){
+			$('<tr>')
+			.append( $('<td>').html(member.no) )
+			.append( $('<td>').html(member.id) )
+			.append( $('<td>').html(member.name) )
+			.append( $('<td>').html(member.gender) )
+			.append( $('<td>').html(member.address) )
+			.append( $('<td>').html('<input type="button" value="조회" id="btnView" />'))
+			.append( $('<td>').html('<input type="button" value="삭제" id="btnDelete" />'))
+			.appendTo('#memberList');
 		});
 	}
 	
@@ -93,7 +125,7 @@
 	td, th {
 		border-top: 1px solid black;
 		border-bottom: 1px solid black;
-		padding: 5px 10px;
+		padding: 5px 20px;
 		text-align: center;
 	}
 	th {
@@ -140,7 +172,7 @@
 						<th>이름</th>
 						<th>성별</th>
 						<th>주소</th>
-						<th>비고</th>
+						<th colspan="2">비고</th>
 					</tr>
 				</thead>
 				<tbody id="memberList"></tbody>
