@@ -6,7 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-	
+
+	/*
+		REST : URI + HTTP Method
+		
+				URI				Method
+		목록	member			GET
+		보기	member/{no}		GET
+		삽입	member			POST
+		수정	member			PUT
+		삭제	member/{no}		DELETE
+	*/
+
 	// 페이지 로드 이벤트
 	$(document).ready(function(){
 		memberList();
@@ -19,7 +30,18 @@
 	
 	/***** 1. 회원 목록 *****/
 	function memberList() {
-		
+		// URI : member, Method : GET
+		$.ajax({
+			url: 'member',
+			type: 'get',
+			dataType: 'json',
+			success: function(responseList) {
+				
+			},
+			error: function(){
+				alert('실패');
+			}
+		});
 	}
 	
 	/***** 2. 회원 정보 *****/
