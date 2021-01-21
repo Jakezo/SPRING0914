@@ -4,7 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import com.koreait.contact2.dao.ContactDao;
@@ -12,9 +11,6 @@ import com.koreait.contact2.dto.ContactDto;
 
 public class ContactUpdateCommand implements ContactCommand {
 
-	@Autowired
-	private ContactDao contactDao;
-	
 	@Override
 	public void execute(Model model) {
 		
@@ -29,6 +25,7 @@ public class ContactUpdateCommand implements ContactCommand {
 		String note = request.getParameter("note");
 		
 		ContactDto contactDto = new ContactDto(no, name, phone, address, email, note);
+		ContactDao contactDao = new ContactDao();
 		contactDao.contactUpdate(contactDto);
 
 	}

@@ -4,17 +4,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import com.koreait.contact2.dao.ContactDao;
-import com.koreait.contact2.dto.ContactDto;
 
 public class ContactViewCommand implements ContactCommand {
 
-	@Autowired
-	private ContactDao contactDao;
-	
 	@Override
 	public void execute(Model model) {
 		
@@ -22,10 +17,8 @@ public class ContactViewCommand implements ContactCommand {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-
-		ContactDto contactDto = contactDao.contactView(no);
-		
-		model.addAttribute("contactDto", contactDto);
+		ContactDao contactDao = new ContactDao();
+		model.addAttribute("contactDto", contactDao.contactView(no));
 		
 	}
 

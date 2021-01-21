@@ -80,6 +80,8 @@
 	/***** 2. 회원 정보 *****/
 	function memberView() {
 		
+		// URI : member/{no}, method = GET
+		
 		// jquery의 append() 등의 메소드를 이용해서 생성한 버튼은
 		// $('#btnView').click(function(){}) 와 같은 click 이벤트 처리가 불가능합니다.
 		
@@ -87,8 +89,53 @@
 		// 동적 요소의 이벤트 연결(바인딩)은 on() 메소드를 사용해야 합니다.
 		
 		$('body').on('click', '#btnView', function(){
-			// <input type="hidden" name="no" /> 태그의 value를 알아내야 합니다.
 			
+			// <input type="hidden" name="no" /> 태그의 value를 알아내야 합니다.
+
+			// 이벤트 객체는 누구인가요?  #btnView입니다. 
+	        // 이벤트 객체는 $(this)라고 부를 수 있습니다.
+	        // $(this)와 같은 위치(수준: <tr>)에 있는 hidden 찾기
+	        // 1. $(this)의 부모 요소 중에서(td -> tr -> tbody) <tr> 태그를 찾는다.
+	        //     1) $(this).parents('tr') : 부모 요소 중 tr
+	        //     2) $(this).closest('tr') : 가장 가까운 tr(같은 id가 많은 경우에 유용)
+	        // 2. 거기서(<tr>) find() 메소드로 <input type="hidden" name="no />를 찾는다.
+	        //     1) $(this).parents('tr').find('input:hidden[name="no"]')
+	        //     2) $(this).closest('tr').find('input:hidden[name="no"]')
+	        // 3. 거기서(<input type="hidden">) 값을 가져온다.
+	        //     1) $(this).parents('tr').find('input:hidden[name="no"]').val()
+	        //     2) $(this).closest('tr').find('input:hidden[name="no"]').val()
+	        
+	        var no = $(this).parents('tr').find('input:hidden[name="no"]').val();
+	        
+	        $.ajax({
+	        	url: 'member/' + no,  // @RequestMapping(value="member/{no}")
+	        	type: 'get',
+	        	dataType: 'json',
+	        	success: function(responseObj) {
+	        		/*
+					responseObj = {
+						"memberDto": {
+								"no": 1,
+								"id": "user1",
+								"name": "제임스",
+								"gender": "남",
+								"address": "서울"
+						},
+						"result": true
+					}
+					*/
+	        		if (responseObj.result == true) {
+	        			$('input:text[name="id"]').val(responseObj.memberDto.id);
+	        			$('input:text[name="name"]').val(responseObj.memberDto.name);
+	        			$('input:radio[name="gender"][value="' + responseObj.memberDto.gender + '"]').prop('checked', true);
+	        			$('select[name="address"]').val(responseObj.memberDto.address);
+	        		}
+	        	},
+	        	error: function(){
+					alert('실패');
+				}
+	        });
+	        
 		});
 		
 	}

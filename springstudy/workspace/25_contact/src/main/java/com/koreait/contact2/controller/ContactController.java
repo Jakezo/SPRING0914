@@ -25,6 +25,7 @@ public class ContactController {
 	private ContactInsertCommand contactInsertCommand;
 	private ContactUpdateCommand contactUpdateCommand;
 	private ContactDeleteCommand contactDeleteCommand;
+	private JdbcTemplate template;
 	
 	@Autowired
 	public void setBeans(JdbcTemplate template,
@@ -33,7 +34,8 @@ public class ContactController {
 			             ContactInsertCommand contactInsertCommand,
 			             ContactUpdateCommand contactUpdateCommand,
 			             ContactDeleteCommand contactDeleteCommand) {
-		SpringJdbc.template = template;
+		this.template = template;
+		SpringJdbc.template = this.template;
 		this.contactListCommand = contactListCommand;
 		this.contactViewCommand = contactViewCommand;
 		this.contactInsertCommand = contactInsertCommand;
