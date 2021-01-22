@@ -15,6 +15,15 @@
 		<input type="text" name="email" autofocus />
 		<button>인증요청하기</button>
 	</form>
+	
+	<br/>
+	
+	<form action="emailAuth2.do" method="get">
+		게시판 이용을 위해서는 이메일 인증을 받으셔야 합니다.<br/><br/>
+		이메일 입력
+		<input type="text" name="email" autofocus />
+		<button>인증요청하기</button>
+	</form>
 
 	<!-- <a href="boardListPage.do">게시판으로 가기</a> -->
 

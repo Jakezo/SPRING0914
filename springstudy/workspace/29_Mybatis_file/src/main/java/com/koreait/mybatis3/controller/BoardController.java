@@ -18,6 +18,7 @@ import com.koreait.mybatis3.command.BoardListCommand;
 import com.koreait.mybatis3.command.BoardViewCommand;
 import com.koreait.mybatis3.command.DownloadCommand;
 import com.koreait.mybatis3.command.EmailAuthCommand;
+import com.koreait.mybatis3.command.EmailAuthCommand2;
 
 @Controller
 public class BoardController {
@@ -31,6 +32,7 @@ public class BoardController {
 	private BoardDeleteCommand boardDeleteCommand;
 	private DownloadCommand downloadCommand;
 	private EmailAuthCommand emailAuthCommand;
+	private EmailAuthCommand2 emailAuthCommand2;
 	
 	@Autowired
 	public void setCommand(BoardListCommand boardListCommand,
@@ -38,13 +40,15 @@ public class BoardController {
 			               BoardViewCommand boardViewCommand,
 			               BoardDeleteCommand boardDeleteCommand,
 			               DownloadCommand downloadCommand,
-			               EmailAuthCommand emailAuthCommand) {
+			               EmailAuthCommand emailAuthCommand,
+		                   EmailAuthCommand2 emailAuthCommand2) {
 		this.boardListCommand = boardListCommand;
 		this.boardInsertCommand = boardInsertCommand;
 		this.boardViewCommand = boardViewCommand;
 		this.boardDeleteCommand = boardDeleteCommand;
 		this.downloadCommand = downloadCommand;
 		this.emailAuthCommand = emailAuthCommand;
+		this.emailAuthCommand2 = emailAuthCommand2;
 	}
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
@@ -118,6 +122,18 @@ public class BoardController {
 		emailAuthCommand.execute(sqlSession, model);
 		
 		return "board/emailAuthConfirm";
+		
+	}
+	
+	@RequestMapping(value="emailAuth2.do", method=RequestMethod.GET)
+	public String emailAuth2(HttpServletRequest request,
+                             Model model) {
+		
+		model.addAttribute("request", request);
+		model.addAttribute("mailSender", mailSender);
+		emailAuthCommand2.execute(sqlSession, model);
+		
+		return "board/emailAuthConfirm2";
 		
 	}
 	
