@@ -27,7 +27,8 @@ public class EmailAuthCommand implements BoardCommand {
 			// MimeMessage 클래스가 이메일의 내용을 작성합니다.
 			MimeMessage message = mailSender.createMimeMessage();
 			message.setHeader("Content-Type", "text/plain; charset=utf-8");
-			message.setFrom(new InternetAddress("보내는사람의'지메일주소'", "마스터"));  // 보내는 사람
+			//message.setFrom(new InternetAddress("보내는사람의'지메일주소'", "마스터"));  // 보내는 사람
+			message.setFrom(new InternetAddress("forspringlec@gmail.com", "마스터"));  // 보내는 사람
 			InternetAddress to = new InternetAddress(request.getParameter("email"));  // 받는 사람
 			InternetAddress[] toList = {to};  // 받는 사람을 배열에 저장해 두면 여러 곳에 한 번에 보낼 수도 있습니다.
 			// message.setRecipient(Message.RecipientType.TO, to);  한명에게 보냅니다.
@@ -35,7 +36,6 @@ public class EmailAuthCommand implements BoardCommand {
 			message.setSubject("인증 요청 메일입니다.");  // 제목
 			long authKey = (long)(Math.random() * 10000000000L) + 1234567890;  // 랜덤하게 마음대로 만듭니다.
 			message.setText("인증코드: " + authKey);  // 본문
-			
 			mailSender.send(message);  // 메일을 보냅니다.
 			
 			// 생성한 인증키를 다음으로 넘겨서 비교가 가능하도록 처리합니다.

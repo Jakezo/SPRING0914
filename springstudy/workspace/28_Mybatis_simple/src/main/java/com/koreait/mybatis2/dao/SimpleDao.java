@@ -6,9 +6,9 @@ import com.koreait.mybatis2.dto.SimpleDto;
 
 public interface SimpleDao {
 
-	public List<SimpleDto> simpleList();
+	public List<SimpleDto> simpleList(int beginRecord, int endRecord);
 	
-	public int totalCount();
+	public int totalRecord();
 	
 	// 삽입 후 성공/실패 처리
 	public int simpleInsert(String writer, String title, String content);
@@ -20,7 +20,5 @@ public interface SimpleDao {
 	
 	// 삭제 후 성공/실패 처리
 	public int simpleDelete(int no);
-	
-	
 	
 }
