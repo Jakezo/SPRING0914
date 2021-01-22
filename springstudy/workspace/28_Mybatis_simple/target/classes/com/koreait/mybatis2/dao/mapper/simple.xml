@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM (SELECT ROWNUM AS RN, A.*
 		          FROM (SELECT *
 		                  FROM SIMPLE
-		              ORDER BY NO DESC) A ) B)
+		              ORDER BY NO DESC) A ) B
 		 WHERE B.RN BETWEEN #{param1} AND #{param2}
 	</select>
 	

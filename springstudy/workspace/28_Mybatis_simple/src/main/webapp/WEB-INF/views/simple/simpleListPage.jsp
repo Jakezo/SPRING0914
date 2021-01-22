@@ -31,7 +31,9 @@
 
 	<h3>게시글 목록</h3>
 
-	전체: ${totalCount}개 게시글<br/>
+	<input type="button" value="새글작성하러가기" onclick="location.href='simpleInsertPage.do'" /><br/><br/>
+
+	전체: ${totalRecord}개 게시글<br/>
 	<table border="1">
 		<thead>
 			<tr>
@@ -48,11 +50,11 @@
 				</tr>
 			</c:if>
 			<c:if test="${not empty list}">
-				<c:forEach var="simpleDto" items="${list}">
+				<c:forEach var="simpleDto" items="${list}" varStatus="k">
 					<tr>
-						<td>${simpleDto.no}</td>
+						<td>${totalRecord - ((page - 1) * recordPerPage + k.index)}</td>
 						<td>${simpleDto.writer}</td>
-						<td><a href="simpleViewPage.do?no=${simpleDto.no}">${simpleDto.title}</a></td>
+						<td><a href="simpleViewPage.do?no=${simpleDto.no}&page=${page}">${simpleDto.title}</a></td>
 						<td>${simpleDto.regDate}</td>
 					</tr>
 				</c:forEach>
@@ -61,7 +63,7 @@
 		<tfoot>
 			<tr>
 				<td colspan="4">
-					<input type="button" value="새글작성하러가기" onclick="location.href='simpleInsertPage.do'" />
+					${paging}
 				</td>
 			</tr>
 		</tfoot>

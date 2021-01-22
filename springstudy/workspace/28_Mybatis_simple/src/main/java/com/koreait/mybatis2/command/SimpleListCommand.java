@@ -51,6 +51,7 @@ public class SimpleListCommand implements SimpleCommand {
 		model.addAttribute("paging", paging);
 		model.addAttribute("totalRecord", totalRecord);
 		model.addAttribute("page", page);
+		model.addAttribute("recordPerPage", recordPerPage);
 
 	}
 

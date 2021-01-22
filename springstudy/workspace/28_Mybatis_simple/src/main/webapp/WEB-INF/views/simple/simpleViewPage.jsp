@@ -37,7 +37,10 @@
 		<input type="button" value="수정하러가기" onclick="fn_simpleUpdatePage(this.form)" />
 		<input type="button" value="삭제하기" onclick="fn_simpleDelete(this.form)" />
 	</form>
-	
+	<form method="get">
+		<input type="hidden" name="page" value="${page}" />
+		<input type="button" value="전체목록" onclick="fn_simpleListPage(this.form)" />	
+	</form>
 	<script type="text/javascript">
 		function fn_simpleUpdatePage(f) {
 			f.action = 'simpleUpdatePage.do';
@@ -48,6 +51,10 @@
 				f.action = 'simpleDelete.do';
 				f.submit();
 			}
+		}
+		function fn_simpleListPage(f) {
+			f.action = 'simpleListPage.do';
+			f.submit();
 		}
 	</script>
 	
